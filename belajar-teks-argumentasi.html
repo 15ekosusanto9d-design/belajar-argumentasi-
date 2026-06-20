@@ -1,0 +1,2368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belajar Teks Argumentasi — Kelas XI</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#FF3B3B;--blue:#2979FF;--yellow:#FFD600;--green:#00C853;
+  --orange:#FF6D00;--purple:#AA00FF;
+  --bg:#FFFDE7;--card-bg:#FFFFFF;--text:#1A1A2E;--muted:#555;
+  --shadow:4px 4px 0px rgba(0,0,0,.15);--shadow-hover:6px 6px 0px rgba(0,0,0,.2);
+  --cyan:var(--blue);--violet:var(--purple);--pink:var(--red);
+  --dark:var(--bg);--dark2:#FFF9C4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{font-size:clamp(13px,2vw,16px)}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,rgba(255,214,0,.06) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--blue);border-radius:6px}
+.page{display:none;position:relative;z-index:1;min-height:100vh}
+.page.active{display:block}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px 80px}
+
+/* ── FLOATING OBJECTS ── */
+.float-objects{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fobj{position:absolute;animation:floatObj linear infinite;opacity:0;user-select:none;font-size:1.6rem}
+@keyframes floatObj{0%{transform:translateY(105vh) rotate(0deg);opacity:0}8%{opacity:.5}88%{opacity:.35}100%{transform:translateY(-8vh) rotate(360deg);opacity:0}}
+
+/* ── PAGE DECO ── */
+.page-deco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.deco-circle{position:absolute;border-radius:50%;opacity:.06;animation:decoFloat ease-in-out infinite alternate}
+@keyframes decoFloat{from{transform:translate(0,0) scale(1)}to{transform:translate(16px,12px) scale(1.07)}}
+
+/* ── LOGIN ── */
+.login-bg{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;
+  background:linear-gradient(135deg,#FFF9C4 0%,#E3F2FD 50%,#F3E5F5 100%);position:relative;overflow:hidden}
+.login-card{background:#fff;border-radius:22px;padding:22px 20px 18px;max-width:420px;width:100%;
+  box-shadow:8px 8px 0 rgba(0,0,0,.12),0 0 0 3px var(--yellow);position:relative;z-index:1;
+  animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both}
+@keyframes popIn{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.login-mascot{text-align:center;font-size:3.5rem;margin-bottom:6px;animation:mascotBounce 2s ease-in-out infinite}
+@keyframes mascotBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.login-title{font-family:'Fredoka One',cursive;font-size:1.7rem;text-align:center;
+  background:linear-gradient(135deg,var(--red),var(--orange),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px}
+.login-sub{text-align:center;font-size:.8rem;color:#444;margin-bottom:18px;font-weight:600}
+.login-label{display:block;font-family:'Fredoka One',cursive;font-size:.8rem;color:var(--text);margin-bottom:5px}
+.login-input{width:100%;padding:11px 14px;border-radius:12px;border:3px solid #eee;font-family:'Nunito',sans-serif;
+  font-size:.95rem;color:var(--text);outline:none;transition:border-color .2s;background:#FAFAFA;margin-bottom:12px}
+.login-input:focus{border-color:var(--blue);background:#fff}
+select.login-input{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.login-err,.avatar-err{color:var(--red);font-size:.78rem;font-weight:700;min-height:16px;text-align:center;margin-bottom:6px}
+.login-btn{width:100%;padding:13px;border-radius:14px;border:none;cursor:pointer;font-family:'Fredoka One',cursive;
+  font-size:1rem;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;
+  box-shadow:0 5px 0 rgba(0,0,0,.18);transition:all .2s;margin-top:4px}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(0,0,0,.18)}
+.login-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.login-note{text-align:center;margin-top:12px;font-size:.72rem;color:#555;font-weight:600}
+
+/* ── AVATAR PICKER ── */
+.avatar-section{margin-bottom:14px}
+.avatar-section-label{font-family:'Fredoka One',cursive;font-size:.82rem;color:var(--text);margin-bottom:8px;display:block}
+.avatar-group-label{font-size:.7rem;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin:8px 0 5px}
+.avatar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:4px}
+.avatar-opt{aspect-ratio:1;border-radius:12px;border:3px solid #eee;background:#f8f8f8;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:1.8rem;transition:all .2s;position:relative}
+.avatar-opt:hover{border-color:var(--blue);transform:scale(1.08)}
+.avatar-opt.selected{border-color:var(--orange);background:#FFF8E1;box-shadow:0 0 0 3px rgba(255,109,0,.2)}
+.avatar-opt.selected::after{content:'✓';position:absolute;top:1px;right:3px;font-size:.6rem;font-weight:800;color:var(--orange);font-family:'Nunito',sans-serif}
+
+/* ── TOP NAV ── */
+.top-nav{display:flex;gap:6px;justify-content:flex-end;margin-bottom:14px;flex-wrap:wrap}
+.nav-btn{padding:7px 13px;border-radius:20px;border:2.5px solid var(--blue);background:#fff;
+  font-family:'Fredoka One',cursive;font-size:.76rem;color:var(--blue);cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
+.nav-btn:hover{background:var(--blue);color:#fff;transform:translateY(-2px)}
+.nav-btn.lb-btn{border-color:var(--orange);color:var(--orange)}
+.nav-btn.lb-btn:hover{background:var(--orange);color:#fff}
+.nav-btn.logout-btn{border-color:var(--red);color:var(--red)}
+.nav-btn.logout-btn:hover{background:var(--red);color:#fff}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:50px 16px 36px}
+.hero-badge{display:inline-block;font-family:'Fredoka One',cursive;font-size:.75rem;letter-spacing:1.5px;
+  color:#fff;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:30px;padding:6px 20px;
+  margin-bottom:20px;box-shadow:var(--shadow);animation:fadeD .7s ease both}
+.hero-title{font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,6vw,3.6rem);font-weight:400;line-height:1.1;
+  background:linear-gradient(135deg,var(--red) 0%,var(--orange) 35%,var(--blue) 70%,var(--purple) 100%);
+  background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  filter:drop-shadow(2px 2px 0 rgba(0,0,0,.1));animation:fadeD .7s .1s ease both,gradShift 4s linear infinite}
+@keyframes gradShift{0%{background-position:0% center}100%{background-position:200% center}}
+.hero-sub{margin-top:10px;font-size:.95rem;color:#444;font-weight:600;animation:fadeD .7s .2s ease both}
+.hero-line{width:90px;height:5px;background:linear-gradient(90deg,var(--red),var(--yellow),var(--green),var(--blue));
+  margin:18px auto 0;border-radius:10px;animation:fadeD .7s .3s ease both}
+@keyframes fadeD{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeU{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION HEADER ── */
+.sec-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;animation:fadeU .6s ease both}
+.sec-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;border:3px solid transparent}
+.sec-icon.cyan{background:#E3F2FD;border-color:var(--blue);box-shadow:var(--shadow)}
+.sec-icon.violet{background:#F3E5F5;border-color:var(--purple);box-shadow:var(--shadow)}
+.sec-icon.pink{background:#FFEBEE;border-color:var(--red);box-shadow:var(--shadow)}
+.sec-label{font-family:'Fredoka One',cursive;font-size:.68rem;letter-spacing:1px;color:#555;text-transform:uppercase}
+.sec-title{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--text)}
+
+/* ── MODULE CARDS ── */
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;animation:fadeU .6s .08s ease both}
+.mod-card{border-radius:18px;border:3px solid var(--blue);background:var(--card-bg);cursor:pointer;
+  transition:transform .2s,box-shadow .2s;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.mod-card:hover{transform:translateY(-5px) rotate(-1deg);box-shadow:var(--shadow-hover)}
+.mod-card:nth-child(2){border-color:var(--red)}
+.mod-card:nth-child(3){border-color:var(--green)}
+.mod-card:nth-child(4){border-color:var(--orange)}
+.mod-card.wide{grid-column:1/-1;border-color:var(--purple)}
+.mod-card-inner{padding:20px 18px}
+.mod-num{font-family:'Fredoka One',cursive;font-size:.68rem;color:var(--blue);letter-spacing:1px;margin-bottom:6px}
+.mod-emoji{font-size:1.8rem;margin-bottom:8px;display:block;animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.mod-title{font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:5px}
+.mod-desc{font-size:.78rem;color:#444;line-height:1.5}
+.mod-arrow{position:absolute;bottom:12px;right:14px;font-size:.9rem;opacity:.4}
+.mod-card:hover .mod-arrow{opacity:1}
+
+/* ── GAME CARDS ── */
+.game-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;animation:fadeU .6s .16s ease both}
+.game-card{border-radius:18px;border:3px solid var(--green);background:var(--card-bg);cursor:pointer;
+  transition:transform .2s,box-shadow .2s;padding:22px 18px;text-align:center;box-shadow:var(--shadow)}
+.game-card:nth-child(2){border-color:var(--orange)}
+.game-card:hover{transform:translateY(-5px) rotate(1deg);box-shadow:var(--shadow-hover)}
+.game-emoji{font-size:2.4rem;margin-bottom:10px;display:block}
+.game-title{font-family:'Fredoka One',cursive;font-size:.88rem;color:var(--green);margin-bottom:5px}
+.game-card:nth-child(2) .game-title{color:var(--orange)}
+.game-desc{font-size:.78rem;color:#444;line-height:1.5;margin-bottom:12px}
+.btn-play{display:inline-block;padding:8px 20px;border-radius:30px;background:var(--green);color:#fff;
+  font-family:'Fredoka One',cursive;font-size:.8rem;cursor:pointer;transition:all .2s;border:none;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+.btn-play:hover{transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.18)}
+
+/* ── KUIS CARD ── */
+.kuis-section{animation:fadeU .6s .24s ease both}
+.kuis-card{border-radius:18px;border:3px solid var(--yellow);background:var(--card-bg);cursor:pointer;
+  padding:22px;display:flex;align-items:center;gap:18px;transition:transform .2s,box-shadow .2s;box-shadow:var(--shadow)}
+.kuis-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.kuis-icon-wrap{width:58px;height:58px;border-radius:14px;background:#FFFDE7;border:3px solid var(--yellow);
+  display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.kuis-text h3{font-family:'Fredoka One',cursive;font-size:.95rem;color:var(--orange);margin-bottom:4px}
+.kuis-text p{font-size:.8rem;color:#444;line-height:1.5}
+
+/* ── PAGE HEADER ── */
+.page-header{display:flex;align-items:center;gap:12px;padding:24px 0 16px;border-bottom:3px dashed rgba(0,0,0,.08);margin-bottom:22px}
+.back-btn{width:40px;height:40px;border-radius:11px;background:#fff;border:3px solid var(--text);display:flex;
+  align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;flex-shrink:0;transition:all .2s;box-shadow:var(--shadow)}
+.back-btn:hover{background:var(--yellow);transform:translateY(-2px)}
+.ph-badge{font-family:'Fredoka One',cursive;font-size:.62rem;color:#555;letter-spacing:1px;margin-bottom:3px}
+.ph-title{font-family:'Fredoka One',cursive;font-size:1.1rem;background:linear-gradient(90deg,var(--blue),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── CONTENT BLOCKS ── */
+.content-block{background:var(--card-bg);border-radius:16px;border:3px solid rgba(0,0,0,.07);border-left:5px solid var(--blue);
+  padding:22px 20px;margin-bottom:16px;box-shadow:var(--shadow);animation:fadeU .5s ease both}
+.content-block:nth-child(2){border-left-color:var(--red)}
+.content-block:nth-child(3){border-left-color:var(--green)}
+.content-block:nth-child(4){border-left-color:var(--orange)}
+.content-block:nth-child(5){border-left-color:var(--purple)}
+.content-block h3{font-family:'Fredoka One',cursive;font-size:.84rem;color:var(--blue);letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(41,121,255,.2)}
+.content-block h4{font-size:.88rem;font-weight:800;color:#111;margin:12px 0 5px}
+.content-block p{font-size:.86rem;color:#2a2a2a;line-height:1.75;margin-bottom:8px}
+.hl{background:#FFF9C4;border-left:5px solid var(--yellow);border-radius:0 10px 10px 0;
+  padding:10px 14px;margin:10px 0;font-style:italic;color:#333;font-size:.84rem;line-height:1.65}
+.hl.violet{background:#F3E5F5;border-color:var(--purple);color:#4a1080}
+.hl.pink{background:#FFEBEE;border-color:var(--red);color:#8b1a1a}
+.tag{display:inline-block;background:var(--blue);color:#fff;border-radius:20px;padding:3px 11px;font-size:.72rem;font-weight:700;margin:2px}
+.tag.pink{background:var(--red)}.tag.green{background:var(--green)}.tag.cyan{background:var(--blue)}
+.struct-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}
+.struct-box{flex:1;min-width:140px;border-radius:14px;padding:14px;border:3px solid var(--blue);background:#E3F2FD;text-align:center}
+.struct-box.v{border-color:var(--purple);background:#F3E5F5}
+.struct-box.p{border-color:var(--red);background:#FFEBEE}
+.struct-box .sb-icon{font-size:1.6rem;margin-bottom:6px}
+.struct-box .sb-title{font-family:'Fredoka One',cursive;font-size:.68rem;letter-spacing:1px;color:var(--blue);margin-bottom:5px}
+.struct-box.v .sb-title{color:var(--purple)}.struct-box.p .sb-title{color:var(--red)}
+.struct-box p{font-size:.76rem;color:#333;line-height:1.5;margin:0}
+.step-row{display:flex;gap:10px;align-items:flex-start;margin:8px 0;padding:12px;border-radius:12px;background:#E8F5E9;border:2px solid var(--green)}
+.step-n{width:26px;height:26px;border-radius:7px;background:var(--green);color:#fff;font-size:.74rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.step-row strong{display:block;color:#111;font-size:.86rem;margin-bottom:2px;font-weight:800}
+.step-row span{font-size:.8rem;color:#2a2a2a}
+.ciri-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:#FFF8E1;border:2px solid var(--yellow);margin:6px 0}
+.ciri-dot{color:var(--orange);font-size:1rem;flex-shrink:0;margin-top:2px}
+.ciri-item strong{color:#111;display:block;margin-bottom:2px;font-size:.86rem;font-weight:800}
+.ciri-item p{font-size:.8rem;color:#2a2a2a;margin:0;line-height:1.6}
+.ex-block{border-radius:12px;padding:16px;margin:10px 0;border:2px solid var(--red);background:#FFEBEE}
+.ex-block.v{border-color:var(--purple);background:#F3E5F5}
+.ex-block.c{border-color:var(--blue);background:#E3F2FD}
+.ex-block.g{border-color:var(--green);background:#E8F5E9}
+.ex-block .ex-head{font-family:'Fredoka One',cursive;font-size:.68rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;color:var(--red)}
+.ex-block.v .ex-head{color:var(--purple)}.ex-block.c .ex-head{color:var(--blue)}.ex-block.g .ex-head{color:var(--green)}
+.ex-block .ex-label{font-size:.7rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin:8px 0 3px;color:var(--red)}
+.ex-block.v .ex-label{color:var(--purple)}.ex-block.c .ex-label{color:var(--blue)}.ex-block.g .ex-label{color:var(--green)}
+.ex-block p{font-size:.82rem;color:#222;line-height:1.7;margin-bottom:5px}
+.ref-box{margin-top:8px;padding:8px 12px;border-radius:8px;background:rgba(0,0,0,.04);border:2px dashed rgba(0,0,0,.12);font-size:.7rem;color:#444}
+.ref-box strong{color:#222;font-weight:800}
+.comp-table{width:100%;border-collapse:separate;border-spacing:0 3px;margin:12px 0;font-size:.8rem}
+.comp-table th{background:var(--purple);color:#fff;font-family:'Fredoka One',cursive;font-size:.68rem;letter-spacing:1px;padding:9px 10px;text-align:left}
+.comp-table th:first-child{border-radius:8px 0 0 8px}.comp-table th:last-child{border-radius:0 8px 8px 0}
+.comp-table td{padding:8px 10px;background:#fff;color:#333;vertical-align:top;line-height:1.5;border-top:2px solid #F3E5F5;border-bottom:2px solid #F3E5F5}
+.comp-table td:first-child{border-left:2px solid #F3E5F5;border-radius:8px 0 0 8px}
+.comp-table td:last-child{border-right:2px solid #F3E5F5;border-radius:0 8px 8px 0}
+.comp-table tr:hover td{background:#F3E5F5}
+.footer{text-align:center;margin-top:50px;font-size:.72rem;color:#888;font-family:'Fredoka One',cursive;letter-spacing:1px}
+
+/* ── PROFILE ── */
+.profile-hero{display:flex;gap:16px;align-items:center;background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;border:3px solid var(--yellow);box-shadow:var(--shadow)}
+.profile-avatar{font-size:3rem;width:80px;height:80px;background:linear-gradient(135deg,#FFF9C4,#FFD600);border-radius:18px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;border:3px solid var(--orange);box-shadow:var(--shadow)}
+.profile-name{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--text);margin-bottom:2px}
+.profile-absen{font-size:.78rem;color:#555;font-weight:700;margin-bottom:8px}
+.profile-xp-bar-wrap{height:11px;background:#eee;border-radius:10px;overflow:hidden;margin-bottom:3px;border:2px solid rgba(0,0,0,.06)}
+.profile-xp-bar{height:100%;background:linear-gradient(90deg,var(--yellow),var(--orange));border-radius:10px;transition:width .8s cubic-bezier(.34,1.56,.64,1)}
+.profile-level{font-family:'Fredoka One',cursive;font-size:.74rem;color:var(--orange)}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.stat-box{background:#fff;border-radius:14px;border:3px solid rgba(0,0,0,.06);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
+.stat-val{font-family:'Fredoka One',cursive;font-size:1.4rem;color:var(--blue)}
+.stat-lbl{font-size:.66rem;color:#555;font-weight:700;margin-top:3px}
+.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:10px;margin-top:6px}
+.badge-item{border-radius:14px;padding:12px 8px;text-align:center;border:3px solid;transition:transform .2s}
+.badge-item:hover{transform:translateY(-3px) rotate(-2deg)}
+.badge-item.earned{background:#fff}
+.badge-item.locked{background:#f5f5f5;opacity:.42;filter:grayscale(1)}
+.badge-icon{font-size:1.8rem;display:block;margin-bottom:4px}
+.badge-name{font-family:'Fredoka One',cursive;font-size:.58rem;color:var(--text);line-height:1.3}
+.badge-pts{font-size:.56rem;color:#555;font-weight:700;margin-top:2px}
+.activity-log{display:flex;flex-direction:column;gap:6px}
+.act-item{display:flex;gap:10px;align-items:center;padding:9px 12px;background:#FAFAFA;border-radius:10px;border:2px solid rgba(0,0,0,.05)}
+.act-icon{font-size:1.2rem;flex-shrink:0}
+.act-text{font-size:.8rem;color:#222;font-weight:600;flex:1}
+.act-pts{font-family:'Fredoka One',cursive;font-size:.84rem;color:var(--green)}
+.act-time{font-size:.66rem;color:#888}
+
+/* ── LEADERBOARD ── */
+.lb-refresh-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.lb-update{font-size:.74rem;color:#555;font-weight:600}
+.lb-card{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 16px;
+  margin-bottom:8px;border:3px solid rgba(0,0,0,.06);box-shadow:var(--shadow);transition:transform .2s;
+  animation:lbSlide .4s ease both}
+@keyframes lbSlide{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:translateX(0)}}
+.lb-card:hover{transform:translateX(4px)}
+.lb-card.rank1{border-color:#FFD600;background:linear-gradient(90deg,#FFFDE7,#fff)}
+.lb-card.rank2{border-color:#B0BEC5;background:linear-gradient(90deg,#FAFAFA,#fff)}
+.lb-card.rank3{border-color:#FF8A65;background:linear-gradient(90deg,#FFF3E0,#fff)}
+.lb-card.me{border-color:var(--blue);background:linear-gradient(90deg,#E3F2FD,#fff)}
+.lb-rank{font-family:'Fredoka One',cursive;font-size:1.2rem;width:32px;text-align:center;flex-shrink:0}
+.lb-avatar{font-size:1.8rem;flex-shrink:0}
+.lb-info{flex:1}
+.lb-uname{font-family:'Fredoka One',cursive;font-size:.88rem;color:var(--text)}
+.lb-detail{font-size:.68rem;color:#444;font-weight:600}
+.lb-pts{font-family:'Fredoka One',cursive;font-size:1.05rem;color:var(--orange)}
+
+/* ── GAME STYLES ── */
+.game-wrap{max-width:780px;margin:0 auto}
+.game-status{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.stat-pill{background:#fff;border:2px solid var(--blue);border-radius:18px;padding:4px 14px;font-size:.78rem;color:var(--text);font-weight:700;box-shadow:var(--shadow)}
+.stat-pill span{color:var(--blue)}
+.puzzle-prompt{background:#E3F2FD;border:3px solid var(--blue);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.puzzle-prompt .pr-label{font-family:'Fredoka One',cursive;font-size:.66rem;letter-spacing:1.5px;color:var(--blue);margin-bottom:6px}
+.puzzle-prompt p{font-size:.86rem;color:#222;line-height:1.65}
+.drop-zone{min-height:65px;border-radius:12px;border:3px dashed var(--purple);background:rgba(170,0,255,.04);
+  padding:10px;margin-bottom:10px;transition:all .2s;display:flex;flex-wrap:wrap;gap:7px;align-items:flex-start;cursor:pointer}
+.drop-zone.drag-over{border-color:var(--blue);background:rgba(41,121,255,.08)}
+.drop-zone-label{font-family:'Fredoka One',cursive;font-size:.62rem;letter-spacing:1.5px;color:var(--purple);margin-bottom:6px;width:100%}
+.drag-pool{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;min-height:52px;border-radius:12px;
+  border:3px dashed var(--orange);padding:10px;background:rgba(255,109,0,.03);cursor:pointer}
+.tile{background:#fff;border:2.5px solid var(--blue);border-radius:9px;padding:8px 12px;font-size:.8rem;
+  color:#1a1a2e;cursor:pointer;user-select:none;font-weight:700;transition:transform .15s,box-shadow .15s;box-shadow:var(--shadow)}
+.tile:hover{border-color:var(--orange);box-shadow:var(--shadow-hover);transform:translateY(-2px) rotate(-1deg)}
+.tile.in-zone{background:#E3F2FD;border-color:var(--blue)}
+.tile.correct-tile{border-color:var(--green)!important;background:#E8F5E9!important}
+.tile.wrong-tile{border-color:var(--red)!important;background:#FFEBEE!important}
+.tile.selected-tile{border-color:var(--orange)!important;background:#FFF8E1!important;box-shadow:0 0 0 3px rgba(255,109,0,.3);transform:translateY(-3px) rotate(-2deg)}
+.game-btn{display:inline-block;padding:9px 22px;border-radius:28px;font-family:'Fredoka One',cursive;font-size:.8rem;cursor:pointer;border:none;transition:all .2s;margin-right:7px;margin-top:7px;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.game-btn.primary{background:var(--blue);color:#fff}
+.game-btn.primary:hover{background:#1565C0;transform:translateY(-2px)}
+.game-btn.danger{background:var(--red);color:#fff}
+.game-btn.danger:hover{background:#B71C1C;transform:translateY(-2px)}
+.game-btn.gray{background:#eee;color:#555;box-shadow:0 3px 0 rgba(0,0,0,.1)}
+.feedback-box{border-radius:12px;padding:14px 16px;margin-top:12px;display:none;border:3px solid transparent}
+.feedback-box.show{display:block}
+.feedback-box.ok{background:#E8F5E9;border-color:var(--green)}
+.feedback-box.err{background:#FFEBEE;border-color:var(--red)}
+.feedback-box h4{font-family:'Fredoka One',cursive;font-size:.76rem;letter-spacing:.5px;margin-bottom:6px}
+.feedback-box.ok h4{color:var(--green)}.feedback-box.err h4{color:var(--red)}
+.feedback-box p{font-size:.8rem;color:#333;line-height:1.6;margin:0}
+.score-banner{text-align:center;padding:30px 16px;border-radius:18px;background:#fff;border:3px solid var(--yellow);box-shadow:var(--shadow)}
+.score-big{font-family:'Fredoka One',cursive;font-size:3rem;background:linear-gradient(135deg,var(--orange),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.score-banner p{color:#444;font-size:.86rem;margin-top:8px;font-weight:600}
+
+/* ── PUZZLE ILLUSTRATION ── */
+.puzzle-board-wrap{background:linear-gradient(135deg,#1a237e,#283593);border-radius:14px;padding:14px;margin-bottom:14px;position:relative;overflow:hidden}
+.puzzle-board-wrap::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 26px),repeating-linear-gradient(90deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1px,transparent 1px,transparent 26px)}
+.pb-slots{display:flex;gap:8px;justify-content:center;align-items:flex-end;padding:6px 0}
+.pb-slot{width:60px;min-height:60px;border-radius:9px;border:2px dashed rgba(255,255,255,.3);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;transition:all .4s cubic-bezier(.34,1.56,.64,1)}
+.pb-slot.filled{border-style:solid;border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.1)}
+.pb-slot.correct{border-color:#00e676;background:rgba(0,230,118,.15);animation:slotPop .4s ease}
+.pb-slot.wrong{border-color:#ff5252;background:rgba(255,82,82,.1);animation:slotShake .3s ease}
+.pb-slot-icon{font-size:1.3rem}.pb-slot-label{font-size:.48rem;color:rgba(255,255,255,.65);font-family:'Fredoka One',cursive;text-align:center;line-height:1.2}
+.pb-score-stars{display:flex;gap:5px;justify-content:center;margin-top:6px}
+.pb-star{font-size:1.2rem;transition:transform .3s;filter:grayscale(1);opacity:.35}
+.pb-star.lit{filter:none;opacity:1;animation:starPop .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes slotPop{0%{transform:scale(.8)}60%{transform:scale(1.1)}100%{transform:scale(1)}}
+@keyframes slotShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes starPop{0%{transform:scale(0) rotate(-30deg)}60%{transform:scale(1.3) rotate(5deg)}100%{transform:scale(1) rotate(0)}}
+
+/* ── DETECTIVE ILLUSTRATION ── */
+.detect-scene{background:linear-gradient(135deg,#1b1b2f,#2d2d44);border-radius:14px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:12px;overflow:hidden;position:relative}
+.detect-scene::after{content:'🔎';position:absolute;right:-8px;bottom:-8px;font-size:3.5rem;opacity:.07}
+.detect-meter{flex:1}
+.detect-meter-label{font-size:.62rem;color:rgba(255,255,255,.55);font-family:'Fredoka One',cursive;letter-spacing:1px;margin-bottom:5px}
+.detect-clues{display:flex;gap:5px;flex-wrap:wrap}
+.detect-clue{width:28px;height:28px;border-radius:7px;border:2px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:.88rem;transition:all .4s cubic-bezier(.34,1.56,.64,1);background:rgba(255,255,255,.04)}
+.detect-clue.found{border-color:#ffd600;background:rgba(255,214,0,.18);animation:clueReveal .5s ease}
+.detect-clue.missed{border-color:#ff5252;background:rgba(255,82,82,.1)}
+.detect-glass{font-size:2.6rem;animation:glassSway 3s ease-in-out infinite;flex-shrink:0}
+.detect-streak-wrap{display:flex;flex-direction:column;align-items:center;gap:2px}
+.detect-streak-num{font-family:'Fredoka One',cursive;font-size:1.3rem;color:#ffd600;line-height:1}
+.detect-streak-lbl{font-size:.54rem;color:rgba(255,255,255,.45);letter-spacing:.5px}
+.detect-card{background:var(--card-bg);border:3px solid var(--blue);border-radius:16px;padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow)}
+.detect-text{font-size:.87rem;color:#222;line-height:1.75;margin-bottom:14px;font-style:italic;border-left:5px solid var(--yellow);padding:10px 12px 10px 16px;background:#FFFDE7;border-radius:0 9px 9px 0}
+.detect-options{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+.detect-opt{padding:11px 14px;border-radius:11px;border:2.5px solid rgba(0,0,0,.09);background:#F5F5F5;cursor:pointer;font-size:.84rem;color:#1a1a2e;transition:all .2s;font-weight:600}
+.detect-opt:hover{border-color:var(--blue);background:#E3F2FD}
+.detect-opt.sel-correct{border-color:var(--green)!important;background:#E8F5E9!important;color:#1B5E20}
+.detect-opt.sel-wrong{border-color:var(--red)!important;background:#FFEBEE!important;color:#B71C1C}
+.detect-opt.show-correct{border-color:var(--green)!important;background:#E8F5E9!important}
+.detect-exp{font-size:.81rem;line-height:1.65;padding:10px 12px;border-radius:9px;margin-top:5px;display:none;font-weight:600}
+.detect-exp.show{display:block}
+.detect-exp.ok{background:#E8F5E9;border:2px solid var(--green);color:#1B5E20}
+.detect-exp.err{background:#FFEBEE;border:2px solid var(--red);color:#B71C1C}
+@keyframes clueReveal{0%{transform:scale(0) rotate(-20deg);opacity:0}60%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+@keyframes glassSway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+
+/* ── KUIS ILLUSTRATION ── */
+.kuis-scene{border-radius:12px;padding:10px 14px;margin-bottom:10px;background:linear-gradient(135deg,#e8f5e9,#f1f8e9);border:2px solid #a5d6a7;display:flex;align-items:center;gap:12px}
+.brain-wrap{font-size:2.4rem;position:relative;flex-shrink:0;animation:brainPulse 2s ease-in-out infinite}
+.brain-wrap .brain-level{position:absolute;bottom:-3px;right:-3px;font-size:.62rem;background:#fff;border-radius:8px;padding:1px 4px;font-family:'Fredoka One',cursive;border:1.5px solid #a5d6a7;color:#2e7d32}
+.kuis-xp-area{flex:1}
+.kuis-xp-label{font-size:.62rem;font-weight:800;color:#388e3c;letter-spacing:.5px;margin-bottom:3px}
+.kuis-xp-track{height:14px;background:#c8e6c9;border-radius:8px;overflow:hidden;border:1.5px solid #a5d6a7;position:relative}
+.kuis-xp-fill{height:100%;background:linear-gradient(90deg,#43a047,#00c853);border-radius:8px;transition:width .6s cubic-bezier(.34,1.56,.64,1)}
+.kuis-hearts{display:flex;gap:3px;margin-top:5px}
+.kuis-heart{font-size:1rem;transition:transform .2s}
+.kuis-heart.lost{filter:grayscale(1);opacity:.3;animation:heartBreak .3s ease}
+@keyframes heartBreak{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes brainPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.quiz-progress{height:7px;background:#eee;border-radius:8px;margin-bottom:12px;overflow:hidden;border:2px solid rgba(0,0,0,.07)}
+.quiz-bar{height:100%;background:linear-gradient(90deg,var(--yellow),var(--orange),var(--red));border-radius:8px;transition:width .4s ease}
+.quiz-q-card{background:var(--card-bg);border-radius:16px;border:3px solid rgba(0,0,0,.06);padding:20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.q-num{font-family:'Fredoka One',cursive;font-size:.65rem;letter-spacing:1.5px;color:#555;margin-bottom:6px}
+.q-text{font-size:.9rem;color:#1a1a2e;line-height:1.65;margin-bottom:14px;font-weight:800}
+.q-snippet{background:#FFF9C4;border-left:5px solid var(--yellow);padding:9px 12px;border-radius:0 9px 9px 0;margin-bottom:12px;font-size:.8rem;color:#444;font-style:italic;line-height:1.65}
+.quiz-opts{display:flex;flex-direction:column;gap:7px}
+.quiz-opt{padding:10px 13px;border-radius:11px;border:2.5px solid rgba(0,0,0,.09);background:#F5F5F5;cursor:pointer;font-size:.83rem;color:#1a1a2e;transition:all .2s;display:flex;gap:9px;align-items:flex-start;font-weight:600}
+.quiz-opt:hover:not(.answered){border-color:var(--purple);background:#F3E5F5}
+.opt-letter{width:22px;height:22px;border-radius:7px;background:var(--purple);color:#fff;font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.quiz-opt.correct .opt-letter{background:var(--green)}
+.quiz-opt.wrong .opt-letter{background:var(--red)}
+.quiz-opt.correct{border-color:var(--green);background:#E8F5E9}
+.quiz-opt.wrong{border-color:var(--red);background:#FFEBEE}
+.quiz-opt span{color:#1a1a2e}
+.reinforce{display:none;margin-top:8px;padding:10px 13px;border-radius:10px;font-size:.8rem;line-height:1.65;font-weight:600}
+.reinforce.show{display:block}
+.reinforce.ok{background:#E8F5E9;border:2px solid var(--green);color:#1B5E20}
+.reinforce.wrong-r{background:#FFEBEE;border:2px solid var(--red);color:#B71C1C}
+.reinforce strong{display:block;margin-bottom:3px;font-size:.83rem}
+.quiz-nav{display:flex;justify-content:flex-end;margin-top:14px}
+.quiz-result{text-align:center;padding:36px 16px}
+.qr-circle{width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--orange));border:4px solid var(--orange);margin:0 auto 18px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-hover)}
+.qr-score{font-family:'Fredoka One',cursive;font-size:2.2rem;color:#fff}
+.qr-lbl{font-size:.68rem;color:rgba(255,255,255,.8);margin-top:1px;font-weight:700}
+.qr-msg{font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.qr-sub{font-size:.83rem;color:#444;margin-bottom:20px;font-weight:600}
+.qr-stats{background:#fff;border:3px solid rgba(0,0,0,.06);border-radius:12px;padding:12px 16px;max-width:320px;margin:0 auto 18px;text-align:left;box-shadow:var(--shadow)}
+.qr-row{display:flex;justify-content:space-between;font-size:.8rem;color:#555;margin-bottom:3px;font-weight:600}
+.qr-row span{color:var(--text);font-weight:800}
+
+/* ── STREAK OVERLAY ── */
+.streak-overlay{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);z-index:9990;pointer-events:none;text-align:center;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.streak-overlay.pop{transform:translate(-50%,-50%) scale(1)}
+.streak-overlay.bye{transform:translate(-50%,-50%) scale(0);transition:transform .2s ease-in}
+.streak-badge{background:#fff;border-radius:18px;padding:12px 24px;box-shadow:0 8px 28px rgba(0,0,0,.18);border:3px solid var(--yellow)}
+.streak-emoji{font-size:2.8rem;display:block;margin-bottom:3px}
+.streak-text{font-family:'Fredoka One',cursive;font-size:1.3rem;background:linear-gradient(135deg,var(--orange),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.streak-sub{font-size:.76rem;color:#555;font-weight:700}
+
+/* ── TOAST ── */
+.toast-wrap{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:9999;display:flex;flex-direction:column;gap:7px;align-items:center;pointer-events:none}
+.toast{background:#fff;border-radius:14px;padding:12px 20px;box-shadow:0 5px 18px rgba(0,0,0,.15);border:3px solid var(--yellow);font-family:'Fredoka One',cursive;font-size:.86rem;color:var(--text);animation:toastIn .4s cubic-bezier(.34,1.56,.64,1) both;max-width:320px;text-align:center}
+@keyframes toastIn{from{opacity:0;transform:translateY(-16px) scale(.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+.toast.bye{animation:toastOut .3s ease forwards}
+@keyframes toastOut{to{opacity:0;transform:translateY(-12px) scale(.92)}}
+
+/* ── ACHIEVEMENT POPUP ── */
+.ach-popup{position:fixed;inset:0;z-index:9998;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.48);backdrop-filter:blur(4px)}
+.ach-popup.show{display:flex}
+.ach-box{background:#fff;border-radius:22px;padding:28px 24px;text-align:center;max-width:300px;border:4px solid var(--yellow);box-shadow:var(--shadow-hover);animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both}
+.ach-icon{font-size:3.5rem;display:block;margin-bottom:10px;animation:spinIn .6s ease-out}
+@keyframes spinIn{from{transform:rotate(-20deg) scale(.5)}to{transform:rotate(0) scale(1)}}
+.ach-title{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--orange);margin-bottom:5px}
+.ach-name{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--text);margin-bottom:5px}
+.ach-desc{font-size:.8rem;color:#555;font-weight:600;margin-bottom:14px}
+.ach-pts-badge{display:inline-block;background:var(--green);color:#fff;border-radius:18px;padding:5px 16px;font-family:'Fredoka One',cursive;font-size:.86rem;margin-bottom:14px}
+.ach-close{cursor:pointer;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:9px 24px;font-family:'Fredoka One',cursive;font-size:.86rem;box-shadow:0 4px 0 rgba(0,0,0,.18)}
+.ach-close:hover{transform:translateY(-2px)}
+
+/* ── SELESAI BAR ── */
+.selesai-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;padding:10px 16px;background:linear-gradient(to top,var(--bg) 75%,transparent);text-align:center}
+.selesai-bar.show{display:block}
+.selesai-btn{display:inline-block;padding:12px 32px;border-radius:28px;border:none;background:linear-gradient(135deg,var(--green),#00a846);color:#fff;font-family:'Fredoka One',cursive;font-size:.95rem;cursor:pointer;box-shadow:0 5px 0 rgba(0,150,70,.35);transition:all .2s}
+.selesai-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(0,150,70,.35)}
+
+/* ── SOUND TOGGLE ── */
+.sound-toggle{position:fixed;top:14px;right:14px;z-index:200;width:38px;height:38px;border-radius:50%;background:#fff;border:3px solid var(--blue);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all .2s;box-shadow:var(--shadow)}
+.sound-toggle:hover{background:var(--yellow);transform:scale(1.1)}
+
+/* ── RESET MODAL ── */
+.reset-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.52);backdrop-filter:blur(5px)}
+.reset-modal.show{display:flex}
+.reset-box{background:#fff;border-radius:22px;padding:28px 24px;max-width:340px;width:90%;text-align:center;border:4px solid var(--red);box-shadow:0 8px 28px rgba(255,59,59,.2);animation:popIn .4s cubic-bezier(.34,1.56,.64,1) both}
+.reset-icon{font-size:2.8rem;margin-bottom:7px;display:block}
+.reset-title{font-family:'Fredoka One',cursive;font-size:1.3rem;color:var(--red);margin-bottom:5px}
+.reset-desc{font-size:.82rem;color:#444;margin-bottom:16px;line-height:1.6;font-weight:600}
+.reset-input{width:100%;padding:11px 14px;border-radius:11px;border:3px solid #eee;font-family:'Fredoka One',cursive;font-size:1rem;text-align:center;letter-spacing:4px;outline:none;margin-bottom:7px;transition:border-color .2s}
+.reset-input:focus{border-color:var(--red)}
+.reset-err{color:var(--red);font-size:.78rem;font-weight:700;min-height:16px;margin-bottom:8px}
+.reset-actions{display:flex;gap:8px;justify-content:center}
+.shake{animation:codeShake .4s ease}
+@keyframes codeShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}60%{transform:translateX(7px)}80%{transform:translateX(-3px)}}
+
+/* ── RIPPLE ── */
+.ripple-wrap{position:relative;overflow:hidden}
+.ripple-el{position:absolute;border-radius:50%;background:rgba(255,214,0,.4);transform:scale(0);animation:rippleAnim .5s linear;pointer-events:none}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+/* ── PARTICLES / MASCOTS ── */
+.particles-wrap{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;border-radius:50%;animation:particleFloat linear infinite;opacity:0}
+@keyframes particleFloat{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.6}90%{opacity:.4}100%{transform:translateY(-10vh) scale(1.2);opacity:0}}
+.float-word{position:fixed;font-family:'Fredoka One',cursive;font-size:.68rem;letter-spacing:2px;pointer-events:none;z-index:0;animation:wordFloat 12s linear infinite;opacity:0;white-space:nowrap}
+@keyframes wordFloat{0%{transform:translateX(-100px);opacity:0}10%{opacity:.38}90%{opacity:.25}100%{transform:translateX(calc(100vw + 100px));opacity:0}}
+.mascot{position:fixed;z-index:50;pointer-events:none;transition:opacity .4s;opacity:0;bottom:0}
+.mascot.show{opacity:1}.mascot.hide{opacity:0}
+.mascot-magnify{right:16px;bottom:0;width:100px}.mascot-write{left:16px;bottom:0;width:90px}
+.mascot svg{width:100%;height:auto;filter:drop-shadow(3px 3px 0 rgba(0,0,0,.18))}
+@keyframes mascotPeek{0%{transform:translateY(100%)}15%{transform:translateY(0)}80%{transform:translateY(0)}100%{transform:translateY(100%)}}
+.mascot.animate-peek{animation:mascotPeek 5s ease-in-out forwards}
+.mascot.animate-write{animation:mascotPeek 4s ease-in-out forwards}
+#confettiCanvas{position:fixed;inset:0;pointer-events:none;z-index:9989;display:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:560px){
+  .wrap{padding:0 10px 70px}
+  .modules-grid,.game-grid{grid-template-columns:1fr}
+  .profile-hero{flex-direction:column;text-align:center}
+  .profile-stats{grid-template-columns:repeat(2,1fr)}
+  .struct-row{flex-direction:column}
+  .page-header{padding:14px 0 12px}
+  .ph-title{font-size:.95rem}
+  .content-block{padding:14px 12px}
+  .game-btn{padding:8px 14px;font-size:.76rem}
+  .tile{font-size:.76rem;padding:7px 10px}
+  .detect-scene{flex-direction:column;gap:8px}
+  .lb-refresh-row{flex-wrap:wrap}
+  .kuis-card{flex-direction:column;text-align:center}
+  .hero{padding:36px 12px 28px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ══ SOUND TOGGLE ══ -->
+<div class="sound-toggle" id="soundBtn" onclick="toggleSound()" title="Toggle Suara">🔊</div>
+
+<!-- ══ PARTICLES ══ -->
+<div class="particles-wrap" id="particles"></div>
+
+<!-- ══ MASCOT: MAGNIFIER ══ -->
+<div class="mascot mascot-magnify" id="mascotMagnify">
+  <svg viewBox="0 0 110 160" xmlns="http://www.w3.org/2000/svg">
+    <!-- Body -->
+    <ellipse cx="55" cy="110" rx="28" ry="36" fill="#0d1a33" stroke="#00f5ff" stroke-width="1.5"/>
+    <!-- Head -->
+    <circle cx="55" cy="68" r="22" fill="#1a2a4a" stroke="#9b5cff" stroke-width="1.5"/>
+    <!-- Eyes -->
+    <circle cx="47" cy="66" r="4" fill="#00f5ff"/>
+    <circle cx="63" cy="66" r="4" fill="#00f5ff"/>
+    <circle cx="48" cy="65" r="1.5" fill="#020614"/>
+    <circle cx="64" cy="65" r="1.5" fill="#020614"/>
+    <!-- Smile -->
+    <path d="M48 74 Q55 80 62 74" stroke="#00f5ff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Hat -->
+    <ellipse cx="55" cy="48" rx="25" ry="5" fill="#9b5cff" opacity=".8"/>
+    <rect x="40" y="30" width="30" height="20" rx="4" fill="#9b5cff" opacity=".9"/>
+    <rect x="44" y="26" width="22" height="6" rx="3" fill="#7a3ee0"/>
+    <!-- Arms -->
+    <line x1="27" y1="100" x2="10" y2="118" stroke="#0d1a33" stroke-width="8" stroke-linecap="round"/>
+    <line x1="83" y1="100" x2="100" y2="118" stroke="#0d1a33" stroke-width="8" stroke-linecap="round"/>
+    <!-- Magnifier held in right hand -->
+    <circle cx="100" cy="122" r="14" fill="none" stroke="#00f5ff" stroke-width="2.5" id="lensCircle" style="animation:lensPulse 2s ease-in-out infinite"/>
+    <line x1="110" y1="132" x2="118" y2="142" stroke="#00f5ff" stroke-width="3" stroke-linecap="round"/>
+    <!-- Lens shine -->
+    <circle cx="96" cy="118" r="4" fill="rgba(0,245,255,.2)"/>
+    <!-- Legs -->
+    <rect x="43" y="140" width="10" height="18" rx="4" fill="#0d1a33" stroke="#9b5cff" stroke-width="1"/>
+    <rect x="57" y="140" width="10" height="18" rx="4" fill="#0d1a33" stroke="#9b5cff" stroke-width="1"/>
+    <!-- Shoes -->
+    <ellipse cx="48" cy="158" rx="9" ry="4" fill="#9b5cff"/>
+    <ellipse cx="62" cy="158" rx="9" ry="4" fill="#9b5cff"/>
+    <!-- Stars around magnifier -->
+    <text x="86" y="112" font-size="8" fill="#00f5ff" opacity=".7">✦</text>
+    <text x="104" y="108" font-size="6" fill="#9b5cff" opacity=".8">✦</text>
+  </svg>
+</div>
+
+<!-- ══ MASCOT: WRITER ══ -->
+<div class="mascot mascot-write" id="mascotWrite">
+  <svg viewBox="0 0 100 160" xmlns="http://www.w3.org/2000/svg">
+    <!-- Body -->
+    <ellipse cx="50" cy="110" rx="26" ry="34" fill="#0d1a33" stroke="#ff3cac" stroke-width="1.5"/>
+    <!-- Head -->
+    <circle cx="50" cy="68" r="20" fill="#1a2a4a" stroke="#ff3cac" stroke-width="1.5"/>
+    <!-- Hair -->
+    <path d="M32 60 Q50 44 68 60" fill="#ff3cac" opacity=".7"/>
+    <ellipse cx="50" cy="50" rx="18" ry="8" fill="#ff3cac" opacity=".6"/>
+    <!-- Eyes -->
+    <circle cx="43" cy="67" r="3.5" fill="#ff3cac"/>
+    <circle cx="57" cy="67" r="3.5" fill="#ff3cac"/>
+    <circle cx="44" cy="66" r="1.5" fill="#020614"/>
+    <circle cx="58" cy="66" r="1.5" fill="#020614"/>
+    <!-- Smile -->
+    <path d="M44 75 Q50 80 56 75" stroke="#ff3cac" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <!-- Left arm (holding paper) -->
+    <line x1="24" y1="98" x2="8" y2="114" stroke="#0d1a33" stroke-width="7" stroke-linecap="round"/>
+    <!-- Paper -->
+    <rect x="-4" y="110" width="22" height="28" rx="3" fill="#e8f4ff" stroke="#9b5cff" stroke-width="1.2"/>
+    <line x1="0" y1="116" x2="14" y2="116" stroke="#9b5cff" stroke-width="1" opacity=".6"/>
+    <line x1="0" y1="120" x2="14" y2="120" stroke="#9b5cff" stroke-width="1" opacity=".6"/>
+    <line x1="0" y1="124" x2="10" y2="124" stroke="#9b5cff" stroke-width="1" opacity=".6"/>
+    <!-- Right arm (writing) -->
+    <line x1="76" y1="98" x2="92" y2="112" stroke="#0d1a33" stroke-width="7" stroke-linecap="round"/>
+    <!-- Pen group (wiggling) -->
+    <g id="penGroup" style="transform-origin:92px 112px;animation:penWiggle 0.6s ease-in-out infinite">
+      <line x1="92" y1="112" x2="104" y2="126" stroke="#ff3cac" stroke-width="3" stroke-linecap="round"/>
+      <polygon points="104,126 100,132 108,130" fill="#ff3cac"/>
+      <!-- Pen tip sparkle -->
+      <circle cx="105" cy="130" r="2" fill="#fff" opacity=".8"/>
+    </g>
+    <!-- Legs -->
+    <rect x="39" y="138" width="9" height="18" rx="4" fill="#0d1a33" stroke="#ff3cac" stroke-width="1"/>
+    <rect x="52" y="138" width="9" height="18" rx="4" fill="#0d1a33" stroke="#ff3cac" stroke-width="1"/>
+    <!-- Shoes -->
+    <ellipse cx="43" cy="156" rx="8" ry="4" fill="#ff3cac"/>
+    <ellipse cx="56" cy="156" rx="8" ry="4" fill="#ff3cac"/>
+    <!-- Writing sparkles -->
+    <text x="88" y="100" font-size="7" fill="#ff3cac" opacity=".8">✦</text>
+    <text x="78" y="92" font-size="5" fill="#00f5ff" opacity=".7">✦</text>
+  </svg>
+</div>
+
+<div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+
+<!-- ══ BERANDA ══ -->
+<!-- ══ LOGIN PAGE ══ -->
+<div class="page active" id="page-login">
+  <div class="login-bg">
+    <div class="login-card">
+      <div class="login-mascot">🦸</div>
+      <div class="login-title">SELAMAT DATANG!</div>
+      <div class="login-sub">Media Belajar Teks Argumentasi · Kelas XI</div>
+      <div class="avatar-section">
+        <span class="avatar-section-label">🎭 Pilih Avatarmu</span>
+        <div class="avatar-group-label">👦 Laki-laki</div>
+        <div class="avatar-grid">
+          <div class="avatar-opt" data-av="av1"  onclick="pickAvatar('av1',this)"  title="Keren">😎</div>
+          <div class="avatar-opt" data-av="av2"  onclick="pickAvatar('av2',this)"  title="Bintang">🤩</div>
+          <div class="avatar-opt" data-av="av3"  onclick="pickAvatar('av3',this)"  title="Juara">🥳</div>
+          <div class="avatar-opt" data-av="av11" onclick="pickAvatar('av11',this)" title="Superhero">🦸</div>
+          <div class="avatar-opt" data-av="av13" onclick="pickAvatar('av13',this)" title="Ninja">🦹</div>
+        </div>
+        <div class="avatar-group-label">👧 Perempuan</div>
+        <div class="avatar-grid">
+          <div class="avatar-opt" data-av="av6"  onclick="pickAvatar('av6',this)"  title="Sayang">🥰</div>
+          <div class="avatar-opt" data-av="av7"  onclick="pickAvatar('av7',this)"  title="Ceria">😁</div>
+          <div class="avatar-opt" data-av="av8"  onclick="pickAvatar('av8',this)"  title="Ramah">🤗</div>
+          <div class="avatar-opt" data-av="av12" onclick="pickAvatar('av12',this)" title="Superheroin">🦸‍♀️</div>
+          <div class="avatar-opt" data-av="av15" onclick="pickAvatar('av15',this)" title="Penyihir">🧙‍♀️</div>
+        </div>
+        <div class="avatar-err" id="avatarErr"></div>
+      </div>
+      <label class="login-label">👤 Nama Lengkap</label>
+      <input class="login-input" id="loginName" type="text" placeholder="Masukkan nama kamu..." autocomplete="off"/>
+      <label class="login-label">🏫 Kelas</label>
+      <select class="login-input" id="loginKelas">
+        <option value="">-- Pilih Kelas --</option>
+        <option>XI-1</option><option>XI-2</option><option>XI-3</option><option>XI-4</option>
+        <option>XI-5</option><option>XI-6</option><option>XI-7</option><option>XI-8</option>
+        <option>XI-9</option><option>XI-10</option>
+      </select>
+      <label class="login-label">🔢 Nomor Absen</label>
+      <input class="login-input" id="loginAbsen" type="number" placeholder="Contoh: 15" min="1" max="40"/>
+      <div class="login-err" id="loginErr"></div>
+      <button class="login-btn" onclick="doLogin()"><span id="loginBtnText">🚀 MASUK & MULAI BELAJAR!</span></button>
+      <div class="login-note">💾 Progresmu tersimpan otomatis</div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-home">
+<div class="wrap">
+  <section class="hero">
+    <div class="top-nav">
+    <button class="nav-btn" onclick="showPage('page-profil');renderProfile()">👤 <span id="navName">Profil</span></button>
+    <button class="nav-btn lb-btn" onclick="showPage('page-leaderboard');loadLeaderboard()">🏆 Leaderboard</button>
+    <button class="nav-btn logout-btn" onclick="doLogout()">🚪 Keluar</button>
+  </div>
+  <div class="hero-badge">✏️ MEDIA BELAJAR SERU · KELAS XI 📚</div>
+    <h1 class="hero-title">BELAJAR TEKS<br>ARGUMENTASI</h1>
+    <p class="hero-sub">Kuasai seni meyakinkan melalui logika, fakta, dan bahasa yang kuat</p>
+    <div class="hero-line"></div>
+  </section>
+
+  <!-- MODUL -->
+  <div style="margin-bottom:36px">
+    <div class="sec-header">
+      <div class="sec-icon violet">📚</div>
+      <div><div class="sec-label">Modul Pembelajaran</div><div class="sec-title">Mengenal Teks Argumentasi</div></div>
+    </div>
+    <div id="anchor-modul"></div><div class="modules-grid">
+      <div class="mod-card" onclick="showPage('page-mod1')"><div class="mod-card-inner"><div class="mod-num">MODUL 01</div><span class="mod-emoji">💡</span><div class="mod-title">Materi Teks Argumentasi</div><div class="mod-desc">Pengertian, tujuan, fungsi, dan jenis-jenis argumen dalam teks argumentasi</div></div><div class="mod-arrow">→</div></div>
+      <div class="mod-card" onclick="showPage('page-mod2')"><div class="mod-card-inner"><div class="mod-num">MODUL 02</div><span class="mod-emoji">🏗️</span><div class="mod-title">Struktur Teks Argumentasi</div><div class="mod-desc">Pendahuluan, tubuh argumen, dan kesimpulan beserta fungsi masing-masing</div></div><div class="mod-arrow">→</div></div>
+      <div class="mod-card" onclick="showPage('page-mod3')"><div class="mod-card-inner"><div class="mod-num">MODUL 03</div><span class="mod-emoji">✅</span><div class="mod-title">Ciri-ciri Teks Argumentasi</div><div class="mod-desc">Karakteristik isi dan kebahasaan yang membedakannya dari jenis teks lain</div></div><div class="mod-arrow">→</div></div>
+      <div class="mod-card" onclick="showPage('page-mod4')"><div class="mod-card-inner"><div class="mod-num">MODUL 04</div><span class="mod-emoji">⚙️</span><div class="mod-title">Langkah-langkah Menyusun</div><div class="mod-desc">Panduan 5 tahap sistematis menulis teks argumentasi yang efektif</div></div><div class="mod-arrow">→</div></div>
+      <div class="mod-card wide" onclick="showPage('page-mod5')"><div class="mod-card-inner"><div class="mod-num">MODUL 05</div><span class="mod-emoji">📖</span><div class="mod-title">Kumpulan Contoh Teks Argumentasi</div><div class="mod-desc">Empat contoh teks dari berbagai topik kontekstual disertai analisis struktur lengkap</div></div><div class="mod-arrow">→</div></div>
+    </div>
+  </div>
+
+  <!-- GAME -->
+  <div style="margin-bottom:36px">
+    <div class="sec-header">
+      <div class="sec-icon cyan">🎮</div>
+      <div><div class="sec-label">Game Edukatif</div><div class="sec-title">Belajar Sambil Bermain</div></div>
+    </div>
+    <div id="anchor-game"></div><div class="game-grid">
+      <div class="game-card" onclick="showPage('page-game1')">
+        <span class="game-emoji">🧩</span>
+        <div class="game-title">Puzzle Susun Argumen</div>
+        <div class="game-desc">Susun kalimat-kalimat acak ke zona struktur yang tepat — Tesis, Tubuh Argumen, atau Kesimpulan. Latih pemahamanmu tentang alur argumentasi!</div>
+        <div class="btn-play">▶ MAIN SEKARANG</div>
+      </div>
+      <div class="game-card" onclick="showPage('page-game2')">
+        <span class="game-emoji">🔍</span>
+        <div class="game-title">Detektif Argumen</div>
+        <div class="game-desc">Jadilah detektif! Baca kutipan teks, identifikasi jenis sesat pikir, dan analisis kualitas argumen. Asah kemampuan berpikir kritismu!</div>
+        <div class="btn-play">▶ MAIN SEKARANG</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KUIS -->
+  <div id="anchor-kuis"></div><div class="kuis-section">
+    <div class="sec-header">
+      <div class="sec-icon pink">📝</div>
+      <div><div class="sec-label">Evaluasi Pembelajaran</div><div class="sec-title">Kuis & Latihan</div></div>
+    </div>
+    <div class="kuis-card" onclick="showPage('page-kuis')">
+      <div class="kuis-icon-wrap">📝</div>
+      <div class="kuis-text">
+        <h3>MULAI KUIS TEKS ARGUMENTASI</h3>
+        <p>20 soal pilihan ganda · Mencakup seluruh materi · Nilai penguatan di setiap jawaban · Skor otomatis di akhir · Dirancang untuk siswa Fase F Kelas XI</p>
+      </div>
+    </div>
+  </div>
+  <footer class="footer"><p>◈ KELOMPOK 6 · MEDIA PEMBELAJARAN DIGITAL · TEKS ARGUMENTASI ◈</p></footer>
+</div>
+</div>
+
+<!-- ══ MODUL 1 ══ -->
+
+<!-- ══ PROFIL SISWA ══ -->
+<div class="page" id="page-profil"><div class="wrap">
+  <div class="page-header">
+    <div class="back-btn" onclick="showPage('page-home')">←</div>
+    <div><div class="ph-badge">PROFIL SISWA</div><div class="ph-title" id="profileNameTitle">Profil Saya</div></div>
+  </div>
+  <div class="profile-hero">
+    <div class="profile-avatar" id="profileAvatar">😊</div>
+    <div class="profile-info">
+      <div class="profile-name" id="profileName">-</div>
+      <div class="profile-absen" id="profileAbsen">Absen: -</div>
+      <div class="profile-xp-bar-wrap"><div class="profile-xp-bar" id="profileXpBar" style="width:0%"></div></div>
+      <div class="profile-level" id="profileLevel">Level 1 · Pemula</div>
+    </div>
+  </div>
+  <div class="profile-stats">
+    <div class="stat-box"><div class="stat-val" id="statPoin">0</div><div class="stat-lbl">⭐ Total Poin</div></div>
+    <div class="stat-box"><div class="stat-val" id="statModul">0/5</div><div class="stat-lbl">📚 Modul Selesai</div></div>
+    <div class="stat-box"><div class="stat-val" id="statGame">0/2</div><div class="stat-lbl">🎮 Game Dimainkan</div></div>
+    <div class="stat-box"><div class="stat-val" id="statKuis">0%</div><div class="stat-lbl">📝 Skor Kuis</div></div>
+  </div>
+  <div class="content-block"><h3>🏆 Koleksi Badge & Achievement</h3><div class="badges-grid" id="badgesGrid"></div></div>
+  <div class="content-block"><h3>📋 Riwayat Aktivitas</h3><div id="activityLog" class="activity-log"></div></div>
+</div></div>
+
+<!-- ══ LEADERBOARD ══ -->
+<div class="page" id="page-leaderboard"><div class="wrap">
+  <div class="page-header">
+    <div class="back-btn" onclick="showPage('page-home')">←</div>
+    <div><div class="ph-badge">PAPAN PERINGKAT</div><div class="ph-title">🏆 Leaderboard Kelas</div></div>
+  </div>
+  <div class="lb-refresh-row">
+    <button class="game-btn primary" onclick="loadLeaderboard()" style="margin:0">🔄 Refresh</button>
+    <span class="lb-update" id="lbUpdate">Memuat data...</span>
+    <button class="game-btn danger" onclick="openResetModal()" style="margin:0;margin-left:auto;font-size:.72rem;padding:7px 12px">🗑️ Reset Data</button>
+  </div>
+  <div id="lbLoading" style="text-align:center;padding:36px;font-family:'Fredoka One';color:var(--muted)">⏳ Memuat leaderboard...</div>
+  <div id="lbList" style="margin-top:12px"></div>
+</div></div>
+
+<div class="page" id="page-mod1"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">MODUL 01 · MATERI</div><div class="ph-title">Materi Teks Argumentasi</div></div></div>
+  <div class="content-block">
+    <h3>🔎 Pengertian Teks Argumentasi</h3>
+    <p>Teks argumentasi adalah jenis teks yang bertujuan untuk <strong style="color:#00f5ff">meyakinkan pembaca</strong> agar menerima, menyetujui, atau membenarkan pendapat, gagasan, atau pandangan penulis melalui penyajian alasan yang logis dan bukti yang kuat dan valid.</p>
+    <div class="hl">💡 <strong>Formula Inti:</strong> Teks Argumentasi = Opini/Posisi + Alasan Logis + Data/Fakta Valid. Ketiga unsur ini tidak bisa dipisahkan.</div>
+    <p>Kata "argumentasi" berasal dari bahasa Latin <em>argumentum</em> yang berarti bukti atau alasan. Dalam bahasa Indonesia, teks argumentasi termasuk dalam ragam teks ekspositoris yang bersifat persuasif — tidak hanya menjelaskan, tetapi juga membujuk pembaca secara rasional.</p>
+    <p>Menurut <strong style="color:#c9a4ff">Keraf (2007)</strong>, argumentasi adalah bentuk retorika yang berusaha mempengaruhi sikap dan pendapat orang lain agar mereka percaya dan bertindak sesuai dengan yang diinginkan penulis atau pembicara. Sementara <strong style="color:#c9a4ff">Tarigan (2008)</strong> mendefinisikannya sebagai paragraf yang menyatakan pendapat disertai alasan-alasan logis yang dapat meyakinkan pembaca.</p>
+  </div>
+  <div class="content-block">
+    <h3>🎯 Tujuan dan Fungsi</h3>
+    <h4>Tujuan Utama</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"><span class="tag cyan">Meyakinkan Pembaca</span><span class="tag cyan">Membela Posisi</span><span class="tag cyan">Mempengaruhi Sikap</span><span class="tag cyan">Menyampaikan Sudut Pandang</span></div>
+    <h4>Fungsi dalam Kehidupan Nyata</h4>
+    <div class="ciri-item"><span class="ciri-dot">▸</span><div><strong>Debat dan Diskusi</strong><p>Saat berdebat dalam forum, musyawarah, atau sidang — memenangkan argumen dengan logika, bukan emosi.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">▸</span><div><strong>Esai dan Karya Ilmiah</strong><p>Menjadi fondasi penulisan esai opini, makalah, skripsi, dan tesis yang memerlukan pembuktian atas suatu klaim.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">▸</span><div><strong>Jurnalisme dan Media</strong><p>Opini di koran, editorial, dan artikel analisis menggunakan struktur argumentasi untuk menyampaikan pandangan.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">▸</span><div><strong>Kehidupan Sehari-hari</strong><p>Saat mengusulkan ide, bernegosiasi, atau meyakinkan seseorang — kamu sedang menggunakan argumen!</p></div></div>
+  </div>
+  <div class="content-block">
+    <h3>📊 Perbandingan dengan Jenis Teks Lain</h3>
+    <table class="comp-table">
+      <tr><th>Aspek</th><th>Argumentasi</th><th>Eksposisi</th><th>Persuasi</th></tr>
+      <tr><td>Tujuan</td><td>Membuktikan pendapat dengan logika</td><td>Menjelaskan fakta secara objektif</td><td>Mengajak pembaca bertindak</td></tr>
+      <tr><td>Sifat</td><td>Subjektif + bukti objektif</td><td>Objektif / netral</td><td>Subjektif + emosional</td></tr>
+      <tr><td>Posisi Penulis</td><td>Berpihak (pro/kontra)</td><td>Netral</td><td>Berpihak + mendorong aksi</td></tr>
+      <tr><td>Contoh</td><td>Esai pendapat, debat</td><td>Artikel ilmiah, ensiklopedia</td><td>Iklan, kampanye, brosur</td></tr>
+    </table>
+    <div class="hl violet">⚠️ Teks argumentasi boleh mengandung unsur persuasi, namun selalu dilandasi bukti dan penalaran yang dapat diverifikasi. Persuasi murni tidak selalu memerlukan bukti.</div>
+  </div>
+  <div class="content-block">
+    <h3>🧠 Jenis-jenis Argumen</h3>
+    <div class="step-row"><div class="step-n">1</div><div><strong>Argumen Deduktif</strong><span>Dari pernyataan umum ke kesimpulan khusus. "Semua makhluk hidup butuh air → Manusia butuh air."</span></div></div>
+    <div class="step-row"><div class="step-n">2</div><div><strong>Argumen Induktif</strong><span>Dari fakta-fakta khusus ke kesimpulan umum. Mengumpulkan banyak data sebelum menarik kesimpulan.</span></div></div>
+    <div class="step-row"><div class="step-n">3</div><div><strong>Argumen Analogi</strong><span>Membandingkan dua hal yang memiliki kemiripan untuk memperkuat klaim.</span></div></div>
+    <div class="step-row"><div class="step-n">4</div><div><strong>Argumen Kausalitas</strong><span>Menjelaskan hubungan sebab-akibat, paling efektif jika didukung penelitian atau data statistik.</span></div></div>
+    <div class="step-row"><div class="step-n">5</div><div><strong>Argumen Autoritas</strong><span>Mengutip pendapat ahli atau lembaga terpercaya. Harus menyertakan sumber yang jelas dan relevan.</span></div></div>
+    <div class="ref-box"><strong>Referensi:</strong> Keraf, G. (2007). <em>Argumentasi dan Narasi</em>. Jakarta: Gramedia. · Tarigan, H.G. (2008). <em>Menulis sebagai Suatu Keterampilan Berbahasa</em>. Bandung: Angkasa. · Kemendikbud (2023). <em>Buku Teks Bahasa Indonesia Kelas XI Kurikulum Merdeka</em>.</div>
+  </div>
+</div></div>
+
+<!-- ══ MODUL 2 ══ -->
+<div class="page" id="page-mod2"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">MODUL 02 · STRUKTUR</div><div class="ph-title">Struktur Teks Argumentasi</div></div></div>
+  <div class="content-block">
+    <h3>🏗️ Gambaran Umum Struktur</h3>
+    <p>Teks argumentasi yang efektif dibangun di atas tiga bagian utama yang saling berkaitan secara logis. Urutan ini tidak boleh dibolak-balik karena setiap bagian mempersiapkan bagian berikutnya.</p>
+    <div class="struct-row">
+      <div class="struct-box"><div class="sb-icon">🎯</div><div class="sb-title">PENDAHULUAN</div><p>Pengantar topik & pernyataan posisi (tesis) yang tegas</p></div>
+      <div class="struct-box v"><div class="sb-icon">⚔️</div><div class="sb-title">TUBUH ARGUMEN</div><p>Serangkaian alasan, bukti, data, dan sanggahan</p></div>
+      <div class="struct-box p"><div class="sb-icon">🏁</div><div class="sb-title">KESIMPULAN</div><p>Penegasan ulang posisi dan dorongan kepada pembaca</p></div>
+    </div>
+    <div class="hl">🔗 <strong>Prinsip Koherensi:</strong> Ketiga bagian membentuk satu alur logis — dari pengenalan masalah → pembuktian → penutupan. Tidak ada bagian yang bisa berdiri sendiri.</div>
+  </div>
+  <div class="content-block">
+    <h3>🎯 Pendahuluan (Tesis)</h3>
+    <p>Pendahuluan adalah "pintu masuk" tulisan. Harus menarik perhatian pembaca sekaligus menyampaikan posisi penulis secara tegas.</p>
+    <div class="ciri-item"><span class="ciri-dot">①</span><div><strong>Hook (Kait Perhatian)</strong><p>Kalimat pembuka yang menarik: fakta mengejutkan, pertanyaan retoris, atau kutipan relevan.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">②</span><div><strong>Latar Belakang Isu</strong><p>Konteks singkat mengenai topik — mengapa isu ini penting dan siapa yang terdampak.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">③</span><div><strong>Pernyataan Tesis</strong><p>Kalimat terpenting dalam tulisan. Menyatakan posisi spesifik penulis secara tegas dan tidak ambigu.</p></div></div>
+    <div class="hl pink">⚠️ <strong>Tesis Lemah vs Kuat:</strong><br>❌ "Media sosial memiliki sisi positif dan negatif." (tidak mengambil posisi)<br>✅ "Pembatasan media sosial di sekolah harus diberlakukan karena terbukti menurunkan konsentrasi belajar siswa."</div>
+  </div>
+  <div class="content-block">
+    <h3>⚔️ Tubuh Argumen</h3>
+    <p>Bagian terbesar dan terpenting. Penulis menyajikan bukti untuk memperkuat tesis sekaligus (opsional) menyangkal argumen lawan.</p>
+    <h4>Prinsip Pengembangan ARE</h4>
+    <div class="step-row"><div class="step-n">A</div><div><strong>Assertion (Pernyataan)</strong><span>Nyatakan poin argumen dengan jelas. Satu paragraf = satu poin argumen utama.</span></div></div>
+    <div class="step-row"><div class="step-n">R</div><div><strong>Reasoning (Penalaran)</strong><span>Jelaskan <em>mengapa</em> pernyataan tersebut benar secara logis.</span></div></div>
+    <div class="step-row"><div class="step-n">E</div><div><strong>Evidence (Bukti)</strong><span>Dukung dengan data statistik, hasil penelitian, fakta sejarah, atau kutipan ahli yang spesifik.</span></div></div>
+    <h4>Counter-Argument</h4>
+    <p>Mengakui argumen lawan lalu membantahnya dengan bukti lebih kuat. Ini justru meningkatkan kredibilitas penulis.</p>
+    <div class="hl">📌 <strong>Pola:</strong> "Memang benar bahwa [argumen lawan]. Namun, hal ini tidak mengubah fakta bahwa [bantahan + bukti]."</div>
+    <h4>Konjungsi yang Efektif</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><span class="tag">Selain itu</span><span class="tag">Lebih jauh lagi</span><span class="tag pink">Meskipun demikian</span><span class="tag pink">Namun</span><span class="tag cyan">Oleh karena itu</span><span class="tag cyan">Terbukti bahwa</span></div>
+  </div>
+  <div class="content-block">
+    <h3>🏁 Kesimpulan (Penegasan Ulang)</h3>
+    <p>Bukan sekadar mengulang — harus mensintesis argumen dan meninggalkan kesan terakhir yang kuat.</p>
+    <div class="ciri-item"><span class="ciri-dot">①</span><div><strong>Restasi Tesis</strong><p>Nyatakan kembali posisi utama dengan kata-kata berbeda dari pendahuluan.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">②</span><div><strong>Sintesis Argumen</strong><p>Rangkum esensi argumen utama secara ringkas dan padat.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">③</span><div><strong>Call to Action / Refleksi</strong><p>Ajukan solusi, ajakan, atau pertanyaan reflektif yang mendorong pembaca berpikir lebih jauh.</p></div></div>
+    <div class="hl">✍️ Hindari penutup lemah seperti "Demikianlah pendapat saya." Gunakan kalimat yang kuat dan berkesan.</div>
+    <div class="ref-box"><strong>Referensi:</strong> Toulmin, S. (2003). <em>The Uses of Argument</em>. Cambridge. · Kemendikbud (2017). <em>Buku Guru Bahasa Indonesia Kelas XI</em>. · Suparno & Yunus (2002). <em>Keterampilan Dasar Menulis</em>. Jakarta: Universitas Terbuka.</div>
+  </div>
+</div></div>
+
+<!-- ══ MODUL 3 ══ -->
+<div class="page" id="page-mod3"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">MODUL 03 · CIRI-CIRI</div><div class="ph-title">Ciri-ciri Teks Argumentasi</div></div></div>
+  <div class="content-block">
+    <h3>✅ Enam Ciri Utama</h3>
+    <div class="ciri-item"><span class="ciri-dot">◆</span><div><strong>1. Tesis yang Jelas dan Tidak Ambigu</strong><p>Penulis menyatakan posisinya secara eksplisit sejak awal. Tesis bersifat <em style="color:#00f5ff">debatable</em> — dapat diperdebatkan, bukan fakta mutlak yang sudah pasti benar.</p><div style="margin-top:6px"><span class="tag cyan">Debatable</span><span class="tag cyan">Spesifik</span><span class="tag cyan">Tegas</span></div></div></div>
+    <div class="ciri-item"><span class="ciri-dot">◆</span><div><strong>2. Argumen Berbasis Logika</strong><p>Setiap klaim didukung penalaran yang valid. Penulis tidak boleh membuat loncatan logika atau <em>logical fallacy</em> seperti generalisasi berlebihan atau serangan pribadi (ad hominem).</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">◆</span><div><strong>3. Mengandung Fakta, Data, dan Bukti</strong><p>Fakta, statistik, hasil penelitian, atau kutipan ahli yang dapat diverifikasi digunakan untuk memperkuat argumen.</p><div style="margin-top:6px"><span class="tag">Statistik</span><span class="tag">Hasil Riset</span><span class="tag">Kutipan Ahli</span><span class="tag">Data Pemerintah</span></div></div></div>
+    <div class="ciri-item"><span class="ciri-dot">◆</span><div><strong>4. Bahasa Lugas, Tegas, dan Persuasif</strong><p>Menggunakan kalimat aktif, pilihan kata tepat, dan struktur kalimat jelas. Menghindari bahasa ambigu. Sering memakai kata-kata tegas: "harus", "tidak boleh", "terbukti".</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">◆</span><div><strong>5. Bersifat Objektif-Subjektif (Campuran)</strong><p>Penulis memiliki pendapat subjektif, namun disampaikan menggunakan data dan logika yang bersifat objektif.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">◆</span><div><strong>6. Terstruktur dan Sistematis</strong><p>Alur pikiran disusun sistematis mengikuti struktur pendahuluan → tubuh argumen → kesimpulan. Setiap paragraf memiliki satu gagasan utama.</p></div></div>
+  </div>
+  <div class="content-block">
+    <h3>⚠️ Ciri Kebahasaan Khusus</h3>
+    <h4>Konjungsi Kausalitas dan Pertentangan</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"><span class="tag pink">karena / sebab</span><span class="tag pink">oleh karena itu</span><span class="tag pink">sehingga</span><span class="tag">namun / tetapi</span><span class="tag">meskipun / walaupun</span><span class="tag cyan">dengan demikian</span><span class="tag cyan">terbukti bahwa</span></div>
+    <h4>Modalitas (Kata Kepastian)</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"><span class="tag">harus / wajib</span><span class="tag">seharusnya</span><span class="tag">tidak boleh</span><span class="tag">terbukti</span><span class="tag">sudah sepatutnya</span></div>
+    <h4>Kalimat Retoris</h4>
+    <p>Pertanyaan yang tidak memerlukan jawaban, mengajak pembaca berpikir: <em style="color:#c9d9f5">"Bukankah sudah saatnya kita bertindak?"</em></p>
+  </div>
+  <div class="content-block">
+    <h3>🚫 Yang Bukan Teks Argumentasi</h3>
+    <div class="step-row"><div class="step-n">✗</div><div><strong>Opini Tanpa Bukti</strong><span>"Menurutku media sosial itu berbahaya." — Hanya opini personal tanpa data pendukung.</span></div></div>
+    <div class="step-row"><div class="step-n">✗</div><div><strong>Sesat Pikir (Logical Fallacy)</strong><span>Generalisasi berlebihan, serangan pribadi, atau mengandalkan emosi semata tanpa argumen logis.</span></div></div>
+    <div class="step-row"><div class="step-n">✗</div><div><strong>Tesis Tidak Debatable</strong><span>"Bumi berputar mengelilingi matahari" — ini fakta ilmiah, bukan tesis argumentasi.</span></div></div>
+    <div class="step-row"><div class="step-n">✗</div><div><strong>Narasi atau Deskripsi Murni</strong><span>Teks yang hanya menceritakan kejadian tanpa posisi dan pembuktian.</span></div></div>
+    <div class="ref-box"><strong>Referensi:</strong> Suharno (2015). <em>Bahasa Indonesia untuk SMA/MA Kelas XI</em>. Yogyakarta: Intan Pariwara. · Kemendikbud (2023). <em>Buku Teks Bahasa Indonesia Kelas XI Kurikulum Merdeka</em>. · Wiesner, D. (2012). <em>Critical Thinking and Argumentation</em>. Oxford Press.</div>
+  </div>
+</div></div>
+
+<!-- ══ MODUL 4 ══ -->
+<div class="page" id="page-mod4"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">MODUL 04 · LANGKAH-LANGKAH</div><div class="ph-title">Langkah Menyusun Teks Argumentasi</div></div></div>
+  <div class="content-block">
+    <h3>⚙️ Peta Jalan Penulisan</h3>
+    <div class="hl">🗺️ <strong>Alur 5 Tahap:</strong> Pilih Topik → Tentukan Posisi → Riset & Kumpulkan Bukti → Buat Kerangka → Tulis & Revisi</div>
+  </div>
+  <div class="content-block">
+    <h3>① Memilih Topik yang Tepat</h3>
+    <div class="ciri-item"><span class="ciri-dot">✓</span><div><strong>Kontroversial / Debatable</strong><p>Topik yang bisa dilihat dari dua sisi atau lebih. Contoh: "Apakah ujian nasional perlu dihapus?"</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">✓</span><div><strong>Relevan dan Kontekstual</strong><p>Berkaitan dengan isu yang sedang hangat dan memengaruhi kehidupan siswa kelas XI secara langsung.</p></div></div>
+    <div class="ciri-item"><span class="ciri-dot">✓</span><div><strong>Tersedia Sumber Datanya</strong><p>Pastikan ada data, penelitian, atau opini ahli yang bisa ditemukan untuk mendukung argumen.</p></div></div>
+    <h4>💡 Ide Topik untuk Siswa Kelas XI</h4>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><span class="tag green">Penggunaan HP di kelas</span><span class="tag green">Kurikulum Merdeka</span><span class="tag green">AI di pendidikan</span><span class="tag green">Media sosial dan remaja</span><span class="tag green">Literasi digital</span><span class="tag green">Gap year setelah SMA</span><span class="tag green">Standar kecantikan di media</span><span class="tag green">Bahasa gaul vs bahasa baku</span></div>
+  </div>
+  <div class="content-block">
+    <h3>② Menentukan Posisi</h3>
+    <p>Tentukan posisimu secara tegas. Posisi ambigu menghasilkan tesis yang lemah.</p>
+    <div class="step-row"><div class="step-n">💬</div><div><strong>Teknik "Karena Clause"</strong><span>Rumuskan: <em style="color:#00f5ff">"Saya [mendukung/menolak] X karena Y dan Z."</em> Jika tidak bisa dilengkapi alasan yang solid, pertimbangkan ulang posisimu.</span></div></div>
+    <div class="step-row"><div class="step-n">💬</div><div><strong>Uji Argumen Lawan</strong><span>Pikirkan argumen terkuat dari pihak berlawanan. Jika bisa dibantah dengan bukti lebih kuat, posisimu sudah tepat.</span></div></div>
+  </div>
+  <div class="content-block">
+    <h3>③ Riset dan Kumpulkan Bahan</h3>
+    <div class="struct-row">
+      <div class="struct-box"><div class="sb-icon">📊</div><div class="sb-title">DATA STATISTIK</div><p>BPS, WHO, UNESCO, Kemendikbud, jurnal ilmiah</p></div>
+      <div class="struct-box v"><div class="sb-icon">👩‍🔬</div><div class="sb-title">PENDAPAT AHLI</div><p>Pakar, psikolog, tokoh pendidikan terpercaya</p></div>
+      <div class="struct-box p"><div class="sb-icon">📜</div><div class="sb-title">FAKTA SEJARAH</div><p>Preseden historis yang relevan dengan topik</p></div>
+    </div>
+    <div class="hl pink">🚨 Jangan ambil data dari sumber tidak jelas. Setiap data harus memiliki sumber yang dapat dikutip dan diverifikasi.</div>
+  </div>
+  <div class="content-block">
+    <h3>④ Menyusun Kerangka Tulisan</h3>
+    <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.15);border-radius:10px;padding:16px 18px;font-size:.84rem;line-height:1.9;color:#90b8cc">
+      <strong style="color:var(--cyan)">I. PENDAHULUAN</strong><br>&nbsp;&nbsp;A. Hook / kalimat pembuka menarik<br>&nbsp;&nbsp;B. Latar belakang isu (2-3 kalimat)<br>&nbsp;&nbsp;C. Pernyataan tesis (tegas dan spesifik)<br><br>
+      <strong style="color:var(--violet)">II. TUBUH ARGUMEN</strong><br>&nbsp;&nbsp;A. Argumen 1 + bukti/data<br>&nbsp;&nbsp;B. Argumen 2 + bukti/data<br>&nbsp;&nbsp;C. Argumen 3 + bukti/data<br>&nbsp;&nbsp;D. (Opsional) Counter-argument + refutasi<br><br>
+      <strong style="color:var(--pink)">III. KESIMPULAN</strong><br>&nbsp;&nbsp;A. Restasi tesis (kata berbeda)<br>&nbsp;&nbsp;B. Sintesis poin utama<br>&nbsp;&nbsp;C. Kalimat penutup berkesan / call to action
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>⑤ Menulis, Merevisi, dan Menyunting</h3>
+    <div class="step-row"><div class="step-n">✍️</div><div><strong>Tulis Draft Pertama</strong><span>Tulis mengalir tanpa banyak berhenti. Tujuannya menuangkan ide, bukan kesempurnaan.</span></div></div>
+    <div class="step-row"><div class="step-n">🔍</div><div><strong>Revisi Konten</strong><span>Baca dari sudut pandang "pembaca kritis". Apakah setiap argumen logis dan sulit dipatahkan?</span></div></div>
+    <div class="step-row"><div class="step-n">✂️</div><div><strong>Sunting Bahasa</strong><span>Periksa ejaan (PUEBI), tanda baca, pilihan kata, dan kepaduan paragraf.</span></div></div>
+    <div class="step-row"><div class="step-n">👀</div><div><strong>Peer Review</strong><span>Minta teman membaca dan memberikan masukan objektif.</span></div></div>
+    <div class="hl">📝 <strong>Ceklis Akhir:</strong> ☐ Tesis jelas & spesifik? ☐ Setiap argumen didukung bukti? ☐ Kesimpulan bukan copy-paste pendahuluan? ☐ Ejaan & tanda baca benar? ☐ Alur logis dan mengalir?</div>
+    <div class="ref-box"><strong>Referensi:</strong> Nurudin (2010). <em>Dasar-dasar Penulisan</em>. Malang: UMM Press. · Zainurrahman (2013). <em>Menulis: Dari Teori hingga Praktik</em>. Bandung: Alfabeta. · Lamm, K. & Everett, M. (2019). <em>The Argument Handbook</em>. Pearson Education.</div>
+  </div>
+</div></div>
+
+<!-- ══ MODUL 5 ══ -->
+<div class="page" id="page-mod5"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">MODUL 05 · CONTOH TEKS</div><div class="ph-title">Kumpulan Contoh Teks Argumentasi</div></div></div>
+  <div class="content-block">
+    <h3>📖 Petunjuk Membaca Contoh</h3>
+    <p>Setiap contoh dilengkapi label struktural dan catatan analisis untuk membantu memahami cara kerja setiap bagian teks argumentasi.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"><span class="tag pink">Contoh 1: AI di Pendidikan</span><span class="tag">Contoh 2: Literasi Digital</span><span class="tag cyan">Contoh 3: Seragam Sekolah</span><span class="tag green">Contoh 4: Bahasa Indonesia di Era Global</span></div>
+  </div>
+  <div class="content-block">
+    <h3>📖 Contoh 1 — AI di Sekolah (Pro)</h3>
+    <div class="ex-block">
+      <div class="ex-head">① PENDAHULUAN — TESIS</div>
+      <p>Integrasi teknologi dalam dunia pendidikan telah mencapai babak baru dengan hadirnya Kecerdasan Buatan (AI). Banyak pihak khawatir AI akan membuat siswa malas dan kehilangan kemampuan berpikir kritis. Namun, memblokir AI di lingkungan sekolah adalah langkah yang kontraproduktif. <strong style="color:#ff3cac">AI seharusnya tidak dipandang sebagai ancaman, melainkan sebagai mitra strategis yang mampu merevolusi kualitas pembelajaran jika diadopsi secara bijak dan terregulasi.</strong></p>
+      <div style="font-size:.72rem;color:#4a6a88;margin-top:6px;padding:7px 10px;border-radius:6px;background:rgba(255,255,255,.03)">💬 <em>Analisis: Hook dengan fakta teknologi → pengakuan argumen lawan → tesis tegas dan spesifik.</em></div>
+      <div class="ex-label" style="margin-top:14px">② TUBUH ARGUMEN</div>
+      <p><strong style="color:#c9a4ff">Argumen 1 — Personalisasi Pembelajaran:</strong> AI hadir melalui sistem <em>adaptive learning</em> yang menganalisis pemahaman siswa dan menyediakan latihan sesuai kemampuan individual secara real-time — sesuatu yang mustahil dilakukan guru untuk 30+ siswa secara bersamaan.</p>
+      <p><strong style="color:#c9a4ff">Argumen 2 — Efisiensi Administrasi Guru:</strong> OECD (2022) melaporkan guru menghabiskan hampir 40% waktu kerja untuk urusan administratif. Dengan AI, waktu ini dapat dialihkan untuk pendekatan emosional dan mentoring yang tidak bisa digantikan algoritma.</p>
+      <p><strong style="color:#c9a4ff">Argumen 3 — Melatih Berpikir Kritis:</strong> Ketika AI menjawab pertanyaan "apa" dan "siapa", pendidikan dipaksa naik ke level "mengapa" dan "bagaimana". Siswa diajarkan mengevaluasi jawaban AI, memilah informasi valid, dan menyusun argumen — inilah HOTS sesungguhnya.</p>
+      <div class="ex-label" style="margin-top:14px">③ KESIMPULAN</div>
+      <p>Melarang AI di sekolah sama saja menutup mata dari perkembangan zaman. <strong style="color:#ff3cac">Dengan menempatkan AI sebagai alat bantu dan guru sebagai pemegang kendali utama, disertai etika digital yang jelas, AI akan menjadi katalisator yang membawa pendidikan ke level lebih tinggi dan inklusif.</strong></p>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>📖 Contoh 2 — Literasi Digital</h3>
+    <div class="ex-block v">
+      <div class="ex-head">① PENDAHULUAN</div>
+      <p>5,4 miliar orang memiliki akses internet (Datareportal, 2024), namun sebagian besar generasi muda tidak dibekali kemampuan untuk membedakan fakta dari hoaks. <strong style="color:#c9a4ff">Literasi digital bukan kemampuan opsional — ia adalah kompetensi dasar yang wajib diajarkan secara formal agar generasi muda tidak menjadi korban sekaligus penyebar disinformasi.</strong></p>
+      <div class="ex-label" style="margin-top:14px">② TUBUH ARGUMEN</div>
+      <p><strong style="color:#c9a4ff">Argumen 1 — Ancaman Hoaks:</strong> Laporan MIT Sloan (2023) menunjukkan berita palsu menyebar enam kali lebih cepat dari berita benar. Di Indonesia, Kominfo mencatat lebih dari 1.000 konten hoaks ditangani setiap tahun.</p>
+      <p><strong style="color:#c9a4ff">Argumen 2 — Perlindungan Privasi:</strong> Penipuan siber di kalangan remaja meningkat 35% dalam lima tahun terakhir (BSSN, 2023). Remaja melek digital mampu mengenali ancaman phishing dan melindungi data pribadi.</p>
+      <p><strong style="color:#c9a4ff">Argumen 3 — Partisipasi Demokratis:</strong> Pemilu 2024 adalah pemilu pertama di mana mayoritas pemilih muda adalah Gen Z yang terpapar politik melalui media sosial. Literasi digital memastikan suara mereka didasari informasi akurat.</p>
+      <div class="ex-label" style="margin-top:14px">③ KESIMPULAN</div>
+      <p><strong style="color:#c9a4ff">Sudah saatnya literasi digital dimasukkan sebagai kurikulum inti, bukan muatan tambahan, agar generasi mendatang tumbuh sebagai konsumen dan produsen informasi yang kritis, bertanggung jawab, dan berdaya.</strong></p>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>📖 Contoh 3 — Seragam Sekolah (Pro)</h3>
+    <div class="ex-block c">
+      <div class="ex-head">① PENDAHULUAN</div>
+      <p>Seragam kerap dianggap mengekang kebebasan berekspresi. Namun di balik kontroversi itu, terdapat bukti yang tidak dapat diabaikan. <strong style="color:#00f5ff">Seragam sekolah seharusnya tetap dipertahankan karena terbukti membangun kesetaraan sosial, meningkatkan fokus akademis, dan memperkuat identitas kolektif.</strong></p>
+      <div class="ex-label" style="margin-top:14px">② TUBUH ARGUMEN</div>
+      <p><strong style="color:#80d8e8">Argumen 1 — Kesetaraan Sosial:</strong> Studi NCES (2020) menunjukkan sekolah dengan kebijakan seragam memiliki tingkat perundungan berbasis penampilan 23% lebih rendah. Di Indonesia, disparitas ekonomi yang masih tinggi membuat seragam menjadi equalizer yang sangat relevan.</p>
+      <p><strong style="color:#80d8e8">Argumen 2 — Fokus Belajar:</strong> Penelitian <em>enclothed cognition</em> (Adam & Galinsky, 2012) membuktikan jenis pakaian secara signifikan memengaruhi proses kognitif. Seragam memperkuat "mode belajar" dalam pikiran siswa.</p>
+      <p><strong style="color:#80d8e8">Argumen 3 — Identitas Institusi:</strong> Siswa yang bangga dengan identitas sekolahnya cenderung lebih termotivasi dan menjaga reputasi almamater di luar jam pelajaran.</p>
+      <div class="ex-label" style="margin-top:14px">③ KESIMPULAN</div>
+      <p><strong style="color:#00f5ff">Dengan desain yang inklusif dan pengelolaan tepat, seragam bukan pemasung kreativitas, melainkan pemersatu yang membangun fondasi karakter siswa secara kolektif.</strong></p>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>📖 Contoh 4 — Bahasa Indonesia di Era Global</h3>
+    <div class="ex-block g">
+      <div class="ex-head">① PENDAHULUAN</div>
+      <p>Banyak pihak berpendapat penguasaan bahasa Inggris jauh lebih penting daripada mendalami bahasa Indonesia. Pandangan ini keliru dan berbahaya. <strong style="color:#00ff9d">Bahasa Indonesia harus tetap menjadi prioritas utama karena ia bukan sekadar alat komunikasi, tetapi identitas bangsa, fondasi berpikir kritis, dan kunci pemersatu keberagaman Indonesia.</strong></p>
+      <div class="ex-label" style="margin-top:14px">② TUBUH ARGUMEN</div>
+      <p><strong style="color:#70f0b8">Argumen 1 — Identitas Budaya:</strong> UNESCO (2021) menetapkan bahasa sebagai elemen paling fundamental dari identitas budaya. Melemahnya penguasaan bahasa Indonesia berarti melemahnya penghayatan nilai-nilai kebangsaan dan kearifan lokal.</p>
+      <p><strong style="color:#70f0b8">Argumen 2 — Fondasi Literasi:</strong> Kemampuan berbahasa ibu yang kuat adalah prasyarat penguasaan bahasa asing yang lebih baik (Cummins, 1991). Siswa yang terampil dalam bahasa Indonesia memiliki kemampuan analisis dan ekspresi ide yang lebih matang.</p>
+      <p><strong style="color:#70f0b8">Argumen 3 — Pemersatu Bangsa:</strong> Indonesia memiliki 700+ bahasa daerah. Bahasa Indonesia adalah satu-satunya jembatan yang menghubungkan semua suku dan budaya — melemahkannya mengancam fondasi persatuan yang dibangun sejak Sumpah Pemuda 1928.</p>
+      <div class="ex-label" style="margin-top:14px">③ KESIMPULAN</div>
+      <p><strong style="color:#00ff9d">Generasi muda Indonesia yang ideal berakar kuat dalam bahasa Indonesia namun mampu merentangkan sayap ke dunia internasional — bukan generasi yang kehilangan jati diri demi mengejar modernitas.</strong></p>
+    </div>
+    <div class="ref-box"><strong>Referensi:</strong> OECD Education Report (2022). · MIT Sloan Review (2023). · Adam, H. & Galinsky, A. (2012). <em>Enclothed Cognition</em>. J. of Experimental Social Psychology. · Cummins, J. (1991). <em>Interdependence of First and Second Language Proficiency</em>. Cambridge. · UNESCO (2021). <em>Language as a Human Right</em>.</div>
+  </div>
+</div></div>
+
+<!-- ══ GAME 1: PUZZLE ══ -->
+<div class="page" id="page-game1"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">🧩 GAME EDUKATIF 01</div><div class="ph-title">Puzzle Susun Argumen</div></div></div>
+  <div class="game-wrap" id="puzzle-app"></div>
+</div></div>
+
+<!-- ══ GAME 2: DETEKTIF ══ -->
+<div class="page" id="page-game2"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">🔍 GAME EDUKATIF 02</div><div class="ph-title">Detektif Argumen</div></div></div>
+  <div class="game-wrap" id="detect-app"></div>
+</div></div>
+
+<!-- ══ KUIS ══ -->
+<div class="page" id="page-kuis"><div class="wrap">
+  <div class="page-header"><div class="back-btn" onclick="showPage('page-home')">←</div><div><div class="ph-badge">📝 EVALUASI PEMBELAJARAN</div><div class="ph-title">Kuis Teks Argumentasi</div></div></div>
+  <div id="kuis-app"></div>
+</div></div>
+
+<script>
+/* ── ROUTER ── */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='page-game1')initPuzzle();
+  if(id==='page-game2')initDetect();
+  if(id==='page-kuis')initKuis();
+}
+
+/* ══════════════════════════════
+   GAME 1 — PUZZLE SUSUN ARGUMEN
+══════════════════════════════ */
+const PUZZLES=[
+  {
+    prompt:"Topik: Penggunaan HP di Kelas. Seret setiap kalimat ke zona struktur yang tepat.",
+    tiles:[
+      {id:'a1',text:"Penggunaan HP secara terbatas di kelas seharusnya diizinkan karena dapat menjadi alat pembelajaran yang efektif jika digunakan dengan bijak.",zone:'tesis'},
+      {id:'a2',text:"Penelitian dari Universitas Lancaster (2019) menunjukkan siswa yang menggunakan perangkat digital secara terkontrol memiliki pemahaman 18% lebih tinggi.",zone:'tubuh'},
+      {id:'a3',text:"Selain itu, kemampuan berpikir mandiri siswa justru terasah ketika mereka aktif mencari informasi menggunakan perangkat mereka sendiri.",zone:'tubuh'},
+      {id:'a4',text:"Di era digital ini, membatasi akses siswa pada teknologi justru menciptakan kesenjangan kompetensi digital yang merugikan mereka di masa depan.",zone:'tubuh'},
+      {id:'a5',text:"Dengan regulasi yang tepat, HP bukan pengganggu, melainkan mitra belajar yang relevan dengan kebutuhan siswa masa kini.",zone:'kesimpulan'},
+    ],
+    explanation:"Urutan benar: Tesis (pernyataan posisi) → Tubuh Argumen (bukti & alasan berlapis) → Kesimpulan (penegasan ulang). Setiap bagian saling menopang secara logis."
+  },
+  {
+    prompt:"Topik: Jam Belajar di Sekolah. Kelompokkan kalimat-kalimat ini ke zona struktur yang sesuai!",
+    tiles:[
+      {id:'b1',text:"Jam belajar yang terlalu panjang di sekolah justru kontraproduktif dan merusak kesehatan fisik serta mental siswa.",zone:'tesis'},
+      {id:'b2',text:"Data WHO (2022) menunjukkan 60% remaja di Asia mengalami kelelahan kronis akibat jam sekolah melebihi 8 jam per hari.",zone:'tubuh'},
+      {id:'b3',text:"Riset neurosains membuktikan otak manusia hanya mampu berkonsentrasi optimal selama 45–60 menit sebelum membutuhkan istirahat.",zone:'tubuh'},
+      {id:'b4',text:"Kelelahan akumulatif tidak hanya menurunkan prestasi akademik, tetapi juga meningkatkan risiko depresi pada remaja.",zone:'tubuh'},
+      {id:'b5',text:"Oleh karena itu, pemerintah perlu meninjau ulang kebijakan jam belajar agar sesuai dengan ritme biologis dan kebutuhan perkembangan remaja.",zone:'kesimpulan'},
+    ],
+    explanation:"Tesis menyatakan posisi kontra jam belajar panjang, tiga tubuh argumen memberikan bukti dari WHO dan neurosains, lalu kesimpulan merekomendasikan kebijakan konkret."
+  },
+  {
+    prompt:"Topik: Ujian Nasional. Susun argumen yang mempertahankan ujian nasional ke dalam struktur yang tepat!",
+    tiles:[
+      {id:'c1',text:"Ujian nasional tidak seharusnya dihapuskan karena berfungsi sebagai standar pengukuran mutu pendidikan yang objektif secara nasional.",zone:'tesis'},
+      {id:'c2',text:"Tanpa standar nasional, sekolah di daerah terpencil kehilangan tolok ukur untuk mengevaluasi kualitas pembelajaran mereka secara objektif.",zone:'tubuh'},
+      {id:'c3',text:"Studi Kemendikbud (2021) menunjukkan siswa di daerah yang menerapkan ujian standar memiliki skor literasi lebih tinggi.",zone:'tubuh'},
+      {id:'c4',text:"Selain itu, ujian nasional mendorong akuntabilitas guru dan sekolah dalam menjaga standar pengajaran minimal di seluruh Indonesia.",zone:'tubuh'},
+      {id:'c5',text:"Dengan perbaikan format dan pengurangan tekanan psikologis, ujian nasional justru menjadi instrumen penting pemerataan kualitas pendidikan Indonesia.",zone:'kesimpulan'},
+    ],
+    explanation:"Tesis membela ujian nasional → tiga argumen dengan bukti berbeda → kesimpulan menawarkan solusi perbaikan, bukan penghapusan."
+  }
+];
+
+let PS={idx:0,score:0,done:false,zones:{tesis:[],tubuh:[],kesimpulan:[]},pool:[],dragging:null};
+
+function initPuzzle(){
+  PS={idx:0,score:0,done:false,zones:{tesis:[],tubuh:[],kesimpulan:[]},pool:[...PUZZLES[0].tiles.map(t=>t.id)].sort(()=>Math.random()-.5),dragging:null};
+  renderPuzzle();
+}
+
+function renderPuzzle(){
+  const app=document.getElementById('puzzle-app');
+  if(PS.done){
+    const pct=Math.round(PS.score/PUZZLES.length*100);
+    const stars=[0,1,2].map(i=>`<span style="font-size:1.8rem;filter:${i<PS.score?'none':'grayscale(1)'};opacity:${i<PS.score?1:.3};animation:${i<PS.score?'starPop .4s '+(i*.15)+'s ease both':'none'}">⭐</span>`).join('');
+    app.innerHTML=`<div class="score-banner" style="padding:24px 14px">
+      <div style="font-family:'Fredoka One';font-size:.9rem;color:var(--muted);margin-bottom:6px">HASIL AKHIR</div>
+      <div style="display:flex;justify-content:center;gap:4px;margin-bottom:10px">${stars}</div>
+      <div class="score-big">${PS.score}/${PUZZLES.length}</div>
+      <p>${pct===100?'🏆 Sempurna!':pct>=60?'👍 Bagus!':'💪 Terus berlatih!'}</p>
+      <br><button class="game-btn primary" onclick="initPuzzle()">🔄 Main Lagi</button>
+      <button class="game-btn gray" onclick="showPage('page-home')">← Beranda</button>
+    </div>`;
+    if(pct===100) launchConfetti();
+    onGameDone('puzzle',PS.score,PUZZLES.length);
+    return;
+  }
+  const p=PUZZLES[PS.idx];
+  const zoneNames={tesis:'🎯 TESIS',tubuh:'⚔️ TUBUH ARGUMEN',kesimpulan:'🏁 KESIMPULAN'};
+  const boardHTML=`<div class="puzzle-board-wrap">
+    <div style="font-family:'Fredoka One';font-size:.6rem;color:rgba(255,255,255,.55);letter-spacing:2px;margin-bottom:6px">🔵 BLUEPRINT ARGUMEN</div>
+    <div class="pb-slots">
+      ${Object.keys(PS.zones).map(z=>`<div class="pb-slot ${PS.zones[z].length>0?'filled':''}" id="pbslot-${z}">
+        <span class="pb-slot-icon">${z==='tesis'?'📌':z==='tubuh'?'⚔️':'🏁'}</span>
+        <span class="pb-slot-label">${z.toUpperCase()}<br><span style="font-size:.44rem;opacity:.6">${PS.zones[z].length} kalimat</span></span>
+      </div>`).join('')}
+    </div>
+    <div class="pb-score-stars">${[0,1,2].map(i=>`<span class="pb-star ${i<PS.score?'lit':''}">⭐</span>`).join('')}</div>
+  </div>`;
+  let poolHTML=PS.pool.length===0
+    ?'<span style="color:var(--green);font-size:.8rem;font-weight:700">✅ Semua kalimat ditempatkan!</span>'
+    :PS.pool.map(id=>{const t=p.tiles.find(x=>x.id===id);return `<div class="tile" data-id="${id}" data-src="pool">${t.text}</div>`;}).join('');
+  let zonesHTML='';
+  Object.keys(PS.zones).forEach(z=>{
+    let tiles=PS.zones[z].map(id=>{const t=p.tiles.find(x=>x.id===id);return `<div class="tile in-zone" data-id="${id}" data-src="${z}">${t.text}</div>`;}).join('');
+    zonesHTML+=`<div class="drop-zone-label">${zoneNames[z]}</div><div class="drop-zone" data-zone="${z}">${tiles||'<span style="color:var(--muted);font-size:.74rem;padding:4px;pointer-events:none">Seret atau klik kalimat ke sini…</span>'}</div>`;
+  });
+  app.innerHTML=boardHTML
+    +`<div class="game-status"><div class="stat-pill">Soal <span>${PS.idx+1}/${PUZZLES.length}</span></div><div class="stat-pill">Skor <span>${PS.score}</span></div></div>`
+    +`<div class="puzzle-prompt"><div class="pr-label">📋 INSTRUKSI</div><p>${p.prompt}</p></div>`
+    +`<div style="font-family:'Fredoka One';font-size:.6rem;color:var(--muted);letter-spacing:1.5px;margin-bottom:7px">🃏 KALIMAT TERSEDIA</div>`
+    +`<div class="drag-pool" id="dp">${poolHTML}</div>`
+    +`<div style="font-family:'Fredoka One';font-size:.6rem;color:var(--muted);letter-spacing:1.5px;margin-bottom:7px">📦 ZONA STRUKTUR</div>`
+    +zonesHTML
+    +`<div class="feedback-box" id="pfb"></div>`
+    +`<div style="margin-top:10px">${PS.pool.length===0?'<button class="game-btn primary" onclick="checkPuzzle()">✅ Periksa Jawaban</button>':''}<button class="game-btn danger" onclick="resetPuzzle()">🔄 Reset</button></div>`;
+  attachTileEvents(app,p);
+}
+function resetPuzzle(){
+  const p=PUZZLES[PS.idx];
+  PS.pool=[...p.tiles.map(t=>t.id)].sort(()=>Math.random()-.5);
+  PS.zones={tesis:[],tubuh:[],kesimpulan:[]};
+  selectedTile=null;
+  renderPuzzle();
+}
+
+function checkPuzzle(){
+  const p=PUZZLES[PS.idx];
+  const correct={
+    tesis:p.tiles.filter(t=>t.zone==='tesis').map(t=>t.id),
+    tubuh:p.tiles.filter(t=>t.zone==='tubuh').map(t=>t.id),
+    kesimpulan:p.tiles.filter(t=>t.zone==='kesimpulan').map(t=>t.id)
+  };
+  const ok={
+    tesis:JSON.stringify([...PS.zones.tesis].sort())===JSON.stringify([...correct.tesis].sort()),
+    tubuh:JSON.stringify([...PS.zones.tubuh].sort())===JSON.stringify([...correct.tubuh].sort()),
+    kesimpulan:JSON.stringify([...PS.zones.kesimpulan].sort())===JSON.stringify([...correct.kesimpulan].sort())
+  };
+  const allOk=ok.tesis&&ok.tubuh&&ok.kesimpulan;
+  const fb=document.getElementById('pfb');
+  if(allOk){
+    fb.className='feedback-box show ok';
+    fb.innerHTML='<h4>🎉 SEMPURNA! STRUKTUR TERSUSUN DENGAN BENAR!</h4><p>'+p.explanation+'</p>';
+    PS.score++;
+    setTimeout(()=>{
+      PS.idx++;
+      if(PS.idx>=PUZZLES.length){PS.done=true;}
+      else{PS.pool=[...PUZZLES[PS.idx].tiles.map(t=>t.id)].sort(()=>Math.random()-.5);PS.zones={tesis:[],tubuh:[],kesimpulan:[]};}
+      selectedTile=null;
+      renderPuzzle();
+    },2400);
+  } else {
+    fb.className='feedback-box show err';
+    fb.innerHTML='<h4>❌ BELUM TEPAT</h4><p>'
+      +(!ok.tesis?'⚠️ Cek zona Tesis. ':'')
+      +(!ok.tubuh?'⚠️ Cek zona Tubuh Argumen. ':'')
+      +(!ok.kesimpulan?'⚠️ Cek zona Kesimpulan. ':'')
+      +'<br><em style="font-size:.8rem;margin-top:6px;display:block">Petunjuk: '+p.explanation+'</em></p>';
+  }
+}
+
+/* ══════════════════════════════
+   GAME 2 — DETEKTIF ARGUMEN
+══════════════════════════════ */
+const DETECT=[
+  {text:'"Semua remaja yang bermain game online pasti malas belajar dan gagal di sekolah."',q:'Masalah utama kalimat ini sebagai argumen adalah...',opts:['Kalimat ini valid karena faktual dan empiris','Bahasanya tidak baku dan tidak formal','Mengandung generalisasi berlebihan tanpa bukti data','Terlalu pendek untuk dijadikan argumen'],correct:2,exp:'Kalimat ini mengandung <strong>overgeneralization</strong> — menggunakan kata "semua" tanpa data yang mencakup seluruh populasi. Argumen yang valid tidak boleh mengklaim absolut tanpa bukti komprehensif.'},
+  {text:'"Penelitian Kemenkes 2023 menunjukkan siswa yang sarapan pagi memiliki konsentrasi belajar 22% lebih tinggi. Maka kantin sekolah wajib menyediakan sarapan bergizi."',q:'Penilaian paling tepat terhadap argumen ini adalah...',opts:['Argumen kuat — data konkret mendukung klaim yang logis dan relevan','Data tidak bisa dipercaya karena bukan penelitian asing','Ini bukan argumen, hanya eksposisi data','Argumen lemah karena hanya menyebut satu fakta saja'],correct:0,exp:'Ini contoh <strong>argumen induktif yang baik</strong>: data dari sumber otoritatif (Kemenkes) dengan angka spesifik (22%) mendukung kesimpulan yang relevan.'},
+  {text:'"Kita tidak perlu mendengarkan pendapat Pak Rudi soal kurikulum karena beliau bukan lulusan S2 pendidikan."',q:'Kalimat ini mengandung jenis sesat pikir bernama...',opts:['Generalisasi berlebihan','Slippery slope','False dichotomy','Ad hominem — menyerang pribadi, bukan argumennya'],correct:3,exp:'<strong>Ad hominem</strong> menyerang orangnya, bukan kualitas argumennya. Latar belakang pendidikan tidak otomatis membuat argumen seseorang salah.'},
+  {text:'"Jika kita biarkan siswa membawa HP ke sekolah, dalam setahun tidak ada yang mau belajar dan Indonesia tertinggal dari negara lain."',q:'Masalah argumentatif utama kalimat ini adalah...',opts:['Tidak memiliki tesis yang jelas','Slippery slope — melompat ke konsekuensi ekstrem tanpa bukti bertahap','Terlalu banyak argumen dalam satu kalimat','Menggunakan bahasa terlalu informal'],correct:1,exp:'<strong>Slippery Slope</strong> mengasumsikan satu tindakan kecil memicu rangkaian bencana tanpa bukti untuk setiap tahapannya.'},
+  {text:'"Orang yang mendukung penghapusan PR pasti malas dan tidak serius dalam pendidikan."',q:'Kalimat ini mengandung masalah argumentatif utama berupa...',opts:['False dichotomy — memaksa dua posisi padahal ada banyak kemungkinan','Data yang tidak akurat','Tesis yang terlalu lemah','Argumen autoritas yang tidak valid'],correct:0,exp:'<strong>False dichotomy</strong> memaksa hanya dua posisi ("mendukung = malas") padahal ada banyak alasan logis dan valid untuk mendukung kebijakan tersebut.'},
+  {text:'"Kita harus terapkan kurikulum baru ini karena kurikulum ini adalah yang terbaik, dan yang terbaik harus diterapkan."',q:'Jenis sesat pikir dalam kalimat ini adalah...',opts:['Slippery slope','Ad hominem','Generalisasi berlebihan','Circular reasoning — kesimpulan digunakan sebagai bukti untuk dirinya sendiri'],correct:3,exp:'<strong>Circular reasoning</strong> terjadi ketika kesimpulan digunakan sebagai premis. Argumen valid harus memiliki bukti yang independen dari kesimpulannya.'},
+  {text:'"Data BPS 2024: 67% sampah plastik di Indonesia tidak terkelola dengan baik. Oleh karena itu, regulasi kantong plastik berbayar perlu diperkuat."',q:'Kualitas argumen di atas paling tepat dinilai sebagai...',opts:['Argumen manipulatif karena memakai statistik','Argumen lemah, satu data tidak cukup','Ini bukan argumentasi, hanya laporan data','Argumen valid — data otoritatif mendukung klaim kebijakan yang relevan'],correct:3,exp:'Ini argumen yang baik: data dari BPS (sumber otoritatif) dengan angka konkret (67%) mendukung klaim kebijakan yang relevan.'},
+  {text:'"Sistem pendidikan Finlandia adalah yang terbaik di dunia, maka Indonesia harus langsung meniru seluruh sistemnya."',q:'Kelemahan logis utama argumen ini adalah...',opts:['False analogy — konteks dua negara berbeda tidak bisa langsung disamakan','Tesis terlalu spesifik dan sempit','Menggunakan kata "harus" yang terlalu kuat','Tidak menyebut sumber yang jelas'],correct:0,exp:'<strong>False analogy</strong> terjadi saat dua hal yang berbeda konteks disamakan. Finlandia dan Indonesia memiliki perbedaan besar dalam budaya dan sumber daya.'},
+  {text:'"Argumen pro lingkungan hidup tidak perlu didengar karena para aktivis lingkungan itu lebay dan mencari perhatian."',q:'Kalimat ini mengandung kombinasi fallacy...',opts:['Circular reasoning dan slippery slope','Generalisasi berlebihan dan ad hominem','False dichotomy dan false analogy','Slippery slope dan argumen autoritas'],correct:1,exp:'Dua fallacy: <strong>Ad hominem</strong> (menyerang karakter aktivis) dan <strong>generalisasi</strong> (menyamaratakan semua aktivis sebagai "lebay").'},
+  {text:'"Penelitian longitudinal 10 tahun oleh Universitas Indonesia (2023) pada 5.000 siswa menunjukkan jam tidur cukup berkorelasi kuat (r=0,74) dengan prestasi akademik."',q:'Kekuatan utama argumen ini dibanding argumen-argumen sebelumnya adalah...',opts:['Lebih panjang dari argumen lainnya','Menggunakan istilah ilmiah yang sulit dipahami','Data skala besar, jangka panjang, dengan ukuran korelasi spesifik dari sumber terpercaya','Menyebutkan nama universitas yang bergengsi'],correct:2,exp:'Kekuatan argumen ini: <strong>sampel besar</strong> (5.000 siswa), <strong>durasi panjang</strong> (10 tahun), <strong>ukuran efek spesifik</strong> (r=0,74), dan <strong>sumber terpercaya</strong>.'}
+];
+
+let DS={idx:0,score:0,answered:false};
+
+function initDetect(){DS={idx:0,score:0,answered:false};renderDetect();}
+
+function renderDetect(){
+  const app=document.getElementById('detect-app');
+  if(DS.idx>=DETECT.length){
+    const pct=Math.round(DS.score/DETECT.length*100);
+    const rank=pct>=90?{e:'🕵️',t:'DETEKTIF MASTER',c:'#FFD600'}:pct>=70?{e:'🔍',t:'DETEKTIF HANDAL',c:'#2979FF'}:pct>=50?{e:'📋',t:'DETEKTIF JUNIOR',c:'#00C853'}:{e:'🔰',t:'CALON DETEKTIF',c:'#FF6D00'};
+    const cluesHTML=Array.from({length:DETECT.length},(_,i)=>`<div class="detect-clue ${i<DS.score?'found':'missed'}">${i<DS.score?'🔍':'❌'}</div>`).join('');
+    app.innerHTML=`<div class="score-banner" style="padding:22px 14px">
+      <div class="detect-scene" style="margin-bottom:14px">
+        <div style="font-size:3rem">🕵️</div>
+        <div style="flex:1"><div style="font-family:'Fredoka One';font-size:.6rem;color:rgba(255,255,255,.5);letter-spacing:1px;margin-bottom:5px">PAPAN BUKTI AKHIR</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px">${cluesHTML}</div></div>
+        <div class="detect-streak-wrap"><div class="detect-streak-num" style="color:${rank.c}">${pct}%</div><div class="detect-streak-lbl">AKURASI</div></div>
+      </div>
+      <div style="font-size:1.8rem;margin-bottom:3px">${rank.e}</div>
+      <div style="font-family:'Fredoka One';font-size:1.2rem;color:${rank.c}">${rank.t}</div>
+      <div class="score-big">${DS.score}/${DETECT.length}</div>
+      <p>${pct>=85?'Analisis argumenmu sangat tajam!':pct>=60?'Bagus! Terus asah kemampuanmu.':'Terus berlatih!'}</p>
+      <br><button class="game-btn primary" onclick="initDetect()">🔄 Main Lagi</button>
+      <button class="game-btn gray" onclick="showPage('page-home')">← Beranda</button>
+    </div>`;
+    if(pct>=90) launchConfetti();
+    return;
+  }
+  const d=DETECT[DS.idx];
+  const cluesHTML=Array.from({length:DETECT.length},(_,i)=>{
+    if(i<DS.idx) return `<div class="detect-clue found">🔍</div>`;
+    if(i===DS.idx) return `<div class="detect-clue" style="border-color:#ffd600;font-size:1rem">❓</div>`;
+    return `<div class="detect-clue"></div>`;
+  }).join('');
+  const optsHTML=d.opts.map((o,i)=>`<div class="detect-opt" id="dopt-${i}" onclick="${DS.answered?'':'selDetect('+i+')'}">${String.fromCharCode(65+i)}. ${o}</div>`).join('');
+  app.innerHTML=`
+    <div class="detect-scene">
+      <div class="detect-glass">🔍</div>
+      <div class="detect-meter">
+        <div class="detect-meter-label">📋 PAPAN BUKTI</div>
+        <div class="detect-clues">${cluesHTML}</div>
+      </div>
+      <div class="detect-streak-wrap">
+        <div class="detect-streak-num">${DS.score}</div>
+        <div class="detect-streak-lbl">TERUNGKAP</div>
+      </div>
+    </div>
+    <div class="game-status" style="margin-bottom:10px">
+      <div class="stat-pill">Soal <span>${DS.idx+1}/${DETECT.length}</span></div>
+      <div class="stat-pill">Akurasi <span>${DS.idx>0?Math.round(DS.score/DS.idx*100):'-'}%</span></div>
+    </div>
+    <div class="detect-card">
+      <div style="font-family:'Fredoka One';font-size:.6rem;color:var(--muted);letter-spacing:1.5px;margin-bottom:8px">🔍 ANALISIS KUTIPAN BERIKUT</div>
+      <div class="detect-text">${d.text}</div>
+      <p style="font-size:.86rem;font-weight:700;color:var(--text);margin-bottom:10px">${d.q}</p>
+      <div class="detect-options">${optsHTML}</div>
+      <div class="detect-exp" id="dexp"></div>
+    </div>
+    ${DS.answered?`<button class="game-btn primary" style="margin-top:4px" onclick="nextDetect()">${DS.idx+1<DETECT.length?'Soal Berikutnya →':'Lihat Hasil 🏁'}</button>`:''}`;
+}
+function selDetect(i){
+  if(DS.answered)return;
+  DS.answered=true;
+  const d=DETECT[DS.idx];
+  document.querySelectorAll('.detect-opt').forEach((el,j)=>{
+    if(j===d.correct)el.classList.add('sel-correct');
+    else if(j===i&&i!==d.correct)el.classList.add('sel-wrong');
+    el.style.cursor='default';
+  });
+  if(i===d.correct)DS.score++;
+  const exp=document.getElementById('dexp');
+  exp.className='detect-exp show '+(i===d.correct?'ok':'err');
+  exp.innerHTML=`<strong>${i===d.correct?'✅ Tepat sekali!':'❌ Belum tepat.'}</strong> ${d.exp}`;
+  const app=document.getElementById('detect-app');
+  const nav=app.querySelector('.game-btn.primary');
+  if(!nav){const btn=document.createElement('button');btn.className='game-btn primary';btn.style.marginTop='8px';btn.textContent=DS.idx+1<DETECT.length?'Soal Berikutnya →':'Lihat Hasil 🏁';btn.onclick=nextDetect;app.querySelector('.detect-card').after(btn);}
+}
+
+function nextDetect(){DS.idx++;DS.answered=false;renderDetect();}
+
+/* ══════════════════════════════
+   KUIS — 20 SOAL
+══════════════════════════════ */
+const KUIS=[
+  {q:"Apa yang dimaksud dengan teks argumentasi?",opts:["Teks yang menceritakan pengalaman pribadi penulis","Teks yang menggambarkan suatu objek secara rinci","Teks yang menjelaskan suatu proses secara urut","Teks yang bertujuan meyakinkan pembaca dengan logika dan bukti"],correct:3,reinforce:"✅ Tepat! Teks argumentasi bertujuan meyakinkan pembaca agar menerima pendapat penulis melalui logika, fakta, dan data valid."},
+  {q:"Manakah yang BUKAN bagian dari struktur teks argumentasi?",opts:["Pendahuluan (Tesis)","Orientasi dan Komplikasi","Tubuh Argumen","Kesimpulan (Penegasan Ulang)"],correct:1,reinforce:"✅ Benar! 'Orientasi' dan 'Komplikasi' adalah bagian teks narasi, bukan argumentasi. Struktur argumentasi: Tesis → Tubuh Argumen → Kesimpulan."},
+  {q:"Manakah contoh TESIS yang paling kuat untuk teks argumentasi?",opts:["Pembatasan media sosial di sekolah harus diberlakukan karena terbukti menurunkan konsentrasi belajar.","Media sosial memiliki banyak dampak positif dan negatif.","Penggunaan media sosial sangat menarik bagi remaja.","Media sosial adalah platform komunikasi digital yang berkembang pesat."],correct:0,reinforce:"✅ Tesis yang kuat harus spesifik, mengambil posisi jelas, dan bersifat debatable. Opsi A memenuhi semua syarat."},
+  {q:"Fungsi utama Tubuh Argumen dalam teks argumentasi adalah...",opts:["Memperkenalkan topik kepada pembaca","Merangkum seluruh isi teks","Memberikan latar belakang sejarah topik","Menyajikan alasan, bukti, dan data yang mendukung tesis"],correct:3,reinforce:"✅ Tubuh Argumen berfungsi MEMBUKTIKAN tesis melalui alasan logis, data, dan fakta."},
+  {q:"'Semua anak muda zaman sekarang tidak menghargai budaya lokal.' Apa masalah utama kalimat ini?",opts:["Kalimat tidak memiliki subjek yang jelas","Bahasanya tidak baku dan tidak formal","Mengandung generalisasi berlebihan tanpa bukti data","Terlalu panjang untuk dijadikan tesis"],correct:2,reinforce:"✅ Fallacy 'overgeneralization' — kata 'semua' menyamaratakan seluruh kelompok tanpa data komprehensif."},
+  {q:"Konjungsi yang tepat untuk menunjukkan hubungan SEBAB-AKIBAT adalah...",opts:["meskipun, walaupun, sekalipun","kemudian, lalu, setelah itu","tetapi, namun, melainkan","oleh karena itu, sehingga, akibatnya"],correct:3,reinforce:"✅ 'Oleh karena itu', 'sehingga', 'akibatnya' adalah konjungsi kausalitas. Opsi A=konsesif, B=urutan waktu, C=pertentangan."},
+  {q:"Mengapa 'counter-argument' justru memperkuat teks argumentasi?",opts:["Karena membuat tulisan lebih panjang","Karena merupakan syarat formal kurikulum","Karena mengakui dan membantah argumen lawan menunjukkan pemahaman menyeluruh dan meningkatkan kredibilitas","Karena penulis harus selalu berpihak pada dua sisi"],correct:2,reinforce:"✅ Counter-argument menunjukkan penulis paham topik secara menyeluruh dan membuat teks lebih persuasif."},
+  {q:"Ciri kebahasaan yang PALING KHAS dalam teks argumentasi adalah...",opts:["Banyak majas (metafora, personifikasi)","Dominan kalimat pasif tanpa subjek","Menggunakan bahasa daerah untuk kesan personal","Konjungsi kausalitas, modalitas tegas, dan kalimat retoris"],correct:3,reinforce:"✅ Ciri kebahasaan teks argumentasi: konjungsi kausalitas ('karena', 'sehingga'), modalitas ('harus', 'seharusnya'), dan kalimat retoris."},
+  {q:"Manakah contoh KESIMPULAN yang paling efektif untuk teks argumentasi?",opts:["'Demikian pendapat saya tentang literasi digital.'","'Literasi digital itu penting bagi semua orang.'","'Dengan demikian, kurikulum literasi digital mendesak dimasukkan dalam pendidikan formal agar generasi muda mampu berpartisipasi kritis di era informasi.'","'Seperti yang telah dijelaskan di atas, literasi digital sangat penting.'"],correct:2,reinforce:"✅ Kesimpulan yang baik menegaskan ulang tesis dengan kata berbeda dan meninggalkan kesan kuat."},
+  {q:"Perbedaan utama teks argumentasi vs teks eksposisi adalah...",opts:["Argumentasi lebih panjang dari eksposisi","Argumentasi mengambil posisi dan membela pendapat; eksposisi menjelaskan secara netral","Eksposisi selalu menggunakan data; argumentasi tidak","Argumentasi hanya untuk debat formal"],correct:1,reinforce:"✅ Argumentasi = berpihak, membela posisi. Eksposisi = netral, menjelaskan tanpa memihak."},
+  {q:"Dalam prinsip ARE, 'R' (Reasoning) berfungsi untuk...",opts:["Menyajikan data dan fakta pendukung","Merangkum seluruh argumen","Menjelaskan MENGAPA pernyataan tersebut benar secara logis","Menyatakan poin argumen secara langsung"],correct:2,reinforce:"✅ Dalam ARE: A=Assertion (klaim), R=Reasoning (logika di balik klaim), E=Evidence (bukti konkret)."},
+  {q:"'Kita tidak perlu dengar pendapat Budi soal lingkungan karena dia bukan sarjana kehutanan.' Ini adalah contoh fallacy...",opts:["Circular reasoning","False dichotomy","Slippery slope","Ad hominem"],correct:3,reinforce:"✅ Ad hominem menyerang karakter/identitas orangnya, bukan kualitas argumennya."},
+  {q:"Manakah topik yang PALING tepat untuk teks argumentasi?",opts:["'Cara membuat nasi goreng yang lezat'","'Sejarah perang dunia kedua'","'Deskripsi keindahan Pantai Bali'","'Apakah jam pelajaran di sekolah perlu dikurangi?'"],correct:3,reinforce:"✅ Topik argumentasi harus debatable (bisa diperdebatkan). Opsi D adalah topik kontroversial yang relevan."},
+  {q:"Kalimat mana yang merupakan TESIS yang valid dan kuat?",opts:["'Banyak siswa menggunakan media sosial setiap hari.'","'Apakah media sosial berbahaya bagi remaja?'","'Penggunaan media sosial tanpa kontrol adalah penyebab utama menurunnya empati sosial remaja Indonesia.'","'Media sosial adalah platform digital populer saat ini.'"],correct:2,reinforce:"✅ Tesis valid harus tegas (bukan pertanyaan), mengambil posisi, dan spesifik."},
+  {q:"Apa yang dimaksud dengan 'argumen deduktif'?",opts:["Argumen menggunakan kutipan ahli","Argumen dari pernyataan umum ke kesimpulan khusus","Argumen menggunakan perbandingan dua hal","Argumen dari fakta khusus ke kesimpulan umum"],correct:1,reinforce:"✅ Deduktif = umum → khusus. Kebalikannya adalah induktif (khusus → umum)."},
+  {q:"'Jika kita izinkan HP di kelas, dalam setahun semua siswa berhenti belajar dan sekolah tutup.' Ini adalah fallacy...",opts:["False dichotomy","Ad hominem","Generalisasi berlebihan","Slippery slope — lompat ke konsekuensi ekstrem tanpa bukti"],correct:3,reinforce:"✅ Slippery slope mengasumsikan satu tindakan kecil memicu bencana tanpa bukti untuk setiap tahapan."},
+  {q:"Mengapa opini tanpa data dianggap lemah dalam teks argumentasi?",opts:["Karena opini selalu salah","Karena data lebih mudah dipahami","Karena opini tanpa bukti mudah dibantah — pembaca tidak punya alasan objektif untuk mempercayainya","Karena opini tidak boleh masuk tulisan formal"],correct:2,reinforce:"✅ Tanpa bukti, ini hanya 'kata-kataku vs kata-katamu'. Data memberi alasan objektif bagi pembaca."},
+  {q:"Langkah PERTAMA yang benar sebelum menulis teks argumentasi adalah...",opts:["Memilih topik debatable dan menentukan posisi (pro/kontra)","Langsung menulis kesimpulan terlebih dahulu","Menentukan panjang teks yang diinginkan","Mencari contoh teks serupa dari internet"],correct:0,reinforce:"✅ Tahap awal: (1) Pilih topik debatable, (2) Tentukan posisimu. Riset dilakukan SETELAH posisi ditentukan."},
+  {q:"Manakah pernyataan yang PALING TEPAT tentang teks argumentasi berkualitas tinggi?",opts:["Harus memiliki lebih dari 10 paragraf","Hanya menggunakan sumber dari buku teks resmi","Tidak boleh mengakui adanya argumen yang menentang","Mencakup tesis debatable, argumen berlapis dengan bukti, dan menanggapi argumen lawan secara serius"],correct:3,reinforce:"✅ Teks argumentasi berkualitas: tesis spesifik + argumen berlapis dengan bukti + counter-argument + kesimpulan kuat."},
+  {q:"Apa peran 'hook' (kalimat pembuka) dalam Pendahuluan teks argumentasi?",opts:["Menyatakan tesis secara langsung di kalimat pertama","Merangkum seluruh argumen yang akan disampaikan","Memberikan definisi istilah teknis dalam tulisan","Menarik perhatian pembaca sejak kalimat pertama agar mereka tertarik melanjutkan membaca"],correct:3,reinforce:"✅ Hook 'memancing' pembaca agar ingin melanjutkan membaca. Tesis disampaikan SETELAH hook dan latar belakang."}
+];
+
+let KS={idx:0,score:0,answered:false,done:false,userAns:[]};
+
+function initKuis(){KS={idx:0,score:0,answered:false,done:false,userAns:[]};renderKuis();}
+
+function renderKuis(){
+  const app=document.getElementById('kuis-app');
+  if(KS.done){
+    const pct=Math.round(KS.score/KUIS.length*100);
+    const wrong=KUIS.length-KS.score;
+    const brain=pct>=90?'🧠✨':pct>=75?'🧠💪':pct>=60?'🧠📚':'🧠🔋';
+    const msg=pct>=90?'🏆 Luar Biasa!':pct>=75?'🌟 Sangat Baik!':pct>=60?'👍 Cukup Baik':'💪 Terus Berlatih!';
+    app.innerHTML=`<div class="quiz-result">
+      <div class="qr-circle"><div><div class="qr-score">${pct}%</div><div class="qr-lbl">SKOR</div></div></div>
+      <div style="font-size:2.2rem;margin-bottom:4px">${brain}</div>
+      <div class="qr-msg">${msg}</div>
+      <div class="qr-stats">
+        <div class="qr-row">Benar <span style="color:var(--green)">✅ ${KS.score}</span></div>
+        <div class="qr-row">Salah <span style="color:var(--red)">❌ ${wrong}</span></div>
+        <div class="qr-row">Skor <span style="color:var(--orange)">${pct}%</span></div>
+      </div>
+      <button class="game-btn primary" onclick="initKuis()">🔄 Ulangi Kuis</button>
+      <button class="game-btn gray" style="margin-top:6px" onclick="showPage('page-home')">← Beranda</button>
+    </div>`;
+    if(pct>=90) launchConfetti();
+    return;
+  }
+  const q=KUIS[KS.idx];
+  const xpPct=Math.round((KS.idx/KUIS.length)*100);
+  const wrongSoFar=(KS.userAns&&KS.userAns.length>0)?KS.userAns.filter((a,i)=>a!==undefined&&a!==KUIS[i].correct).length:0;
+  const maxH=5,heartsLeft=Math.max(0,maxH-wrongSoFar);
+  const heartsHTML=Array.from({length:maxH},(_,i)=>`<span class="kuis-heart ${i>=heartsLeft?'lost':''}">❤️</span>`).join('');
+  const brainLv=KS.score>=15?'🧠⚡':KS.score>=10?'🧠✨':KS.score>=5?'🧠💡':'🧠';
+  const letters=['A','B','C','D'];
+  const optsHTML=q.opts.map((o,i)=>{
+    let cls='quiz-opt',icon=letters[i];
+    if(KS.answered){cls+=' answered';if(i===q.correct){cls+=' correct';icon='✓';}else if(KS.userAns[KS.idx]===i&&i!==q.correct){cls+=' wrong';icon='✗';}}
+    return `<div class="${cls}" onclick="${KS.answered?'':'answerKuis('+i+')'}" style="${KS.answered?'cursor:default':''}"><div class="opt-letter">${icon}</div><span>${o}</span></div>`;
+  }).join('');
+  const reinHTML=KS.answered?`<div class="reinforce show ${KS.userAns[KS.idx]===q.correct?'ok':'wrong-r'}"><strong>${KS.userAns[KS.idx]===q.correct?'✅ Jawaban Benar!':'❌ Jawaban Kurang Tepat.'}</strong>${q.reinforce}</div>`:'';
+  app.innerHTML=`
+    <div class="kuis-scene">
+      <div class="brain-wrap">${brainLv}<div class="brain-level">Lv${Math.floor(KS.score/3)+1}</div></div>
+      <div class="kuis-xp-area">
+        <div class="kuis-xp-label">⚡ XP — ${KS.score} POIN</div>
+        <div class="kuis-xp-track"><div class="kuis-xp-fill" id="kuisXpFill" style="width:${xpPct}%"></div></div>
+        <div class="kuis-hearts">${heartsHTML}</div>
+      </div>
+    </div>
+    <div class="quiz-progress"><div class="quiz-bar" style="width:${xpPct}%"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-bottom:12px;font-family:'Fredoka One'"><span>SOAL ${KS.idx+1}/${KUIS.length}</span><span>SKOR: ${KS.score}</span></div>
+    <div class="quiz-q-card">
+      <div class="q-num">PERTANYAAN ${KS.idx+1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="quiz-opts">${optsHTML}</div>
+      ${reinHTML}
+    </div>
+    ${KS.answered?`<div class="quiz-nav"><button class="game-btn primary" onclick="nextKuis()">${KS.idx===KUIS.length-1?'Lihat Hasil 🏁':'Soal Berikutnya →'}</button></div>`:''}`;
+}
+function answerKuis(i){
+  if(KS.answered)return;
+  KS.answered=true;KS.userAns[KS.idx]=i;
+  if(i===KUIS[KS.idx].correct)KS.score++;
+  renderKuis();
+}
+
+function nextKuis(){
+  if(KS.idx===KUIS.length-1){KS.done=true;}
+  else{KS.idx++;KS.answered=false;}
+  renderKuis();
+}
+
+
+/* ══════════════════════════════
+   AUDIO ENGINE (Web Audio API)
+══════════════════════════════ */
+let audioCtx = null;
+let soundOn = true;
+
+function getCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  return audioCtx;
+}
+
+function playTone(freq, type, dur, vol=0.18, delay=0){
+  if(!soundOn) return;
+  try{
+    const ctx=getCtx();
+    const o=ctx.createOscillator();
+    const g=ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.type=type; o.frequency.setValueAtTime(freq, ctx.currentTime+delay);
+    g.gain.setValueAtTime(0, ctx.currentTime+delay);
+    g.gain.linearRampToValueAtTime(vol, ctx.currentTime+delay+0.01);
+    g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime+delay+dur);
+    o.start(ctx.currentTime+delay);
+    o.stop(ctx.currentTime+delay+dur+0.05);
+  }catch(e){}
+}
+
+function playClick(){
+  // Soft futuristic click: two quick blips
+  playTone(880,'sine',0.06,0.12);
+  playTone(1320,'sine',0.06,0.10,0.06);
+}
+
+function playCorrect(){
+  // Ascending cheerful arpeggio
+  [523,659,784,1047].forEach((f,i)=>playTone(f,'sine',0.18,0.15,i*0.09));
+}
+
+function playWrong(){
+  // Descending buzzer
+  playTone(300,'sawtooth',0.15,0.12);
+  playTone(200,'sawtooth',0.15,0.10,0.14);
+}
+
+function playPageOpen(){
+  // Swoosh: quick frequency sweep
+  if(!soundOn) return;
+  try{
+    const ctx=getCtx();
+    const o=ctx.createOscillator();
+    const g=ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.type='sine';
+    o.frequency.setValueAtTime(200,ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(800,ctx.currentTime+0.18);
+    g.gain.setValueAtTime(0.14,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.22);
+    o.start(ctx.currentTime);
+    o.stop(ctx.currentTime+0.25);
+  }catch(e){}
+}
+
+function toggleSound(){
+  soundOn=!soundOn;
+  document.getElementById('soundBtn').textContent=soundOn?'🔊':'🔇';
+  if(soundOn) playClick();
+}
+
+/* ══ PATCH showPage with sound + ripple ══ */
+const _origShowPage = showPage;
+window.showPage = function(id){
+  playPageOpen();
+  _origShowPage(id);
+};
+
+/* ══ ADD ripple to all clickable cards ══ */
+function addRipple(el, e){
+  const rect=el.getBoundingClientRect();
+  const r=document.createElement('span');
+  r.className='ripple-el';
+  const size=Math.max(rect.width,rect.height);
+  r.style.cssText='width:'+size+'px;height:'+size+'px;left:'+(e.clientX-rect.left-size/2)+'px;top:'+(e.clientY-rect.top-size/2)+'px';
+  el.appendChild(r);
+  r.addEventListener('animationend',()=>r.remove());
+}
+document.addEventListener('click',function(e){
+  const card=e.target.closest('.mod-card,.game-card,.kuis-card,.back-btn,.detect-opt,.quiz-opt,.game-btn');
+  if(card){
+    playClick();
+    addRipple(card,e);
+  }
+});
+
+/* ══ PATCH game answer sounds ══ */
+const _origSelDetect = selDetect;
+window.selDetect = function(i){
+  const d=DETECT[DS.idx];
+  if(i===d.correct) playCorrect(); else playWrong();
+  _origSelDetect(i);
+};
+
+const _origAnswerKuis = answerKuis;
+window.answerKuis = function(i){
+  const q=KUIS[KS.idx];
+  if(i===q.correct) playCorrect(); else playWrong();
+  _origAnswerKuis(i);
+};
+
+const _origCheckPuzzle = checkPuzzle;
+window.checkPuzzle = function(){
+  // We'll intercept by monitoring feedback after call
+  _origCheckPuzzle();
+  setTimeout(()=>{
+    const fb=document.getElementById('pfb');
+    if(fb && fb.classList.contains('ok')) playCorrect();
+    else if(fb && fb.classList.contains('err')) playWrong();
+  },50);
+};
+
+/* ══════════════════════════════
+   FLOATING PARTICLES
+══════════════════════════════ */
+(function initParticles(){
+  const wrap=document.getElementById('particles');
+  if(!wrap)return;
+  const colors=['#00f5ff','#9b5cff','#ff3cac','#00ff9d','#ffffff'];
+  for(let i=0;i<28;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const size=Math.random()*4+2;
+    p.style.cssText=[
+      'width:'+size+'px',
+      'height:'+size+'px',
+      'left:'+Math.random()*100+'vw',
+      'background:'+colors[Math.floor(Math.random()*colors.length)],
+      'animation-duration:'+(Math.random()*14+8)+'s',
+      'animation-delay:'+(-Math.random()*14)+'s',
+      'box-shadow:0 0 '+(size*2)+'px currentColor',
+      'opacity:0'
+    ].join(';');
+    wrap.appendChild(p);
+  }
+  // Floating keyword words
+  const words=['ARGUMENTASI','TESIS','FAKTA','LOGIKA','BUKTI','DATA','ANALISIS','KRITIS','PERSUASI'];
+  const wordColors=['rgba(0,245,255,.3)','rgba(155,92,255,.3)','rgba(255,60,172,.25)','rgba(0,255,157,.25)'];
+  words.forEach((w,i)=>{
+    const el=document.createElement('div');
+    el.className='float-word';
+    el.textContent=w;
+    el.style.cssText=[
+      'color:'+wordColors[i%wordColors.length],
+      'top:'+(15+Math.random()*65)+'%',
+      'animation-duration:'+(16+Math.random()*10)+'s',
+      'animation-delay:'+(-Math.random()*16)+'s'
+    ].join(';');
+    wrap.appendChild(el);
+  });
+})();
+
+/* ══ Only show particles on home page ══ */
+const _pp = window.showPage;
+window.showPage = function(id){
+  const pw=document.getElementById('particles');
+  if(pw) pw.style.display=(id==='page-home')?'block':'none';
+  _pp(id);
+};
+
+/* ══════════════════════════════
+   MASCOT SCHEDULER
+══════════════════════════════ */
+let mascotTimer=null;
+let mascotPhase=0; // 0=magnifier(15s), 1=writer(10s after)
+
+function runMascot(){
+  const home=document.getElementById('page-home');
+  if(!home || !home.classList.contains('active')) return;
+
+  const mMag=document.getElementById('mascotMagnify');
+  const mWri=document.getElementById('mascotWrite');
+
+  if(mascotPhase===0){
+    // Show magnifier for ~5s
+    mMag.classList.remove('animate-peek','animate-write');
+    void mMag.offsetWidth; // reflow
+    mMag.classList.add('animate-peek');
+    mMag.style.display='block';
+    mascotPhase=1;
+    mascotTimer=setTimeout(()=>{
+      // Wait 10s then show writer
+      mascotTimer=setTimeout(()=>{
+        mWri.classList.remove('animate-peek','animate-write');
+        void mWri.offsetWidth;
+        mWri.classList.add('animate-write');
+        mWri.style.display='block';
+        mascotPhase=0;
+        mascotTimer=setTimeout(runMascot, 15000); // next cycle in 15s
+      },10000);
+    },5500);
+  }
+}
+
+// Start mascot cycle
+function startMascots(){
+  clearTimeout(mascotTimer);
+  mascotPhase=0;
+  mascotTimer=setTimeout(runMascot,15000);
+}
+
+// Restart when returning to home
+const _ppp = window.showPage;
+window.showPage = function(id){
+  _ppp(id);
+  if(id==='page-home'){
+    startMascots();
+  } else {
+    clearTimeout(mascotTimer);
+    const mMag=document.getElementById('mascotMagnify');
+    const mWri=document.getElementById('mascotWrite');
+    if(mMag){mMag.classList.remove('animate-peek','animate-write');mMag.style.display='none';}
+    if(mWri){mWri.classList.remove('animate-peek','animate-write');mWri.style.display='none';}
+  }
+};
+
+// Init on load
+startMascots();
+
+
+/* ════════════════════════════════════════════════════
+   GAME SYSTEM — ALL FEATURES IN ONE CLEAN BLOCK
+   No duplicate patches. All variables declared upfront.
+════════════════════════════════════════════════════ */
+
+/* ── CONFIG ── */
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwD7vO2EdvJffR9FjlTqqZRoOxVhWfLhJYgNfpPJh7PJ36vxQuRk-HWEiWqnp_rIymr/exec';
+const RESET_CODE = 'key2.';
+
+/* ── ACHIEVEMENT DEFINITIONS ── */
+const ACHIEVEMENTS = [
+  {id:'first_login',   icon:'🌟',name:'Petualang Baru',    desc:'Pertama kali login',             pts:20, color:'#FFD600'},
+  {id:'modul1_done',   icon:'💡',name:'Pencari Tahu',       desc:'Menyelesaikan Modul 1',           pts:30, color:'#FF6D00'},
+  {id:'modul2_done',   icon:'🏗️',name:'Arsitek Argumen',   desc:'Menyelesaikan Modul 2',           pts:30, color:'#2979FF'},
+  {id:'modul3_done',   icon:'✅',name:'Si Teliti',          desc:'Menyelesaikan Modul 3',           pts:30, color:'#00C853'},
+  {id:'modul4_done',   icon:'⚙️',name:'Perencana Handal',  desc:'Menyelesaikan Modul 4',           pts:30, color:'#AA00FF'},
+  {id:'modul5_done',   icon:'📖',name:'Kolektor Contoh',    desc:'Menyelesaikan Modul 5',           pts:30, color:'#FF3B3B'},
+  {id:'all_modul',     icon:'🎓',name:'Master Argumen',     desc:'Selesaikan semua 5 modul',        pts:100,color:'#FFD600'},
+  {id:'puzzle_done',   icon:'🧩',name:'Puzzle Master',      desc:'Menyelesaikan Puzzle Argumen',    pts:40, color:'#2979FF'},
+  {id:'detective_done',icon:'🔍',name:'Detektif Ulung',     desc:'Menyelesaikan Detektif Argumen',  pts:40, color:'#AA00FF'},
+  {id:'all_games',     icon:'🎮',name:'Gamer Edukasi',      desc:'Menyelesaikan semua game',        pts:60, color:'#FF6D00'},
+  {id:'quiz_done',     icon:'📝',name:'Pejuang Kuis',       desc:'Menyelesaikan kuis',              pts:50, color:'#00C853'},
+  {id:'quiz_perfect',  icon:'💯',name:'Sempurna!',          desc:'Kuis skor 100%',                  pts:150,color:'#FFD600'},
+  {id:'quiz_80',       icon:'🔥',name:'Hot Streak',         desc:'Kuis skor ≥80%',                  pts:80, color:'#FF3B3B'},
+  {id:'answer_5',      icon:'⚡',name:'Kilat Jawab',        desc:'5 jawaban benar beruntun',        pts:30, color:'#FFD600'},
+  {id:'top3',          icon:'🏆',name:'Podium!',            desc:'Masuk 3 besar leaderboard',       pts:100,color:'#FFD600'},
+  {id:'poin_100',      icon:'💎',name:'Diamond 100',        desc:'Kumpulkan 100 poin',              pts:0,  color:'#2979FF'},
+  {id:'poin_300',      icon:'🌈',name:'Rainbow 300',        desc:'Kumpulkan 300 poin',              pts:0,  color:'#AA00FF'},
+  {id:'poin_500',      icon:'👑',name:'Juara 500',          desc:'Kumpulkan 500 poin',              pts:0,  color:'#FFD600'},
+];
+
+const LEVELS = [
+  {min:0,   max:99,  name:'Pemula',       avatar:'✏️'},
+  {min:100, max:199, name:'Pelajar',      avatar:'📚'},
+  {min:200, max:349, name:'Cendekia',     avatar:'🔍'},
+  {min:350, max:499, name:'Ahli Argumen', avatar:'🏆'},
+  {min:500, max:9999,name:'Master Bahasa',avatar:'👑'},
+];
+
+/* ── AVATAR EMOJI MAP ── */
+const AVATAR_MAP = {
+  'av1':'😎','av2':'🤩','av3':'🥳','av4':'😄','av5':'🤓',
+  'av6':'🥰','av7':'😁','av8':'🤗','av9':'🧐','av10':'😜',
+  'av11':'🦸','av12':'🦸‍♀️','av13':'🦹','av14':'🧙','av15':'🧙‍♀️'
+};
+function getAvatarDisplay(id){ return AVATAR_MAP[id] || '😊'; }
+
+/* ── STATE ── */
+let STUDENT = null;
+let _selectedAvatar = '';
+
+/* ── GUARD FLAGS (declared globally to avoid hoisting issues) ── */
+let _kuisDoneFired = false;
+let _gameDoneCalled = {};
+
+function getLevel(p){ return LEVELS.find(l=>p>=l.min&&p<=l.max)||LEVELS[0]; }
+
+/* ── STORAGE ── */
+function saveLocal(){
+  if(!STUDENT) return;
+  const key = STUDENT.storageKey || (STUDENT.kelas+'_'+STUDENT.absen);
+  STUDENT.storageKey = key;
+  localStorage.setItem('stu_'+key, JSON.stringify(STUDENT));
+  localStorage.setItem('last_stu', key);
+}
+function loadLocal(key){ try{ const d=localStorage.getItem('stu_'+key); return d?JSON.parse(d):null; }catch(e){return null;} }
+
+/* ── AVATAR PICKER ── */
+function pickAvatar(id, el){
+  _selectedAvatar = id;
+  document.querySelectorAll('.avatar-opt').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('avatarErr').textContent = '';
+  if(typeof playPageOpen==='function') playPageOpen();
+}
+
+/* ── LOGIN ── */
+function doLogin(){
+  const name  = document.getElementById('loginName').value.trim();
+  const kelas = document.getElementById('loginKelas').value;
+  const absen = parseInt(document.getElementById('loginAbsen').value);
+  const errEl = document.getElementById('loginErr');
+  const avErr = document.getElementById('avatarErr');
+  errEl.textContent = '';
+  avErr.textContent = '';
+
+  if(!_selectedAvatar){ avErr.textContent='⚠️ Pilih avatar dulu ya!'; return; }
+  if(!name){ errEl.textContent='⚠️ Nama tidak boleh kosong!'; return; }
+  if(!kelas){ errEl.textContent='⚠️ Pilih kelas terlebih dahulu!'; return; }
+  if(!absen||absen<1||absen>40){ errEl.textContent='⚠️ Nomor absen 1–40!'; return; }
+
+  const btn = document.getElementById('loginBtnText');
+  btn.textContent = '⏳ Memproses...';
+
+  const storageKey = kelas+'_'+absen;
+  const existing = loadLocal(storageKey);
+
+  if(existing && existing.name === name){
+    STUDENT = existing;
+    STUDENT.storageKey = storageKey;
+    if(!STUDENT.avatar) STUDENT.avatar = _selectedAvatar;
+  } else if(existing && existing.name !== name){
+    errEl.textContent = '⚠️ Absen ini sudah dipakai nama lain di kelas '+kelas+'!';
+    btn.textContent = '🚀 MASUK & MULAI BELAJAR!';
+    return;
+  } else {
+    STUDENT = {
+      name, absen, kelas, storageKey, avatar:_selectedAvatar,
+      poin:0, achievements:[], activity:[], modulDone:[], gameDone:[],
+      kuisBest:0, streakCorrect:0, sessionPts:0, pointsAwarded:{},
+      puzzleStats:{pts:0,benar:0,salah:0},
+      detectiveStats:{pts:0,benar:0,salah:0},
+      kuisStats:{pts:0,benar:0,salah:0},
+      joinDate: new Date().toISOString()
+    };
+    saveLocal();
+    setTimeout(()=>unlockAchievement('first_login'), 600);
+  }
+
+  // Reset session flags
+  _kuisDoneFired = false;
+  _gameDoneCalled = {};
+
+  // Update nav
+  const navEl = document.getElementById('navName');
+  if(navEl) navEl.textContent = getAvatarDisplay(STUDENT.avatar) + ' ' + STUDENT.name.split(' ')[0];
+
+  syncToSheet();
+
+  // Navigate to home
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+
+  btn.textContent = '🚀 MASUK & MULAI BELAJAR!';
+  setTimeout(()=>showToast('👋 Halo, '+STUDENT.name+'! Selamat belajar! ('+kelas+')'), 400);
+  setTimeout(colorizeCards, 100);
+}
+
+function doLogout(){
+  if(!confirm('Yakin mau keluar?')) return;
+  saveLocal();
+  STUDENT = null;
+  localStorage.removeItem('last_stu');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-login').classList.add('active');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* ── AUTO LOGIN ── */
+(function autoLogin(){
+  const last = localStorage.getItem('last_stu');
+  if(!last) return;
+  const s = loadLocal(last);
+  if(!s) return;
+  STUDENT = s;
+  if(!STUDENT.storageKey) STUDENT.storageKey = last;
+  if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded = {};
+  if(!STUDENT.puzzleStats) STUDENT.puzzleStats = {pts:0,benar:0,salah:0};
+  if(!STUDENT.detectiveStats) STUDENT.detectiveStats = {pts:0,benar:0,salah:0};
+  if(!STUDENT.kuisStats) STUDENT.kuisStats = {pts:0,benar:0,salah:0};
+  _selectedAvatar = STUDENT.avatar || '';
+  const navEl2 = document.getElementById('navName');
+  if(navEl2) navEl2.textContent = getAvatarDisplay(STUDENT.avatar) + ' ' + STUDENT.name.split(' ')[0];
+  document.getElementById('page-login').classList.remove('active');
+  document.getElementById('page-home').classList.add('active');
+  setTimeout(()=>showToast('👋 Selamat datang kembali, '+STUDENT.name.split(' ')[0]+'!'), 600);
+  setTimeout(colorizeCards, 100);
+})();
+
+/* ── POINTS ── */
+function addPoin(pts, reason){
+  if(!STUDENT) return;
+  STUDENT.poin += pts;
+  STUDENT.activity.unshift({
+    icon: pts>50?'🔥':pts>20?'⭐':'✅',
+    text: reason,
+    pts: '+'+pts,
+    time: new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})
+  });
+  if(STUDENT.activity.length>30) STUDENT.activity.pop();
+  saveLocal();
+  syncToSheet();
+  showToast('⭐ +'+pts+' Poin — '+reason);
+  if(STUDENT.poin>=100) unlockAchievement('poin_100');
+  if(STUDENT.poin>=300) unlockAchievement('poin_300');
+  if(STUDENT.poin>=500) unlockAchievement('poin_500');
+}
+
+/* ── ACHIEVEMENTS ── */
+function unlockAchievement(id){
+  if(!STUDENT) return;
+  if(STUDENT.achievements.includes(id)) return;
+  const ach = ACHIEVEMENTS.find(a=>a.id===id);
+  if(!ach) return;
+  STUDENT.achievements.push(id);
+  if(ach.pts>0) STUDENT.poin += ach.pts;
+  STUDENT.activity.unshift({icon:ach.icon, text:'🏅 Achievement: '+ach.name, pts:ach.pts>0?'+'+ach.pts:'✨', time:new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})});
+  saveLocal();
+  syncToSheet();
+  setTimeout(()=>showAchievementPopup(ach), 500);
+}
+
+function showAchievementPopup(ach){
+  document.getElementById('achIcon').textContent = ach.icon;
+  document.getElementById('achName').textContent = ach.name;
+  document.getElementById('achDesc').textContent = ach.desc;
+  document.getElementById('achPts').textContent = ach.pts>0 ? '+'+ach.pts+' Poin' : '✨ Unlocked!';
+  document.getElementById('achPopup').classList.add('show');
+  if(typeof playCorrect==='function') playCorrect();
+}
+
+/* ── TOAST ── */
+function showToast(msg, dur=2800){
+  const wrap = document.getElementById('toastWrap');
+  if(!wrap) return;
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  wrap.appendChild(t);
+  setTimeout(()=>{ t.classList.add('bye'); setTimeout(()=>t.remove(), 400); }, dur);
+}
+
+/* ── SELESAI BAR ── */
+function showSelesaiBar(){ document.getElementById('selesaiBar').classList.add('show'); }
+function hideSelesaiBar(){ document.getElementById('selesaiBar').classList.remove('show'); }
+function handleSelesai(){ hideSelesaiBar(); showPage('page-home'); }
+
+/* ── PROFILE ── */
+function renderProfile(){
+  if(!STUDENT) return;
+  const lv = getLevel(STUDENT.poin);
+  const lvIdx = LEVELS.indexOf(lv);
+  const nextLv = LEVELS[lvIdx+1];
+  const progress = nextLv ? Math.min(100,((STUDENT.poin-lv.min)/(nextLv.min-lv.min))*100) : 100;
+  document.getElementById('profileNameTitle').textContent = STUDENT.name;
+  document.getElementById('profileName').textContent = STUDENT.name;
+  document.getElementById('profileAbsen').textContent = 'Kelas '+STUDENT.kelas+' · Absen: '+STUDENT.absen;
+  document.getElementById('profileAvatar').textContent = getAvatarDisplay(STUDENT.avatar);
+  document.getElementById('profileLevel').textContent = 'Level: '+lv.name+(nextLv?' · '+STUDENT.poin+'/'+nextLv.min+' poin':' · MAX!');
+  document.getElementById('statPoin').textContent = STUDENT.poin;
+  document.getElementById('statModul').textContent = (STUDENT.modulDone||[]).length+'/5';
+  document.getElementById('statGame').textContent  = (STUDENT.gameDone||[]).length+'/2';
+  document.getElementById('statKuis').textContent  = (STUDENT.kuisBest||0)+'%';
+  setTimeout(()=>{ const b=document.getElementById('profileXpBar'); if(b) b.style.width=progress+'%'; }, 120);
+  const grid = document.getElementById('badgesGrid');
+  if(grid) grid.innerHTML = ACHIEVEMENTS.map(ach=>{
+    const earned = STUDENT.achievements.includes(ach.id);
+    return `<div class="badge-item ${earned?'earned':'locked'}" style="border-color:${ach.color}" title="${ach.desc}">
+      <span class="badge-icon">${earned?ach.icon:'🔒'}</span>
+      <div class="badge-name">${ach.name}</div>
+      <div class="badge-pts">${ach.pts>0?'+'+ach.pts+' pts':''}</div>
+    </div>`;
+  }).join('');
+  const log = document.getElementById('activityLog');
+  if(log){
+    if(!STUDENT.activity||!STUDENT.activity.length){
+      log.innerHTML='<div style="color:var(--muted);font-size:.85rem;font-weight:600;padding:14px">Belum ada aktivitas. Mulai belajar!</div>';
+    } else {
+      log.innerHTML = STUDENT.activity.slice(0,15).map(a=>`
+        <div class="act-item"><span class="act-icon">${a.icon}</span><span class="act-text">${a.text}</span>
+        <span class="act-pts">${a.pts}</span><span class="act-time">${a.time}</span></div>`).join('');
+    }
+  }
+  colorizeCards();
+}
+
+/* ── SPREADSHEET SYNC ── */
+function buildPayload(){
+  if(!STUDENT) return null;
+  return {
+    action:'upsert', absen:STUDENT.absen, kelas:STUDENT.kelas||'', name:STUDENT.name,
+    poin_total:STUDENT.poin||0,
+    modul_done:(STUDENT.modulDone||[]).join(','),
+    badges:(STUDENT.achievements||[]).length,
+    poin_puzzle:(STUDENT.puzzleStats||{}).pts||0,
+    puzzle_benar:(STUDENT.puzzleStats||{}).benar||0,
+    puzzle_salah:(STUDENT.puzzleStats||{}).salah||0,
+    poin_detective:(STUDENT.detectiveStats||{}).pts||0,
+    detective_benar:(STUDENT.detectiveStats||{}).benar||0,
+    detective_salah:(STUDENT.detectiveStats||{}).salah||0,
+    poin_kuis:(STUDENT.kuisStats||{}).pts||0,
+    kuis_benar:(STUDENT.kuisStats||{}).benar||0,
+    kuis_salah:(STUDENT.kuisStats||{}).salah||0,
+    kuis_skor:STUDENT.kuisBest||0,
+    join_date:STUDENT.joinDate||'',
+    last_active:new Date().toISOString()
+  };
+}
+function syncToSheet(){
+  if(!STUDENT||GAS_URL==='YOUR_APPS_SCRIPT_URL_HERE') return;
+  const p = buildPayload(); if(!p) return;
+  fetch(GAS_URL,{method:'POST',body:JSON.stringify(p)}).catch(()=>{});
+}
+
+/* ── LEADERBOARD ── */
+async function loadLeaderboard(){
+  const lbList=document.getElementById('lbList');
+  const lbLoad=document.getElementById('lbLoading');
+  const lbUpd=document.getElementById('lbUpdate');
+  if(lbLoad) lbLoad.style.display='block';
+  if(lbList) lbList.innerHTML='';
+  if(GAS_URL==='YOUR_APPS_SCRIPT_URL_HERE'){
+    if(lbLoad) lbLoad.style.display='none';
+    if(lbUpd) lbUpd.textContent='⚠️ Perlu setup Apps Script dahulu';
+    renderLbLocal(lbList); return;
+  }
+  try{
+    const res = await fetch(GAS_URL);
+    const data = await res.json();
+    if(lbLoad) lbLoad.style.display='none';
+    if(lbUpd) lbUpd.textContent='Diperbarui: '+new Date().toLocaleTimeString('id-ID');
+    renderLbData(lbList, data);
+  }catch(e){
+    if(lbLoad) lbLoad.style.display='none';
+    if(lbUpd) lbUpd.textContent='⚠️ Gagal memuat — tampil data lokal';
+    renderLbLocal(lbList);
+  }
+}
+
+function renderLbData(container, rows){
+  if(!rows||!rows.length){
+    container.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-family:\'Fredoka One\'">Belum ada data siswa 📭</div>';
+    return;
+  }
+  const medals=['🥇','🥈','🥉'];
+  container.innerHTML = rows.map((r,i)=>{
+    const poin = parseInt(r['Poin Total']||r['Poin']||0);
+    const absen = r['Absen']||'?';
+    const nama  = r['Nama']||'?';
+    const kelas = r['Kelas']||'';
+    const badges= r['Badges']||0;
+    const lv    = getLevel(poin);
+    const isMe  = STUDENT && String(absen)===String(STUDENT.absen) && kelas===STUDENT.kelas;
+    const avKey = isMe && STUDENT.avatar ? STUDENT.avatar : null;
+    const avHtml= avKey ? `<span style="font-size:1.8rem">${getAvatarDisplay(avKey)}</span>` : `<span style="font-size:1.6rem">${lv.avatar}</span>`;
+    return `<div class="lb-card ${i===0?'rank1':i===1?'rank2':i===2?'rank3':''}${isMe?' me':''}" style="animation-delay:${i*0.06}s">
+      <div class="lb-rank">${medals[i]||('#'+(i+1))}</div>
+      <div class="lb-avatar">${avHtml}</div>
+      <div class="lb-info">
+        <div class="lb-uname">${nama}${isMe?' <span style="font-size:.6rem;background:var(--blue);color:#fff;border-radius:8px;padding:1px 6px">Kamu</span>':''}</div>
+        <div class="lb-detail">${kelas?kelas+' · ':''}Absen ${absen} · ${lv.name} · ${badges} badge</div>
+      </div>
+      <div class="lb-pts">⭐ ${poin}</div>
+    </div>`;
+  }).join('');
+  if(STUDENT){
+    const myRank = rows.findIndex(r=>String(r['Absen'])===String(STUDENT.absen)&&r['Kelas']===STUDENT.kelas);
+    if(myRank>=0&&myRank<3) unlockAchievement('top3');
+  }
+}
+
+function renderLbLocal(container){
+  if(!container) return;
+  const keys = Object.keys(localStorage).filter(k=>k.startsWith('stu_'));
+  const students = keys.map(k=>loadLocal(k.replace('stu_',''))).filter(Boolean);
+  students.sort((a,b)=>b.poin-a.poin);
+  if(!students.length){
+    container.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-family:\'Fredoka One\'">Belum ada data 📭<br><small style="font-size:.72rem">Data dari siswa lain akan muncul setelah setup Apps Script</small></div>';
+    return;
+  }
+  const medals=['🥇','🥈','🥉'];
+  container.innerHTML = students.map((s,i)=>{
+    const isMe = STUDENT && s.storageKey===STUDENT.storageKey;
+    const lv = getLevel(s.poin);
+    return `<div class="lb-card ${i<3?'rank'+(i+1):''}${isMe?' me':''}">
+      <div class="lb-rank">${medals[i]||('#'+(i+1))}</div>
+      <div class="lb-avatar"><span style="font-size:1.8rem">${getAvatarDisplay(s.avatar)}</span></div>
+      <div class="lb-info">
+        <div class="lb-uname">${s.name}${isMe?' <span style="font-size:.6rem;background:var(--blue);color:#fff;border-radius:8px;padding:1px 6px">Kamu</span>':''}</div>
+        <div class="lb-detail">${s.kelas?s.kelas+' · ':''}Absen ${s.absen} · ${lv.name} · ${(s.achievements||[]).length} badge</div>
+      </div>
+      <div class="lb-pts">⭐ ${s.poin}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ── RESET ── */
+function openResetModal(){
+  document.getElementById('resetCodeInput').value='';
+  document.getElementById('resetErr').textContent='';
+  document.getElementById('resetModal').classList.add('show');
+  setTimeout(()=>document.getElementById('resetCodeInput').focus(), 200);
+}
+function closeResetModal(){ document.getElementById('resetModal').classList.remove('show'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeResetModal(); });
+
+async function doReset(){
+  const code = document.getElementById('resetCodeInput').value.trim();
+  const errEl = document.getElementById('resetErr');
+  errEl.textContent='';
+  if(code !== RESET_CODE){
+    errEl.textContent='❌ Kode salah!';
+    document.getElementById('resetCodeInput').classList.add('shake');
+    setTimeout(()=>document.getElementById('resetCodeInput').classList.remove('shake'),500);
+    return;
+  }
+  errEl.textContent='⏳ Mereset data...';
+  Object.keys(localStorage).filter(k=>k.startsWith('stu_')||k==='last_stu').forEach(k=>localStorage.removeItem(k));
+  if(GAS_URL!=='YOUR_APPS_SCRIPT_URL_HERE'){
+    try{ await fetch(GAS_URL,{method:'POST',body:JSON.stringify({action:'reset'})}); }catch(e){}
+  }
+  STUDENT=null; _gameDoneCalled={}; _kuisDoneFired=false;
+  closeResetModal();
+  showToast('✅ Semua data berhasil direset!');
+  setTimeout(()=>{
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('page-login').classList.add('active');
+  },1000);
+}
+
+/* ── COMPLETION HOOKS ── */
+function onModulDone(modId){
+  if(!STUDENT) return;
+  if(!STUDENT.modulDone) STUDENT.modulDone=[];
+  if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded={};
+  const key='modul_'+modId;
+  if(STUDENT.modulDone.includes(modId)) return;
+  STUDENT.modulDone.push(modId);
+  STUDENT.pointsAwarded[key]=true;
+  addPoin(30,'Menyelesaikan Modul '+modId);
+  unlockAchievement('modul'+modId+'_done');
+  if(STUDENT.modulDone.length===5) setTimeout(()=>unlockAchievement('all_modul'),800);
+  saveLocal();
+}
+
+function onGameDone(gameId, score, total){
+  if(!STUDENT) return;
+  if(_gameDoneCalled[gameId]===score+'_'+total) return;
+  _gameDoneCalled[gameId]=score+'_'+total;
+  if(!STUDENT.gameDone) STUDENT.gameDone=[];
+  if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded={};
+  const alreadyDone = STUDENT.gameDone.includes(gameId);
+  if(!alreadyDone){
+    const pts = Math.round((score/total)*50);
+    STUDENT.gameDone.push(gameId);
+    STUDENT.pointsAwarded['game_'+gameId]=true;
+    addPoin(pts,'Selesai Game '+(gameId==='puzzle'?'Puzzle Argumen':'Detektif Argumen')+' ('+score+'/'+total+')');
+    unlockAchievement(gameId+'_done');
+    if(STUDENT.gameDone.length===2) setTimeout(()=>unlockAchievement('all_games'),800);
+  } else {
+    showToast('🎮 Skor kamu: '+score+'/'+total+'. Poin hanya diberikan 1x.');
+  }
+  saveLocal();
+}
+
+function onKuisDone(correct, total){
+  if(!STUDENT) return;
+  const pct = Math.round((correct/total)*100);
+  if(pct>(STUDENT.kuisBest||0)) STUDENT.kuisBest=pct;
+  if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded={};
+  if(!STUDENT.pointsAwarded['kuis']){
+    STUDENT.pointsAwarded['kuis']=true;
+    const pts = Math.round((correct/total)*80);
+    addPoin(pts,'Selesai Kuis — Skor '+pct+'%');
+    unlockAchievement('quiz_done');
+    if(pct===100) setTimeout(()=>unlockAchievement('quiz_perfect'),800);
+    else if(pct>=80) setTimeout(()=>unlockAchievement('quiz_80'),800);
+  } else {
+    showToast('📝 Skor kamu: '+pct+'%. Poin hanya diberikan 1x.');
+  }
+  saveLocal();
+}
+
+function onCorrectStreak(){
+  if(!STUDENT) return;
+  if(!STUDENT.sessionPts) STUDENT.sessionPts=0;
+  STUDENT.streakCorrect=(STUDENT.streakCorrect||0)+1;
+  if(STUDENT.sessionPts<200){ STUDENT.sessionPts+=5; addPoin(5,'Jawaban benar!'); }
+  if(STUDENT.streakCorrect>=5) unlockAchievement('answer_5');
+  if([3,5,7,10].includes(STUDENT.streakCorrect)) showStreakOverlay(STUDENT.streakCorrect);
+  saveLocal();
+}
+function onWrongAnswer(){
+  if(!STUDENT) return;
+  STUDENT.streakCorrect=0;
+  saveLocal();
+}
+
+/* ── SOUND EXTRAS ── */
+function playWow(){
+  if(!soundOn) return;
+  try{
+    const ctx=getCtx();
+    const o=ctx.createOscillator(),g=ctx.createGain();
+    o.connect(g);g.connect(ctx.destination);o.type='sine';
+    o.frequency.setValueAtTime(300,ctx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(900,ctx.currentTime+0.18);
+    o.frequency.exponentialRampToValueAtTime(600,ctx.currentTime+0.35);
+    g.gain.setValueAtTime(0.22,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.45);
+    o.start(ctx.currentTime);o.stop(ctx.currentTime+0.45);
+  }catch(e){}
+}
+function playCombo(n){
+  if(!soundOn) return;
+  if(n>=7){ playWow(); setTimeout(()=>[523,659,784,880,1047].forEach((f,i)=>playTone(f,'sine',0.1,0.12,i*0.07)),200); }
+  else if(n>=5){ playWow(); }
+  else { playCorrect(); }
+}
+
+/* ── STREAK OVERLAY ── */
+const STREAK_MSGS=[
+  {n:3,emoji:'🔥',text:'ON FIRE!',sub:'3 benar beruntun'},
+  {n:5,emoji:'⚡',text:'COMBO x5!',sub:'Luar biasa!'},
+  {n:7,emoji:'🌟',text:'SUPER COMBO!',sub:'7 benar beruntun!'},
+  {n:10,emoji:'👑',text:'UNSTOPPABLE!',sub:'10 benar beruntun!'},
+];
+function showStreakOverlay(n){
+  const msg=[...STREAK_MSGS].reverse().find(m=>n>=m.n);
+  if(!msg) return;
+  const el=document.getElementById('streakOverlay');if(!el)return;
+  document.getElementById('streakEmoji').textContent=msg.emoji;
+  document.getElementById('streakText').textContent=msg.text;
+  document.getElementById('streakSub').textContent=msg.sub;
+  el.classList.remove('bye');el.classList.add('pop');
+  playCombo(n);
+  if(n>=5) launchConfetti();
+  setTimeout(()=>{ el.classList.add('bye'); setTimeout(()=>el.classList.remove('pop','bye'),300); },1600);
+}
+
+/* ── CONFETTI ── */
+function launchConfetti(){
+  const canvas=document.getElementById('confettiCanvas');if(!canvas)return;
+  canvas.style.display='block';
+  const ctx2=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const pieces=Array.from({length:70},()=>({
+    x:Math.random()*canvas.width,y:Math.random()*-canvas.height*.5,
+    r:Math.random()*6+3,
+    c:['#FF3B3B','#2979FF','#FFD600','#00C853','#FF6D00','#AA00FF','#fff'][Math.floor(Math.random()*7)],
+    vx:(Math.random()-.5)*4,vy:Math.random()*4+2,rot:Math.random()*360,vr:(Math.random()-.5)*8,
+    shape:Math.random()>.5?'rect':'circle'
+  }));
+  let frame=0;
+  function draw(){
+    ctx2.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.vy+=0.1;
+      ctx2.save();ctx2.translate(p.x,p.y);ctx2.rotate(p.rot*Math.PI/180);
+      ctx2.fillStyle=p.c;ctx2.globalAlpha=Math.max(0,1-frame/90);
+      if(p.shape==='rect') ctx2.fillRect(-p.r,-p.r/2,p.r*2,p.r);
+      else{ ctx2.beginPath();ctx2.arc(0,0,p.r,0,Math.PI*2);ctx2.fill(); }
+      ctx2.restore();
+    });
+    frame++;
+    if(frame<100) requestAnimationFrame(draw);
+    else{ canvas.style.display='none';ctx2.clearRect(0,0,canvas.width,canvas.height); }
+  }
+  draw();
+}
+
+/* ── FLOATING OBJECTS ── */
+const FLOAT_EMOJIS=['⚡','🔥','💎','🌟','🏆','✨','💡','🎯','🌈','⭐','🚀','💥','🎮','🔍','🧠','📚'];
+function initFloatingObjects(){
+  const wrap=document.getElementById('floatObjects');if(!wrap)return;
+  wrap.innerHTML='';
+  const count=window.innerWidth<600?8:16;
+  for(let i=0;i<count;i++){
+    const el=document.createElement('div');el.className='fobj';
+    el.textContent=FLOAT_EMOJIS[Math.floor(Math.random()*FLOAT_EMOJIS.length)];
+    const sz=Math.random()*1.2+0.7,dur=Math.random()*16+10,delay=Math.random()*-20,left=Math.random()*100;
+    el.style.cssText=`left:${left}%;font-size:${sz}rem;animation-duration:${dur}s;animation-delay:${delay}s`;
+    wrap.appendChild(el);
+  }
+}
+let _resizeTimer;
+window.addEventListener('resize',()=>{ clearTimeout(_resizeTimer);_resizeTimer=setTimeout(initFloatingObjects,300); });
+
+/* ── COLORIZE CARDS ── */
+const CARD_COLORS=['var(--red)','var(--blue)','var(--yellow)','var(--green)','var(--orange)','var(--purple)'];
+function colorizeCards(){
+  document.querySelectorAll('.mod-card').forEach((c,i)=>{ c.style.borderColor=CARD_COLORS[i%CARD_COLORS.length]; });
+  document.querySelectorAll('.stat-box').forEach((c,i)=>{
+    const col=CARD_COLORS[i%CARD_COLORS.length];c.style.borderColor=col;
+    const v=c.querySelector('.stat-val');if(v) v.style.color=col;
+  });
+}
+
+/* ── UNIFIED showPage PATCH ── */
+(function(){
+  const _base=window.showPage;
+  const CONTENT_PAGES=['page-mod1','page-mod2','page-mod3','page-mod4','page-mod5','page-game1','page-game2','page-kuis'];
+  const PAGE_ANCHORS={'page-mod1':'anchor-modul','page-mod2':'anchor-modul','page-mod3':'anchor-modul','page-mod4':'anchor-modul','page-mod5':'anchor-modul','page-game1':'anchor-game','page-game2':'anchor-game','page-kuis':'anchor-kuis'};
+  window.showPage=function(id){
+    // Guard: require login
+    if(!STUDENT&&id!=='page-login'){ _base('page-login'); return; }
+    // Detect modul completion
+    const curPage=document.querySelector('.page.active');
+    let scrollAnchor=null;
+    if(curPage&&STUDENT){
+      const curId=curPage.id;
+      const mm=curId.match(/^page-mod(\d+)$/);
+      if(mm&&id==='page-home') onModulDone(parseInt(mm[1]));
+      if(id==='page-home'&&PAGE_ANCHORS[curId]) scrollAnchor=PAGE_ANCHORS[curId];
+    }
+    _base(id);
+    // Selesai bar
+    if(CONTENT_PAGES.includes(id)) setTimeout(showSelesaiBar,300);
+    else hideSelesaiBar();
+    // Scroll
+    if(scrollAnchor) setTimeout(()=>{ const el=document.getElementById(scrollAnchor);if(el)el.scrollIntoView({behavior:'smooth',block:'start'}); },120);
+    // Colorize
+    setTimeout(colorizeCards,60);
+  };
+})();
+
+/* ── GAME STAT PATCHES (single layer each) ── */
+// Puzzle
+(function(){
+  const _o=window.checkPuzzle;
+  window.checkPuzzle=function(){
+    _o();
+    setTimeout(()=>{
+      const fb=document.getElementById('pfb');
+      if(!fb||!STUDENT) return;
+      if(!STUDENT.puzzleStats) STUDENT.puzzleStats={pts:0,benar:0,salah:0};
+      if(fb.classList.contains('ok')){
+        STUDENT.puzzleStats.benar++;STUDENT.puzzleStats.pts+=10;
+        document.querySelectorAll('.pb-slot').forEach((sl,i)=>setTimeout(()=>sl.classList.add('correct'),i*120));
+        onCorrectStreak();
+      } else if(fb.classList.contains('err')){
+        STUDENT.puzzleStats.salah++;
+        document.querySelectorAll('.pb-slot').forEach(sl=>sl.classList.add('wrong'));
+        setTimeout(()=>document.querySelectorAll('.pb-slot').forEach(sl=>sl.classList.remove('wrong')),400);
+        onWrongAnswer();
+      }
+      saveLocal();
+    },80);
+  };
+})();
+
+// Detective
+(function(){
+  const _o=window.selDetect;
+  window.selDetect=function(i){
+    const currentIdx=DS.idx;
+    const wasCorrect=(i===DETECT[currentIdx].correct);
+    _o(i);
+    setTimeout(()=>{
+      const clues=document.querySelectorAll('.detect-clue');
+      if(clues[currentIdx]){
+        if(wasCorrect){clues[currentIdx].classList.add('found');clues[currentIdx].textContent='🔍';}
+        else{clues[currentIdx].classList.add('missed');clues[currentIdx].textContent='❌';}
+      }
+    },120);
+    if(!STUDENT) return;
+    if(!STUDENT.detectiveStats) STUDENT.detectiveStats={pts:0,benar:0,salah:0};
+    if(wasCorrect){STUDENT.detectiveStats.benar++;STUDENT.detectiveStats.pts+=5;onCorrectStreak();}
+    else{STUDENT.detectiveStats.salah++;onWrongAnswer();}
+    saveLocal();
+  };
+})();
+
+// Kuis
+(function(){
+  const _o=window.answerKuis;
+  window.answerKuis=function(i){
+    const q=KUIS[KS.idx];
+    const wasCorrect=(i===q.correct);
+    _o(i);
+    if(!STUDENT) return;
+    if(!STUDENT.kuisStats) STUDENT.kuisStats={pts:0,benar:0,salah:0};
+    if(wasCorrect){
+      STUDENT.kuisStats.benar++;STUDENT.kuisStats.pts+=4;
+      onCorrectStreak();
+      setTimeout(()=>{ const fill=document.getElementById('kuisXpFill');if(fill){const p=Math.round(((KS.idx)/KUIS.length)*100);fill.style.width=p+'%';} },200);
+    } else {
+      STUDENT.kuisStats.salah++;onWrongAnswer();
+    }
+    saveLocal();
+    if(KS.done&&!_kuisDoneFired){_kuisDoneFired=true;setTimeout(()=>onKuisDone(KS.score,KUIS.length),400);}
+  };
+  const _on=window.nextKuis;
+  window.nextKuis=function(){
+    _on();
+    if(KS.done&&!_kuisDoneFired){_kuisDoneFired=true;onKuisDone(KS.score,KUIS.length);}
+  };
+})();
+
+// Puzzle game done
+(function(){
+  const _oi=window.initPuzzle;
+  window.initPuzzle=function(){ delete _gameDoneCalled['puzzle'];_oi(); };
+  const _od=window.initDetect;
+  window.initDetect=function(){ delete _gameDoneCalled['detective'];_od(); };
+  const _ok=window.initKuis;
+  window.initKuis=function(){ _kuisDoneFired=false;_ok(); };
+})();
+
+/* ── nextDetect trigger onGameDone ── */
+(function(){
+  const _o=window.nextDetect;
+  window.nextDetect=function(){
+    _o();
+    if(DS.idx>=DETECT.length) onGameDone('detective',DS.score,DETECT.length);
+  };
+})();
+
+/* ── INIT on load ── */
+window.addEventListener('load',()=>{
+  initFloatingObjects();
+  colorizeCards();
+});
+
+/* ── APPS SCRIPT CODE (paste into Google Apps Script) ──
+function doPost(e){
+  try{
+    var d=JSON.parse(e.postData.contents);
+    var ss=SpreadsheetApp.openById('1rKxs9OPAX1J_zIk6g_Z08EI5UB74ndhD5tyzwINUfW0');
+    if(d.action==='reset'){
+      ss.getSheets().forEach(function(sh){
+        if(sh.getName()==='Log')return;
+        var nr=sh.getLastRow(),nc=sh.getLastColumn();
+        if(nr>1){for(var r=2;r<=nr;r++){sh.getRange(r,nc).setValue('DIHAPUS');sh.getRange(r,1,1,nc).setBackground('#ffcccc');}}
+      });
+      var log=ss.getSheetByName('Log')||ss.insertSheet('Log');
+      log.appendRow([new Date().toLocaleString('id-ID'),'RESET','Semua data ditandai DIHAPUS']);
+      return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
+    }
+    var kelas=d.kelas||'Umum';
+    var sheet=ss.getSheetByName(kelas)||buatSheet(ss,kelas);
+    var lv=d.poin_total>=500?'Master Bahasa':d.poin_total>=350?'Ahli Argumen':d.poin_total>=200?'Cendekia':d.poin_total>=100?'Pelajar':'Pemula';
+    var row=[kelas,d.absen,d.name,d.poin_total||0,lv,d.badges||0,d.modul_done||'',
+      d.poin_puzzle||0,d.puzzle_benar||0,d.puzzle_salah||0,
+      d.poin_detective||0,d.detective_benar||0,d.detective_salah||0,
+      d.poin_kuis||0,d.kuis_benar||0,d.kuis_salah||0,d.kuis_skor||0,
+      d.join_date||'',d.last_active||'','AKTIF'];
+    var rows=sheet.getDataRange().getValues();
+    var found=-1;
+    for(var i=1;i<rows.length;i++){if(String(rows[i][1])===String(d.absen)&&rows[i][19]!=='DIHAPUS'){found=i+1;break;}}
+    if(found>0)sheet.getRange(found,1,1,row.length).setValues([row]);
+    else sheet.appendRow(row);
+    if(sheet.getLastRow()>2)sheet.getRange(2,1,sheet.getLastRow()-1,sheet.getLastColumn()).sort({column:4,ascending:false});
+    return ContentService.createTextOutput(JSON.stringify({ok:true})).setMimeType(ContentService.MimeType.JSON);
+  }catch(err){
+    return ContentService.createTextOutput(JSON.stringify({ok:false,error:err.message})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+function buatSheet(ss,kelas){
+  var sh=ss.insertSheet(kelas);
+  var h=['Kelas','Absen','Nama','Poin Total','Level','Badges','Modul Selesai',
+    'Poin Puzzle','Puzzle Benar','Puzzle Salah',
+    'Poin Detektif','Detektif Benar','Detektif Salah',
+    'Poin Kuis','Kuis Benar','Kuis Salah','Skor Kuis Terbaik',
+    'Bergabung','Terakhir Aktif','Status'];
+  sh.getRange(1,1,1,h.length).setValues([h]).setFontWeight('bold').setBackground('#FFD600').setFontColor('#000');
+  sh.setFrozenRows(1);
+  return sh;
+}
+function doGet(e){
+  try{
+    var ss=SpreadsheetApp.openById('1rKxs9OPAX1J_zIk6g_Z08EI5UB74ndhD5tyzwINUfW0');
+    var all=[];
+    ss.getSheets().forEach(function(sh){
+      if(sh.getName()==='Log')return;
+      var rows=sh.getDataRange().getValues();
+      if(rows.length<2)return;
+      var h=rows[0];
+      rows.slice(1).forEach(function(r){
+        if(!r[2]||r[19]==='DIHAPUS')return;
+        var obj={};h.forEach(function(hh,i){obj[hh]=r[i];});all.push(obj);
+      });
+    });
+    all.sort(function(a,b){return (b['Poin Total']||0)-(a['Poin Total']||0);});
+    return ContentService.createTextOutput(JSON.stringify(all)).setMimeType(ContentService.MimeType.JSON);
+  }catch(e){
+    return ContentService.createTextOutput(JSON.stringify([])).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+── END APPS SCRIPT ── */
+
+
+</script>
+<!-- ══ FLOATING OBJECTS ══ -->
+<div class="float-objects" id="floatObjects"></div>
+<!-- ══ PAGE DECORATIONS ══ -->
+<div class="page-deco" id="pageDeco">
+  <div class="deco-circle" style="width:260px;height:260px;background:var(--red);top:-70px;right:-50px;animation-duration:7s"></div>
+  <div class="deco-circle" style="width:200px;height:200px;background:var(--blue);bottom:-50px;left:-40px;animation-duration:9s;animation-delay:-3s"></div>
+  <div class="deco-circle" style="width:140px;height:140px;background:var(--yellow);top:40%;right:5%;animation-duration:11s;animation-delay:-5s"></div>
+  <div class="deco-circle" style="width:90px;height:90px;background:var(--green);top:20%;left:3%;animation-duration:8s;animation-delay:-2s"></div>
+</div>
+<!-- ══ STREAK OVERLAY ══ -->
+<div class="streak-overlay" id="streakOverlay">
+  <div class="streak-badge">
+    <span class="streak-emoji" id="streakEmoji">🔥</span>
+    <div class="streak-text" id="streakText">ON FIRE!</div>
+    <div class="streak-sub" id="streakSub">3 benar beruntun</div>
+  </div>
+</div>
+<!-- ══ CONFETTI ══ -->
+<canvas id="confettiCanvas"></canvas>
+<!-- ══ SELESAI BAR ══ -->
+<div class="selesai-bar" id="selesaiBar">
+  <button class="selesai-btn" onclick="handleSelesai()">✅ Selesai — Kembali ke Beranda</button>
+</div>
+<!-- ══ ACHIEVEMENT POPUP ══ -->
+<div class="ach-popup" id="achPopup">
+  <div class="ach-box">
+    <span class="ach-icon" id="achIcon">🏆</span>
+    <div class="ach-title">ACHIEVEMENT!</div>
+    <div class="ach-name" id="achName">Badge Baru</div>
+    <div class="ach-desc" id="achDesc">Kamu luar biasa!</div>
+    <div class="ach-pts-badge" id="achPts">+50 Poin</div><br>
+    <button class="ach-close" onclick="document.getElementById('achPopup').classList.remove('show')">KEREN! ✨</button>
+  </div>
+</div>
+<!-- ══ RESET MODAL ══ -->
+<div class="reset-modal" id="resetModal">
+  <div class="reset-box">
+    <span class="reset-icon">🗑️</span>
+    <div class="reset-title">Reset Semua Data</div>
+    <div class="reset-desc">Tindakan ini akan menghapus <strong>semua data siswa</strong> dari website dan menandai data di spreadsheet sebagai DIHAPUS.<br><strong style="color:var(--red)">Tidak bisa dikembalikan!</strong></div>
+    <input class="reset-input" id="resetCodeInput" type="password" placeholder="Masukkan kode reset" maxlength="10" autocomplete="off"/>
+    <div class="reset-err" id="resetErr"></div>
+    <div class="reset-actions">
+      <button class="game-btn danger" onclick="doReset()">🗑️ Reset</button>
+      <button class="game-btn gray" onclick="closeResetModal()">Batal</button>
+    </div>
+  </div>
+</div>
+<!-- ══ TOAST ══ -->
+<div class="toast-wrap" id="toastWrap"></div>
+
+</body>
+</html>
