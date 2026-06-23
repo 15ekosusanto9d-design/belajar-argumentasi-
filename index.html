@@ -992,6 +992,13 @@ function showPage(id){
 /* ══════════════════════════════
    GAME 1 — PUZZLE SUSUN ARGUMEN
 ══════════════════════════════ */
+/* ── HELPER: WARNA SKOR (75-100 hijau, 50-74 kuning, 0-49 merah) ── */
+function scoreColor(pct){
+  if(pct>=75) return '#00C853';
+  if(pct>=50) return '#FFAB00';
+  return '#FF3D00';
+}
+
 const PUZZLES=[
   {
     prompt:"Topik: Penggunaan HP di Kelas. Seret setiap kalimat ke zona struktur yang tepat.",
@@ -1222,7 +1229,7 @@ function renderDetect(){
         <div style="font-size:3rem">🕵️</div>
         <div style="flex:1"><div style="font-family:'Fredoka One';font-size:.6rem;color:rgba(255,255,255,.5);letter-spacing:1px;margin-bottom:5px">PAPAN BUKTI AKHIR</div>
           <div style="display:flex;flex-wrap:wrap;gap:4px">${cluesHTML}</div></div>
-        <div class="detect-streak-wrap"><div class="detect-streak-num" style="color:${rank.c}">${pct}%</div><div class="detect-streak-lbl">AKURASI</div></div>
+        <div class="detect-streak-wrap"><div class="detect-streak-num" style="color:${scoreColor(pct)}">${pct}</div><div class="detect-streak-lbl">SKOR</div></div>
       </div>
       <div style="font-size:1.8rem;margin-bottom:3px">${rank.e}</div>
       <div style="font-family:'Fredoka One';font-size:1.2rem;color:${rank.c}">${rank.t}</div>
@@ -1324,13 +1331,13 @@ function renderKuis(){
     const brain=pct>=90?'🧠✨':pct>=75?'🧠💪':pct>=60?'🧠📚':'🧠🔋';
     const msg=pct>=90?'🏆 Luar Biasa!':pct>=75?'🌟 Sangat Baik!':pct>=60?'👍 Cukup Baik':'💪 Terus Berlatih!';
     app.innerHTML=`<div class="quiz-result">
-      <div class="qr-circle"><div><div class="qr-score">${pct}%</div><div class="qr-lbl">SKOR</div></div></div>
+      <div class="qr-circle" style="background:${scoreColor(pct)};border-color:${scoreColor(pct)}"><div><div class="qr-score">${pct}</div><div class="qr-lbl">SKOR</div></div></div>
       <div style="font-size:2.2rem;margin-bottom:4px">${brain}</div>
       <div class="qr-msg">${msg}</div>
       <div class="qr-stats">
         <div class="qr-row">Benar <span style="color:var(--green)">✅ ${KS.score}</span></div>
         <div class="qr-row">Salah <span style="color:var(--red)">❌ ${wrong}</span></div>
-        <div class="qr-row">Skor <span style="color:var(--orange)">${pct}%</span></div>
+        <div class="qr-row">Skor <span style="color:${scoreColor(pct)};font-weight:800">${pct}</span></div>
       </div>
       <button class="game-btn primary" onclick="initKuis()">🔄 Ulangi Kuis</button>
       <button class="game-btn gray" style="margin-top:6px" onclick="showPage('page-home')">← Beranda</button>
@@ -1721,9 +1728,9 @@ function doLogin(){
       name, absen, kelas, storageKey, avatar:_selectedAvatar,
       poin:0, achievements:[], activity:[], modulDone:[], gameDone:[],
       kuisBest:0, streakCorrect:0, sessionPts:0, pointsAwarded:{},
-      puzzleStats:{pts:0,benar:0,salah:0},
-      detectiveStats:{pts:0,benar:0,salah:0},
-      kuisStats:{pts:0,benar:0,salah:0},
+      puzzleStats:{pts:0,benar:0,salah:0,attempts:0,bestScore:0},
+      detectiveStats:{pts:0,benar:0,salah:0,attempts:0,bestScore:0},
+      kuisStats:{pts:0,benar:0,salah:0,attempts:0,bestScore:0},
       joinDate: new Date().toISOString()
     };
     saveLocal();
@@ -1769,9 +1776,15 @@ function doLogout(){
   STUDENT = s;
   if(!STUDENT.storageKey) STUDENT.storageKey = last;
   if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded = {};
-  if(!STUDENT.puzzleStats) STUDENT.puzzleStats = {pts:0,benar:0,salah:0};
-  if(!STUDENT.detectiveStats) STUDENT.detectiveStats = {pts:0,benar:0,salah:0};
-  if(!STUDENT.kuisStats) STUDENT.kuisStats = {pts:0,benar:0,salah:0};
+  if(!STUDENT.puzzleStats) STUDENT.puzzleStats = {pts:0,benar:0,salah:0,attempts:0,bestScore:0};
+  if(!STUDENT.detectiveStats) STUDENT.detectiveStats = {pts:0,benar:0,salah:0,attempts:0,bestScore:0};
+  if(!STUDENT.kuisStats) STUDENT.kuisStats = {pts:0,benar:0,salah:0,attempts:0,bestScore:0};
+  if(STUDENT.puzzleStats.attempts===undefined) STUDENT.puzzleStats.attempts=0;
+  if(STUDENT.puzzleStats.bestScore===undefined) STUDENT.puzzleStats.bestScore=0;
+  if(STUDENT.detectiveStats.attempts===undefined) STUDENT.detectiveStats.attempts=0;
+  if(STUDENT.detectiveStats.bestScore===undefined) STUDENT.detectiveStats.bestScore=0;
+  if(STUDENT.kuisStats.attempts===undefined) STUDENT.kuisStats.attempts=0;
+  if(STUDENT.kuisStats.bestScore===undefined) STUDENT.kuisStats.bestScore=0;
   _selectedAvatar = STUDENT.avatar || '';
   const navEl2 = document.getElementById('navName');
   if(navEl2) navEl2.textContent = getAvatarDisplay(STUDENT.avatar) + ' ' + STUDENT.name.split(' ')[0];
@@ -1886,12 +1899,15 @@ function buildPayload(){
     poin_puzzle:(STUDENT.puzzleStats||{}).pts||0,
     puzzle_benar:(STUDENT.puzzleStats||{}).benar||0,
     puzzle_salah:(STUDENT.puzzleStats||{}).salah||0,
+    puzzle_attempts:(STUDENT.puzzleStats||{}).attempts||0,
     poin_detective:(STUDENT.detectiveStats||{}).pts||0,
     detective_benar:(STUDENT.detectiveStats||{}).benar||0,
     detective_salah:(STUDENT.detectiveStats||{}).salah||0,
+    detective_attempts:(STUDENT.detectiveStats||{}).attempts||0,
     poin_kuis:(STUDENT.kuisStats||{}).pts||0,
     kuis_benar:(STUDENT.kuisStats||{}).benar||0,
     kuis_salah:(STUDENT.kuisStats||{}).salah||0,
+    kuis_attempts:(STUDENT.kuisStats||{}).attempts||0,
     kuis_skor:STUDENT.kuisBest||0,
     join_date:STUDENT.joinDate||'',
     last_active:new Date().toISOString()
@@ -2036,23 +2052,30 @@ function onModulDone(modId){
 
 function onGameDone(gameId, score, total){
   if(!STUDENT) return;
-  if(_gameDoneCalled[gameId]===score+'_'+total) return;
-  _gameDoneCalled[gameId]=score+'_'+total;
   if(!STUDENT.gameDone) STUDENT.gameDone=[];
   if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded={};
   const statsKey = gameId==='puzzle' ? 'puzzleStats' : 'detectiveStats';
-  if(!STUDENT[statsKey]) STUDENT[statsKey]={pts:0,benar:0,salah:0};
-  const alreadyDone = STUDENT.gameDone.includes(gameId);
-  if(!alreadyDone){
-    const pts = Math.round((score/total)*50);
-    STUDENT.gameDone.push(gameId);
-    STUDENT.pointsAwarded['game_'+gameId]=true;
-    STUDENT[statsKey].pts = pts;
-    addPoin(pts,'Selesai Game '+(gameId==='puzzle'?'Puzzle Argumen':'Detektif Argumen')+' ('+score+'/'+total+')');
+  if(!STUDENT[statsKey]) STUDENT[statsKey]={pts:0,benar:0,salah:0,attempts:0,bestScore:0};
+  const st = STUDENT[statsKey];
+  st.attempts = (st.attempts||0) + 1;
+  const pctScore = Math.round((score/total)*100);
+  const pts = Math.round((score/total)*50);
+  const isFirstTime = !STUDENT.gameDone.includes(gameId);
+  const isNewBest = pctScore > (st.bestScore||0);
+  if(isFirstTime || isNewBest){
+    const ptsDiff = pts - (st.pts||0);
+    st.bestScore = pctScore;
+    st.pts = pts;
+    st.benar = score;
+    st.salah = total-score;
+    if(isFirstTime){ STUDENT.gameDone.push(gameId); STUDENT.pointsAwarded['game_'+gameId]=true; }
+    if(ptsDiff>0) addPoin(ptsDiff, (isFirstTime?'Selesai Game ':'Skor Baru — ')+(gameId==='puzzle'?'Puzzle Argumen':'Detektif Argumen')+' ('+score+'/'+total+')');
+    else saveLocal();
     unlockAchievement(gameId+'_done');
     if(STUDENT.gameDone.length===2) setTimeout(()=>unlockAchievement('all_games'),800);
+    if(isNewBest && !isFirstTime) showToast('🌟 Skor terbaik baru! '+pctScore+' poin');
   } else {
-    showToast('🎮 Skor kamu: '+score+'/'+total+'. Poin hanya diberikan 1x.');
+    showToast('🎮 Skor kamu: '+score+'/'+total+' ('+pctScore+'). Skor terbaikmu ('+st.bestScore+') tetap tersimpan.');
   }
   saveLocal();
 }
@@ -2062,17 +2085,27 @@ function onKuisDone(correct, total){
   const pct = Math.round((correct/total)*100);
   if(pct>(STUDENT.kuisBest||0)) STUDENT.kuisBest=pct;
   if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded={};
-  if(!STUDENT.kuisStats) STUDENT.kuisStats={pts:0,benar:0,salah:0};
-  if(!STUDENT.pointsAwarded['kuis']){
+  if(!STUDENT.kuisStats) STUDENT.kuisStats={pts:0,benar:0,salah:0,attempts:0,bestScore:0};
+  const st = STUDENT.kuisStats;
+  st.attempts = (st.attempts||0) + 1;
+  const pts = Math.round((correct/total)*80);
+  const isFirstTime = !STUDENT.pointsAwarded['kuis'];
+  const isNewBest = pct > (st.bestScore||0);
+  if(isFirstTime || isNewBest){
+    const ptsDiff = pts - (st.pts||0);
+    st.bestScore = pct;
+    st.pts = pts;
+    st.benar = correct;
+    st.salah = total-correct;
     STUDENT.pointsAwarded['kuis']=true;
-    const pts = Math.round((correct/total)*80);
-    STUDENT.kuisStats.pts = pts;
-    addPoin(pts,'Selesai Kuis — Skor '+pct+'%');
+    if(ptsDiff>0) addPoin(ptsDiff, (isFirstTime?'Selesai Kuis — Skor ':'Skor Kuis Baru — ')+pct+'%');
+    else saveLocal();
     unlockAchievement('quiz_done');
     if(pct===100) setTimeout(()=>unlockAchievement('quiz_perfect'),800);
     else if(pct>=80) setTimeout(()=>unlockAchievement('quiz_80'),800);
+    if(isNewBest && !isFirstTime) showToast('🌟 Skor kuis terbaik baru! '+pct+'%');
   } else {
-    showToast('📝 Skor kamu: '+pct+'%. Poin hanya diberikan 1x.');
+    showToast('📝 Skor kamu: '+pct+'%. Skor terbaikmu ('+st.bestScore+'%) tetap tersimpan.');
   }
   saveLocal();
 }
@@ -2225,18 +2258,14 @@ function colorizeCards(){
     setTimeout(()=>{
       const fb=document.getElementById('pfb');
       if(!fb||!STUDENT) return;
-      if(!STUDENT.puzzleStats) STUDENT.puzzleStats={pts:0,benar:0,salah:0};
       if(fb.classList.contains('ok')){
-        STUDENT.puzzleStats.benar++;STUDENT.puzzleStats.pts+=10;
         document.querySelectorAll('.pb-slot').forEach((sl,i)=>setTimeout(()=>sl.classList.add('correct'),i*120));
         onCorrectStreak();
       } else if(fb.classList.contains('err')){
-        STUDENT.puzzleStats.salah++;
         document.querySelectorAll('.pb-slot').forEach(sl=>sl.classList.add('wrong'));
         setTimeout(()=>document.querySelectorAll('.pb-slot').forEach(sl=>sl.classList.remove('wrong')),400);
         onWrongAnswer();
       }
-      saveLocal();
     },80);
   };
 })();
@@ -2256,10 +2285,7 @@ function colorizeCards(){
       }
     },120);
     if(!STUDENT) return;
-    if(!STUDENT.detectiveStats) STUDENT.detectiveStats={pts:0,benar:0,salah:0};
-    if(wasCorrect){STUDENT.detectiveStats.benar++;STUDENT.detectiveStats.pts+=5;onCorrectStreak();}
-    else{STUDENT.detectiveStats.salah++;onWrongAnswer();}
-    saveLocal();
+    if(wasCorrect){onCorrectStreak();} else {onWrongAnswer();}
   };
 })();
 
@@ -2271,15 +2297,12 @@ function colorizeCards(){
     const wasCorrect=(i===q.correct);
     _o(i);
     if(!STUDENT) return;
-    if(!STUDENT.kuisStats) STUDENT.kuisStats={pts:0,benar:0,salah:0};
     if(wasCorrect){
-      STUDENT.kuisStats.benar++;STUDENT.kuisStats.pts+=4;
       onCorrectStreak();
       setTimeout(()=>{ const fill=document.getElementById('kuisXpFill');if(fill){const p=Math.round(((KS.idx)/KUIS.length)*100);fill.style.width=p+'%';} },200);
     } else {
-      STUDENT.kuisStats.salah++;onWrongAnswer();
+      onWrongAnswer();
     }
-    saveLocal();
     if(KS.done&&!_kuisDoneFired){_kuisDoneFired=true;setTimeout(()=>onKuisDone(KS.score,KUIS.length),400);}
   };
   const _on=window.nextKuis;
