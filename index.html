@@ -277,6 +277,7 @@ select.login-input{cursor:pointer;appearance:none;background-image:url("data:ima
 .tile.correct-tile{border-color:var(--green)!important;background:#E8F5E9!important}
 .tile.wrong-tile{border-color:var(--red)!important;background:#FFEBEE!important}
 .tile.selected-tile{border-color:var(--orange)!important;background:#FFF8E1!important;box-shadow:0 0 0 3px rgba(255,109,0,.3);transform:translateY(-3px) rotate(-2deg)}
+.tile.dragging{opacity:.4}
 .game-btn{display:inline-block;padding:9px 22px;border-radius:28px;font-family:'Fredoka One',cursive;font-size:.8rem;cursor:pointer;border:none;transition:all .2s;margin-right:7px;margin-top:7px;box-shadow:0 4px 0 rgba(0,0,0,.18)}
 .game-btn.primary{background:var(--blue);color:#fff}
 .game-btn.primary:hover{background:#1565C0;transform:translateY(-2px)}
@@ -412,8 +413,7 @@ select.login-input{cursor:pointer;appearance:none;background-image:url("data:ima
 .ach-close:hover{transform:translateY(-2px)}
 
 /* ── SELESAI BAR ── */
-.selesai-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;padding:10px 16px;background:linear-gradient(to top,var(--bg) 75%,transparent);text-align:center}
-.selesai-bar.show{display:block}
+.selesai-bar-inline{display:block;padding:28px 16px 10px;text-align:center}
 .selesai-btn{display:inline-block;padding:12px 32px;border-radius:28px;border:none;background:linear-gradient(135deg,var(--green),#00a846);color:#fff;font-family:'Fredoka One',cursive;font-size:.95rem;cursor:pointer;box-shadow:0 5px 0 rgba(0,150,70,.35);transition:all .2s}
 .selesai-btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 rgba(0,150,70,.35)}
 
@@ -764,6 +764,7 @@ select.login-input{cursor:pointer;appearance:none;background-image:url("data:ima
     <div class="step-row"><div class="step-n">5</div><div><strong>Argumen Autoritas</strong><span>Mengutip pendapat ahli atau lembaga terpercaya. Harus menyertakan sumber yang jelas dan relevan.</span></div></div>
     <div class="ref-box"><strong>Referensi:</strong> Keraf, G. (2007). <em>Argumentasi dan Narasi</em>. Jakarta: Gramedia. · Tarigan, H.G. (2008). <em>Menulis sebagai Suatu Keterampilan Berbahasa</em>. Bandung: Angkasa. · Kemendikbud (2023). <em>Buku Teks Bahasa Indonesia Kelas XI Kurikulum Merdeka</em>.</div>
   </div>
+  <div class="selesai-bar-inline"><button class="selesai-btn" onclick="handleSelesai()">✅ Selesai — Kembali ke Beranda</button></div>
 </div></div>
 
 <!-- ══ MODUL 2 ══ -->
@@ -809,6 +810,7 @@ select.login-input{cursor:pointer;appearance:none;background-image:url("data:ima
     <div class="hl">✍️ Hindari penutup lemah seperti "Demikianlah pendapat saya." Gunakan kalimat yang kuat dan berkesan.</div>
     <div class="ref-box"><strong>Referensi:</strong> Toulmin, S. (2003). <em>The Uses of Argument</em>. Cambridge. · Kemendikbud (2017). <em>Buku Guru Bahasa Indonesia Kelas XI</em>. · Suparno & Yunus (2002). <em>Keterampilan Dasar Menulis</em>. Jakarta: Universitas Terbuka.</div>
   </div>
+  <div class="selesai-bar-inline"><button class="selesai-btn" onclick="handleSelesai()">✅ Selesai — Kembali ke Beranda</button></div>
 </div></div>
 
 <!-- ══ MODUL 3 ══ -->
@@ -840,6 +842,7 @@ select.login-input{cursor:pointer;appearance:none;background-image:url("data:ima
     <div class="step-row"><div class="step-n">✗</div><div><strong>Narasi atau Deskripsi Murni</strong><span>Teks yang hanya menceritakan kejadian tanpa posisi dan pembuktian.</span></div></div>
     <div class="ref-box"><strong>Referensi:</strong> Suharno (2015). <em>Bahasa Indonesia untuk SMA/MA Kelas XI</em>. Yogyakarta: Intan Pariwara. · Kemendikbud (2023). <em>Buku Teks Bahasa Indonesia Kelas XI Kurikulum Merdeka</em>. · Wiesner, D. (2012). <em>Critical Thinking and Argumentation</em>. Oxford Press.</div>
   </div>
+  <div class="selesai-bar-inline"><button class="selesai-btn" onclick="handleSelesai()">✅ Selesai — Kembali ke Beranda</button></div>
 </div></div>
 
 <!-- ══ MODUL 4 ══ -->
@@ -889,6 +892,7 @@ select.login-input{cursor:pointer;appearance:none;background-image:url("data:ima
     <div class="hl">📝 <strong>Ceklis Akhir:</strong> ☐ Tesis jelas & spesifik? ☐ Setiap argumen didukung bukti? ☐ Kesimpulan bukan copy-paste pendahuluan? ☐ Ejaan & tanda baca benar? ☐ Alur logis dan mengalir?</div>
     <div class="ref-box"><strong>Referensi:</strong> Nurudin (2010). <em>Dasar-dasar Penulisan</em>. Malang: UMM Press. · Zainurrahman (2013). <em>Menulis: Dari Teori hingga Praktik</em>. Bandung: Alfabeta. · Lamm, K. & Everett, M. (2019). <em>The Argument Handbook</em>. Pearson Education.</div>
   </div>
+  <div class="selesai-bar-inline"><button class="selesai-btn" onclick="handleSelesai()">✅ Selesai — Kembali ke Beranda</button></div>
 </div></div>
 
 <!-- ══ MODUL 5 ══ -->
@@ -953,6 +957,7 @@ select.login-input{cursor:pointer;appearance:none;background-image:url("data:ima
     </div>
     <div class="ref-box"><strong>Referensi:</strong> OECD Education Report (2022). · MIT Sloan Review (2023). · Adam, H. & Galinsky, A. (2012). <em>Enclothed Cognition</em>. J. of Experimental Social Psychology. · Cummins, J. (1991). <em>Interdependence of First and Second Language Proficiency</em>. Cambridge. · UNESCO (2021). <em>Language as a Human Right</em>.</div>
   </div>
+  <div class="selesai-bar-inline"><button class="selesai-btn" onclick="handleSelesai()">✅ Selesai — Kembali ke Beranda</button></div>
 </div></div>
 
 <!-- ══ GAME 1: PUZZLE ══ -->
@@ -1024,6 +1029,7 @@ const PUZZLES=[
 ];
 
 let PS={idx:0,score:0,done:false,zones:{tesis:[],tubuh:[],kesimpulan:[]},pool:[],dragging:null};
+let selectedTile=null;
 
 function initPuzzle(){
   PS={idx:0,score:0,done:false,zones:{tesis:[],tubuh:[],kesimpulan:[]},pool:[...PUZZLES[0].tiles.map(t=>t.id)].sort(()=>Math.random()-.5),dragging:null};
@@ -1065,7 +1071,7 @@ function renderPuzzle(){
   let zonesHTML='';
   Object.keys(PS.zones).forEach(z=>{
     let tiles=PS.zones[z].map(id=>{const t=p.tiles.find(x=>x.id===id);return `<div class="tile in-zone" data-id="${id}" data-src="${z}">${t.text}</div>`;}).join('');
-    zonesHTML+=`<div class="drop-zone-label">${zoneNames[z]}</div><div class="drop-zone" data-zone="${z}">${tiles||'<span style="color:var(--muted);font-size:.74rem;padding:4px;pointer-events:none">Seret atau klik kalimat ke sini…</span>'}</div>`;
+    zonesHTML+=`<div class="drop-zone-label">${zoneNames[z]}</div><div class="drop-zone" data-zone="${z}">${tiles||'<span style="color:var(--muted);font-size:.74rem;padding:4px;pointer-events:none">Ketuk kalimat lalu ketuk di sini, atau seret langsung…</span>'}</div>`;
   });
   app.innerHTML=boardHTML
     +`<div class="game-status"><div class="stat-pill">Soal <span>${PS.idx+1}/${PUZZLES.length}</span></div><div class="stat-pill">Skor <span>${PS.score}</span></div></div>`
@@ -1121,9 +1127,73 @@ function checkPuzzle(){
   }
 }
 
-/* ══════════════════════════════
-   GAME 2 — DETEKTIF ARGUMEN
-══════════════════════════════ */
+function moveTile(tileId, fromZone, toZone){
+  if(fromZone==='pool'){ PS.pool=PS.pool.filter(id=>id!==tileId); }
+  else{ PS.zones[fromZone]=PS.zones[fromZone].filter(id=>id!==tileId); }
+  if(toZone==='pool'){ PS.pool.push(tileId); }
+  else{ PS.zones[toZone].push(tileId); }
+  selectedTile=null;
+  renderPuzzle();
+}
+
+function attachTileEvents(app,p){
+  const tiles=app.querySelectorAll('.tile');
+  const zones=app.querySelectorAll('.drop-zone');
+  const pool=app.querySelector('#dp');
+
+  // --- Klik / tap untuk pilih kalimat ---
+  tiles.forEach(t=>{
+    t.setAttribute('draggable','true');
+    if(selectedTile===t.dataset.id) t.classList.add('selected-tile');
+    t.addEventListener('click', e=>{
+      e.stopPropagation();
+      if(selectedTile===t.dataset.id){ selectedTile=null; renderPuzzle(); return; }
+      selectedTile=t.dataset.id;
+      renderPuzzle();
+    });
+    // --- Drag events (mouse / desktop) ---
+    t.addEventListener('dragstart', e=>{
+      PS.dragging={id:t.dataset.id,from:t.dataset.src};
+      e.dataTransfer.effectAllowed='move';
+      setTimeout(()=>t.classList.add('dragging'),0);
+    });
+    t.addEventListener('dragend', ()=>{ t.classList.remove('dragging'); PS.dragging=null; });
+  });
+
+  // --- Tap pada zona untuk menempatkan kalimat terpilih ---
+  zones.forEach(z=>{
+    z.addEventListener('click', e=>{
+      if(selectedTile){
+        const fromZone = PS.pool.includes(selectedTile) ? 'pool' :
+          Object.keys(PS.zones).find(k=>PS.zones[k].includes(selectedTile));
+        moveTile(selectedTile, fromZone, z.dataset.zone);
+      }
+    });
+    z.addEventListener('dragover', e=>{ e.preventDefault(); z.classList.add('drag-over'); });
+    z.addEventListener('dragleave', ()=>{ z.classList.remove('drag-over'); });
+    z.addEventListener('drop', e=>{
+      e.preventDefault();
+      z.classList.remove('drag-over');
+      if(PS.dragging){ moveTile(PS.dragging.id, PS.dragging.from, z.dataset.zone); }
+    });
+  });
+
+  // --- Tap pada area pool (kembalikan kalimat ke pool) ---
+  if(pool){
+    pool.addEventListener('click', e=>{
+      if(e.target===pool && selectedTile){
+        const fromZone = Object.keys(PS.zones).find(k=>PS.zones[k].includes(selectedTile));
+        if(fromZone) moveTile(selectedTile, fromZone, 'pool');
+      }
+    });
+    pool.addEventListener('dragover', e=>{ e.preventDefault(); });
+    pool.addEventListener('drop', e=>{
+      e.preventDefault();
+      if(PS.dragging && PS.dragging.from!=='pool'){ moveTile(PS.dragging.id, PS.dragging.from, 'pool'); }
+    });
+  }
+}
+
 const DETECT=[
   {text:'"Semua remaja yang bermain game online pasti malas belajar dan gagal di sekolah."',q:'Masalah utama kalimat ini sebagai argumen adalah...',opts:['Kalimat ini valid karena faktual dan empiris','Bahasanya tidak baku dan tidak formal','Mengandung generalisasi berlebihan tanpa bukti data','Terlalu pendek untuk dijadikan argumen'],correct:2,exp:'Kalimat ini mengandung <strong>overgeneralization</strong> — menggunakan kata "semua" tanpa data yang mencakup seluruh populasi. Argumen yang valid tidak boleh mengklaim absolut tanpa bukti komprehensif.'},
   {text:'"Penelitian Kemenkes 2023 menunjukkan siswa yang sarapan pagi memiliki konsentrasi belajar 22% lebih tinggi. Maka kantin sekolah wajib menyediakan sarapan bergizi."',q:'Penilaian paling tepat terhadap argumen ini adalah...',opts:['Argumen kuat — data konkret mendukung klaim yang logis dan relevan','Data tidak bisa dipercaya karena bukan penelitian asing','Ini bukan argumen, hanya eksposisi data','Argumen lemah karena hanya menyebut satu fakta saja'],correct:0,exp:'Ini contoh <strong>argumen induktif yang baik</strong>: data dari sumber otoritatif (Kemenkes) dengan angka spesifik (22%) mendukung kesimpulan yang relevan.'},
@@ -1271,7 +1341,7 @@ function renderKuis(){
   const q=KUIS[KS.idx];
   const xpPct=Math.round((KS.idx/KUIS.length)*100);
   const wrongSoFar=(KS.userAns&&KS.userAns.length>0)?KS.userAns.filter((a,i)=>a!==undefined&&a!==KUIS[i].correct).length:0;
-  const maxH=5,heartsLeft=Math.max(0,maxH-wrongSoFar);
+  const maxH=10,heartsLeft=Math.max(0,maxH-wrongSoFar);
   const heartsHTML=Array.from({length:maxH},(_,i)=>`<span class="kuis-heart ${i>=heartsLeft?'lost':''}">❤️</span>`).join('');
   const brainLv=KS.score>=15?'🧠⚡':KS.score>=10?'🧠✨':KS.score>=5?'🧠💡':'🧠';
   const letters=['A','B','C','D'];
@@ -1764,9 +1834,7 @@ function showToast(msg, dur=2800){
 }
 
 /* ── SELESAI BAR ── */
-function showSelesaiBar(){ document.getElementById('selesaiBar').classList.add('show'); }
-function hideSelesaiBar(){ document.getElementById('selesaiBar').classList.remove('show'); }
-function handleSelesai(){ hideSelesaiBar(); showPage('page-home'); }
+function handleSelesai(){ showPage('page-home'); }
 
 /* ── PROFILE ── */
 function renderProfile(){
@@ -2136,9 +2204,6 @@ function colorizeCards(){
       if(id==='page-home'&&PAGE_ANCHORS[curId]) scrollAnchor=PAGE_ANCHORS[curId];
     }
     _base(id);
-    // Selesai bar
-    if(CONTENT_PAGES.includes(id)) setTimeout(showSelesaiBar,300);
-    else hideSelesaiBar();
     // Scroll
     if(scrollAnchor) setTimeout(()=>{ const el=document.getElementById(scrollAnchor);if(el)el.scrollIntoView({behavior:'smooth',block:'start'}); },120);
     // Colorize
@@ -2332,10 +2397,7 @@ function doGet(e){
 </div>
 <!-- ══ CONFETTI ══ -->
 <canvas id="confettiCanvas"></canvas>
-<!-- ══ SELESAI BAR ══ -->
-<div class="selesai-bar" id="selesaiBar">
-  <button class="selesai-btn" onclick="handleSelesai()">✅ Selesai — Kembali ke Beranda</button>
-</div>
+<!-- (selesai-bar kini disisipkan langsung di akhir setiap halaman modul) -->
 <!-- ══ ACHIEVEMENT POPUP ══ -->
 <div class="ach-popup" id="achPopup">
   <div class="ach-box">
