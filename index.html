@@ -1881,7 +1881,7 @@ function buildPayload(){
   return {
     action:'upsert', absen:STUDENT.absen, kelas:STUDENT.kelas||'', name:STUDENT.name,
     poin_total:STUDENT.poin||0,
-    modul_done:(STUDENT.modulDone||[]).join(','),
+    modul_done:(STUDENT.modulDone||[]).map(n=>'M'+n).join(', '),
     badges:(STUDENT.achievements||[]).length,
     poin_puzzle:(STUDENT.puzzleStats||{}).pts||0,
     puzzle_benar:(STUDENT.puzzleStats||{}).benar||0,
@@ -2040,11 +2040,14 @@ function onGameDone(gameId, score, total){
   _gameDoneCalled[gameId]=score+'_'+total;
   if(!STUDENT.gameDone) STUDENT.gameDone=[];
   if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded={};
+  const statsKey = gameId==='puzzle' ? 'puzzleStats' : 'detectiveStats';
+  if(!STUDENT[statsKey]) STUDENT[statsKey]={pts:0,benar:0,salah:0};
   const alreadyDone = STUDENT.gameDone.includes(gameId);
   if(!alreadyDone){
     const pts = Math.round((score/total)*50);
     STUDENT.gameDone.push(gameId);
     STUDENT.pointsAwarded['game_'+gameId]=true;
+    STUDENT[statsKey].pts = pts;
     addPoin(pts,'Selesai Game '+(gameId==='puzzle'?'Puzzle Argumen':'Detektif Argumen')+' ('+score+'/'+total+')');
     unlockAchievement(gameId+'_done');
     if(STUDENT.gameDone.length===2) setTimeout(()=>unlockAchievement('all_games'),800);
@@ -2059,9 +2062,11 @@ function onKuisDone(correct, total){
   const pct = Math.round((correct/total)*100);
   if(pct>(STUDENT.kuisBest||0)) STUDENT.kuisBest=pct;
   if(!STUDENT.pointsAwarded) STUDENT.pointsAwarded={};
+  if(!STUDENT.kuisStats) STUDENT.kuisStats={pts:0,benar:0,salah:0};
   if(!STUDENT.pointsAwarded['kuis']){
     STUDENT.pointsAwarded['kuis']=true;
     const pts = Math.round((correct/total)*80);
+    STUDENT.kuisStats.pts = pts;
     addPoin(pts,'Selesai Kuis — Skor '+pct+'%');
     unlockAchievement('quiz_done');
     if(pct===100) setTimeout(()=>unlockAchievement('quiz_perfect'),800);
